@@ -3,11 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>Pierre_Papier_Ciseaux</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="app.config" />
-    <None Remove="Second try.config" />
+    <ProjectReference Include="..\..\Factorizor.BLL\Factorizor.BLL\Factorizor.BLL.csproj" />
   </ItemGroup>
 </Project>

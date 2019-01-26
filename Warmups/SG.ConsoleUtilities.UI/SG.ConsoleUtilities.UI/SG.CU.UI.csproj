@@ -3,11 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>Pierre_Papier_Ciseaux</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="app.config" />
-    <None Remove="Second try.config" />
+    <ProjectReference Include="..\SG.ConsoleUtil2.BLL\SG.ConsoleUtil2.BLL.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.11.0" />
   </ItemGroup>
 </Project>

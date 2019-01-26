@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factor.Tests", "Factor.Tests\Factor.Tests.csproj", "{DEEB422D-6C79-42EF-8A97-8534426DBB51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factor2.UI", "..\Factor2.UI\Factor2.UI\Factor2.UI.csproj", "{894A2B64-2D65-48F7-9B57-C2B2C793C12D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEEB422D-6C79-42EF-8A97-8534426DBB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEEB422D-6C79-42EF-8A97-8534426DBB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEEB422D-6C79-42EF-8A97-8534426DBB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEEB422D-6C79-42EF-8A97-8534426DBB51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{894A2B64-2D65-48F7-9B57-C2B2C793C12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{894A2B64-2D65-48F7-9B57-C2B2C793C12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{894A2B64-2D65-48F7-9B57-C2B2C793C12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{894A2B64-2D65-48F7-9B57-C2B2C793C12D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

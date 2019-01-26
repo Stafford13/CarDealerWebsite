@@ -26,7 +26,16 @@ namespace Warmups.BLL
         
         public int Sum(int[] numbers)
         {
-            throw new NotImplementedException();
+            int sum = 0;
+
+            for (int i=0; i < numbers.Length; i++)
+            {
+                sum += numbers[i];
+            }
+
+           return sum;
+
+            //throw new NotImplementedException();
         }
         
         public int[] RotateLeft(int[] numbers)
@@ -76,6 +85,7 @@ namespace Warmups.BLL
         
         public int[] Make2(int[] a, int[] b)
         {
+            //return new int[a, b] { { 1 }, { 2 } };
             throw new NotImplementedException();
         }
 

@@ -151,7 +151,8 @@ namespace Warmups.BLL
 
         public string StripX(string str)
         {
-            //Console.WriteLine(s.Remove(0)
+            Console.WriteLine(str.Replace("Hxix","Hxi"));
+
             throw new NotImplementedException();
         }
     }

@@ -7,90 +7,134 @@ namespace Pierre_Papier_Ciseaux
         static void Main(string[] args)
         {
             Console.WriteLine("Hello user. Let's play a game");
-            Console.WriteLine("How many rounds of Rock, Paper, Scissors would you like to play? Please choose between 1 and 10.");
-            string str = Console.ReadLine();
-            int x = Int32.Parse(str);
+            int t = 0;
+            int w = 0;
+            int l = 0;
 
-            if (x <= 0 && x > 10)
+            while (true)
             {
-                Console.WriteLine("This isn't what I asked for! Try again, gurl.");
-            }
-            else if (x >= 1 && x < 10)
-            {
-                Console.WriteLine($" You will play for {x} rounds.");
-            }
-
-            for (int i = 1; i <= str.Length; i++)
-
-                if (i <= str.Length)
+                Console.WriteLine("Would you like to play?");
+                string input = Console.ReadLine().ToUpper();
+                if (input == "Y")
                 {
-                    for (int j = 0; j < x; i++)
-                    {
-                        Random handThrown = new Random();
-                        int throwHands = handThrown.Next(2) + 1;
-
-                        Console.WriteLine("Please choose your weapon of choice: Rock (1), Paper (2), or Scissors (3)");
-                        string line = Console.ReadLine();
-                        Console.WriteLine($"So, you've chosen {line}. Now I will choose.");
-                        Console.WriteLine($"I have chosen {throwHands}.");
-                        int y = Int32.Parse(line);
-
-                        if (throwHands == y)
-                        {
-                            int r = Int32.Parse(j);
-                            Console.WriteLine("Well, look at that. We tied!");
-                        }
-                        else if (throwHands < y)
-                        {
-                            Console.WriteLine("Looks like someone's lucky. You win this round.");
-                        }
-                        else if (throwHands > y)
-                        {
-                            Console.WriteLine("Sorry, not sorry. I win this round.");
-                        }
-                    }
-                    Console.WriteLine("Let's go again, shall we?");
-                    int wins = r;
-                    int lose = t;
-                    int ties = h;
+                    Rounds();
                 }
-                else if (i > str.Length)
-                {
-                Console.WriteLine($"You ended up with {ties} ties, {wins} wins, and {lose} losses.");
-
-                    if (wins > lose)
-                    {
-                        Console.WriteLine("You're a winner, baby.");
-                        Exit();
-                    }
-                    else if (lose < wins)
-                    {
-                        Console.WriteLine("Looks like both your rock and your paper couldn't cut it.");
-                        Exit();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Flippty flop, neither of us are on top");
-                        Exit();
-                    }
-                }
-        }
-            static void Exit()
-            {
-                Console.WriteLine("Would you like to play again? Please press y or n");
-                if (Console.ReadLine().Equals("y"))
-                {
-                    Console.WriteLine("Here we go!");
-                    Main();
-                }
-                else
+                else if (input == "N")
                 {
                     Console.WriteLine("Thanks for playing!");
                     Environment.Exit(0);
                 }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                }
+
+            }
+            void Rounds()
+            {
+                while (true)
+                {
+                    Console.WriteLine("How many rounds of Rock, Paper, Scissors would you like to play? Please choose between 1 and 10.");
+                    int rounds = int.Parse(Console.ReadLine());
+                    if (rounds > 0 && rounds < 11)
+                    {
+                        PlayGame(rounds);
+                    }
+                    else
+                    {
+                        Console.WriteLine("This isn't what I asked for! Try again, gurl");
+                    }
+                }
+            }
+
+            void PlayGame(int rounds)
+            {
+                for (int i = 1; i <= rounds; i++)
+                {
+                    Random handThrown = new Random();
+                    int throwHands = handThrown.Next(2) + 1;
+
+                    Console.WriteLine("Please choose your weapon of choice: Rock (1), Paper (2), or Scissors (3)");
+                    string line = Console.ReadLine();
+                    //Console.WriteLine($"So, you've chosen {line}. Now I will choose.");
+                    //Console.WriteLine($"I have chosen {throwHands}.");
+                    int y = Int32.Parse(line);
+
+                    if (throwHands == y)
+                    {
+                        Console.WriteLine("Well, look at that. We tied!");
+                        t++;
+                    }
+                    else if (throwHands < y)
+                    {
+                        Console.WriteLine("Looks like someone's lucky. You win this round.");
+                        w++;
+                    }
+                    else if (throwHands > y)
+                    {
+                        Console.WriteLine("Sorry, not sorry. I win this round.");
+                        l++;
+                    }
+
+                    if (i < rounds)
+                    {
+                        Console.WriteLine("Let's go again, shall we?");
+                    }
+                    else 
+                    {
+                        Ending();
+                    }
+                }
+                
+            }
+            void Ending()
+            {
+                Console.WriteLine($"You ended up with {t} ties, {w} wins, and {l} losses.");
+
+                if (w > l)
+                {
+                    Console.WriteLine("You're a winner, baby.");
+                }
+                else if (l > w)
+                {
+                    Console.WriteLine("Looks like both your rock and your paper couldn't cut it.");
+                }
+                else if (l == w)
+                {
+                    Console.WriteLine("Flippty flop, neither of us are on top");
+                }
+                    PlayAgain();
+
+            }
+
+            void PlayAgain()
+            {
+                Console.WriteLine(" Would you like to play again?");
+                string input = Console.ReadLine().ToUpper();
+                if (input == "Y")
+                {
+                    Rounds();
+                }
+                else if (input == "N")
+                {
+                    Console.WriteLine("Thanks for playing!");
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                }
             }
         }
     }
+}        
+
+// The final W, T , L loops over into the next game...
+// Feel free to return out of methods to main method
+// Fix this so that it resets number of wins etc. every time
+
+
+
 
 // Computer asks how many rounds the user would like to play between 1 and 10
 //  if user says something else, print error message then quit program

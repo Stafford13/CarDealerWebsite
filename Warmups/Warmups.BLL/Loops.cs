@@ -39,31 +39,60 @@ namespace Warmups.BLL
 
         public int CountXX(string str)
         {
-            //string w = "XX";
-                //if (w)
-            throw new NotImplementedException();
+            // XX counter
+            int xx = 0;
+            for (int i = 0; i < str.Length-1; i++)
+                if (str.Substring(i, 2) == "xx")
+                {
+                    xx++;
+                }
+            return xx;
         }
 
         public bool DoubleX(string str)
         {
-            if ("xx")
-            {
-                retun true;
-            }
-            else if ()
+            //if (str.Substring("x"))
+
+            //{
+            //    return true;
+            //}
+            //else if ()
             throw new NotImplementedException();
         }
 
         public string EveryOther(string str)
         {
+            for (int i = 0; i < str.Length; i++)
+                if (i <= 0)
+                {
+                    Console.Write(str);
+                }
+                else if (i % 2 == 0)
+                { 
+                    Console.Write(str); 
+                }
+                else if (i % 2 != 0)
+                {
+                    continue;
+                }
             throw new NotImplementedException();
         }
 
         public string StringSplosion(string str)
         {
-            //int x = 0;
-            //str.substring
-
+           if (str.Length <= 2)
+            {
+                return str.Substring(0, 1) + str;
+            }
+           else if (str.Length == 3)
+            {
+                return str.Substring(0, 1) + str.Substring(0, 2) + str;
+            }
+           else if (str.Length == 4)
+            {
+                return str.Substring(0, 1) + str.Substring(0, 2) + str.Substring(0, 3) + str;
+            }
+            
             throw new NotImplementedException();
         }
 
@@ -74,16 +103,7 @@ namespace Warmups.BLL
 
         public int Count9(int[] numbers)
         {
-            //int sum = 0;
-            //for (int i = 0; i < numbers.Length; i++)
-                //if (numbers[i,9])
-                //{
-                //    sum = 
-                //}
-                //else
-                //{
-                //continue;
-                //}
+            //indexOf.numbers(9);
             throw new NotImplementedException();
         }
 
@@ -121,19 +141,19 @@ namespace Warmups.BLL
 
         public string AltPairs(string str)
         {
-            if (str.Length <= 6)
-            { 
-            return str.Substring(0, 2) + str.Substring(4, 2);
-            }
-            else if (str.Length > 0)
+            string newString = "";
+            for (int i = 0; i <str.Length; i+=4)
             {
-                return str.Substring(0, 2) + str.Substring(4, 2) + str.Substring(8, 2);
+                if (i+1 == str.Length)
+                {
+                    newString += str.Substring(i, 1);
+                }
+                else
+                {
+                    newString += str.Substring(i, 2);
+                }
             }
-            //else if (str.Length < 0)
-            //{
-            //    return str.Substring(0, 2) + str.Substring(4, 2) + str.Substring(8, 2);
-            //}
-            throw new NotImplementedException();
+            return newString;
         }
 
         public string DoNotYak(string str)
@@ -161,6 +181,7 @@ namespace Warmups.BLL
 
         public bool NoTriples(int[] numbers)
         {
+            //if (
             throw new NotImplementedException();
         }
 
