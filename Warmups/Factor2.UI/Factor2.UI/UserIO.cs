@@ -1,5 +1,6 @@
 ﻿using System;
 using Factorizor.BLL;
+using Factor_Run.UI;
 
 namespace Factor_Run.UI
 {

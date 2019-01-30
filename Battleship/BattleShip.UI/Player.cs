@@ -1,10 +1,17 @@
 ﻿using System;
+using BattleShip.BLL.GameLogic;
+
 namespace BattleShip.UI
 {
-    public class Players
+    public class Player
     {
-        public Players()
+        public Player EnemyPlayer { get; set; }
+        public string Name { get; set; }
+        public Board Board { get; set; }
+       
+       public Player()
         {
+            Board = new Board();
         }
     }
 }

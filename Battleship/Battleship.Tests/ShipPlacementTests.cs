@@ -15,27 +15,25 @@ namespace Battleship.Tests
     public class ShipPlacementTests
     {
         [Test]
-        //public void CanNotPlaceShipOffBoard()
-        //{
-        //    Board board = new Board();
-        //    //PlaceShipRequest request = new PlaceShipRequest()
-        //    //{
-        //    //    Coordinate = new Coordinate(15, 10),
-        //    //    Direction = ShipDirection.Up,
-        //    //    ShipType = ShipType.Destroyer
-        //    //};
-        //    PlaceShipRequest request = new PlaceShipRequest();
-        //    request.Direction = ShipDirection.Up;
-        //    request.ShipType = ShipType.Destroyer;
-        //    request.Coordinate = Coordinate(15, 10);
+        public void CanNotPlaceShipOffBoard()
+        {
+            Board board = new Board();
+            //PlaceShipRequest request = new PlaceShipRequest()
+            //{
+            //    Coordinate = new Coordinate(15, 10),
+            //    Direction = ShipDirection.Up,
+            //    ShipType = ShipType.Destroyer
+            //};
+            PlaceShipRequest request = new PlaceShipRequest();
+            request.Direction = ShipDirection.Up;
+            request.ShipType = ShipType.Destroyer;
+            request.Coordinate = new Coordinate(15, 10);
 
-        //    ShipPlacement response = new ShipPlacement();
-        //    response = board.PlaceShip(request);
+            ShipPlacement response = new ShipPlacement();
+            response = board.PlaceShip(request);
 
-        //    var response = board.PlaceShip(request);
-
-        //    Assert.AreEqual(ShipPlacement.NotEnoughSpace, response);
-        //}
+            Assert.AreEqual(ShipPlacement.NotEnoughSpace, response);
+        }
 
         [Test]
         public void CanNotPlaceShipPartiallyOnBoard()

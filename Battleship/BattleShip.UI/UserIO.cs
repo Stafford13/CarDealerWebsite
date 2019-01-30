@@ -16,6 +16,7 @@ namespace BattleShip.UI
             Console.WriteLine("<<>><<>><<>>)(_B__A__T__T__L__E__S__H__I__P_)(<<>><<>><<>>");
             Console.WriteLine("<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>");
             Console.WriteLine("<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>");
+            Console.WriteLine("<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>");
             Console.WriteLine("<<>><<>><<>>)(PRESS__ANY__KEY__TO__START)(<<>><<>><<>>");
             Console.WriteLine("\n \n");
             Console.ReadLine();
@@ -26,25 +27,15 @@ namespace BattleShip.UI
             Console.WriteLine("Welcome to Battleship");
         }
 
-        public string Player1()
-        {
-            Console.WriteLine("User 1. What is your name?");
-            string name1 = Console.ReadLine();
-        }
-
-        public string GetName2()
-        {
-            Console.WriteLine("User 2. What is your name?");
-            string name2 = Console.ReadLine();
-        }
-
         public static Coordinate EnterCoordinates()
         {
             while (true)
             {
                 Console.WriteLine("Please enter your coordinate (e.g. B5): ");
+                //string strang = Console.ReadLine();
+                //string coords = Console.ReadLine();
+                //coords = coords.ToUpper();
                 string coords = Console.ReadLine();
-                coords = coords.ToUpper();
 
                 string xStr = "ABCDEFJHIJKLMNOPQRSTUVWXYZ";
                 int xCoord = 0;
@@ -90,16 +81,17 @@ namespace BattleShip.UI
             ShotHistory displayShot = new ShotHistory();
             Console.WriteLine("   [1  2  3  4  5  6  7  8  9  10]");
 
-            for (int x = 0; x < 11; x++)
+            for (int x = 0; x < 10; x++)
             {
                 row = xStr[x];
                 Console.Write($"\n[{row}]");
 
-                for (int y = 0; y < 11; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     if (x == 0 && y == 0)
                     {
-                        Coordinate coord = new Coordinate(x, y);
+                        Console.ReadLine();
+                        Coordinate coord = new Coordinate(x+1, y+1);
                         displayShot = board.CheckCoordinate(coord);
                         Console.Write($"[{displayShot}]");
                     }
@@ -108,100 +100,196 @@ namespace BattleShip.UI
             }
         }
 
-        public string Randomize()
+        public static ShipDirection Direction()
+        {
+            while (true)
+            {
+                Console.WriteLine("Please enter the Ship direction: ");
+                string direction = Console.ReadLine();
+                switch (direction.ToUpper())
+                {
+                    case "UP":
+                    case "U":
+                        return ShipDirection.Up;
+                    case "DOWN":
+                    case "D":
+                        return ShipDirection.Down;
+                    case "LEFT":
+                    case "L":
+                        return ShipDirection.Left;
+                    case "RIGHT":
+                    case "R":
+                        return ShipDirection.Right;
+                }
+            }
+        }
+
+        public static int Randomize(Player user1, Player user2)
         {
             Random Player = new Random();
             int random = Player.Next(1, 2);
-            Console.WriteLine($"Player {Player} goes first.");
-            if (random == 2)
+            if (random == 1)
             {
-                //Player1Method
+                Console.WriteLine($"{user1.Name} goes first.");
+                return random;
             }
             else
             {
-                //Player2Method
+                Console.WriteLine($"{user2.Name} goes second.");
+                return random;
             }
+
         }
 
-        public static string VictoryAndGlory()
+        public static bool VictoryAndGlory()
         {
             Console.WriteLine("You're a winnah, baby");
             Console.WriteLine("\n \n");
-            Console.WriteLine("Would you like to play again?");
-            string input = Console.ReadLine().ToLower;
-
             while (true)
-            {
-                if (input == "yes")
-                {
-                    return WelcomeUser();
+            { 
+            Console.WriteLine("Would you like to play again?");
+            string input = Console.ReadLine();
+            input = input.ToLower();
+             
+                    if (input == "yes")
+                    {
+                        return true;
+                    }
+                    else if (input == "no")
+                    {
+                        Console.WriteLine("Thanks for playing!");
+                        Environment.Exit(0);
+                        return false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Could you try that again? I didn't understand you. Try typing yes or no.");
+                    }
                 }
-                else if (input == "no")
+        }        
+
+        public static void PlaceShips(Board board)
+        {
+            foreach (var item in Enum.GetValues(typeof(ShipType)))
+            {
+                while (true)
                 {
-                    Console.WriteLine("Thanks for playing!");
-                    Environment.Exit(0);
+                    Console.WriteLine($"Place your {item}");
+
+                    PlaceShipRequest request = new PlaceShipRequest
+                    {
+                        Coordinate = UserIO.EnterCoordinates(),
+                        Direction = UserIO.Direction(),
+                        ShipType = (ShipType)item, //set up loop to rotate current ship
+                    };
+                    ShipPlacement response = new ShipPlacement();
+                    response = board.PlaceShip(request);
+                    switch (response)
+                    {
+                        case ShipPlacement.NotEnoughSpace:
+                            Console.Clear();
+                            Console.WriteLine($"Could not place {item}: Not enough space.\nPlease try again.");
+                            continue;
+                        case ShipPlacement.Overlap:
+                            Console.Clear();
+                            Console.WriteLine($"Could not place {item}: Ship overlap.\nPlease try again");
+                            continue;
+                        case ShipPlacement.Ok:
+                            break;
+                    }
+                    break;
+                }
+                Console.Clear();
+
+            }
+
+        }
+        public static void DisplayShotStatus(Player user, FireShotResponse response)
+        {
+            switch (response.ShotStatus)
+            {
+                case ShotStatus.Invalid:
+                    Console.WriteLine($"\n{response.ShotStatus}.");
+                    break;
+                case ShotStatus.Duplicate:
+                    Console.WriteLine($"\n{response.ShotStatus}.");
+                    break;
+                case ShotStatus.Miss:
+                    Console.WriteLine($"\n{response.ShotStatus}.");
+                    break;
+                case ShotStatus.Hit:
+                    Console.WriteLine($"\n{response.ShotStatus}!");
+                    break;
+                // need to add which ship sunk
+                case ShotStatus.HitAndSunk:
+                    Console.WriteLine($"\n{response.ShotStatus}!!");
+                    break;
+                case ShotStatus.Victory:
+                    Console.WriteLine($"\n{response.ShotStatus}!!!!\n{user.Name} has Won!!!!");
+                    break;
+            }
+        }
+        public static void TakingTurns(Player user1, Player user2)
+        {
+            Player currentPlayer = new Player();
+            Player nextPlayer = new Player();
+            FireShotResponse response;
+            int flip = Randomize(user1, user2);
+            do
+            {
+
+                if (flip == 1)
+                {
+                    currentPlayer = user1;
+                    nextPlayer = user2;
+                    flip = 2;
                 }
                 else
                 {
-                    Console.WriteLine("Could you try that again? I didn't understand you.");
-                    continue;
+                    currentPlayer = user2;
+                    nextPlayer = user1;
+                    flip = 1;
                 }
-            }
-        }
 
-        public static string PlacingShips()
-        {
-            while (true)
-            {
-                for (int i = 1; i < 6; i++)
+                DisplayBoard(nextPlayer.Board);
+                do
                 {
-                    if (i == 1)
-                    {
+                    //get coord for shot
+                    Coordinate coord = EnterCoordinates();
 
-                       Console.WriteLine($"Place the {ShipType.Battleship}.");
-                        Console.WriteLine($"Enter coordinate: {UserIO.EnterCoordinates}");
-                        string bShip = Console.ReadLine();
-                        Console.WriteLine($"{ShipPlacement}");
-                    }
-                    else if (i == 2)
-                    {
-                        Console.WriteLine($"Place the {ShipType.Carrier}");
-                        Console.WriteLine($"Enter coordinate: {UserIO.EnterCoordinates}");
-                        string caShip = Console.ReadLine();
-                        Console.WriteLine($"{ShipPlacement}")
-                    }
-                    else if (i == 3)
-                    {
-                        Console.WriteLine($"Place the {ShipType.Cruiser}");
-                        Console.WriteLine($"Enter coordinate: {UserIO.EnterCoordinates}");
-                        string crShip = Console.ReadLine();
-                        Console.WriteLine($"{ShipPlacement}")
-                    }
-                    else if (i == 4)
-                    {
-                        Console.WriteLine($"Place the {ShipType.Destroyer}");
-                        Console.WriteLine($"Enter coordinate: {UserIO.EnterCoordinates}");
-                        string dShip = Console.ReadLine();
-                        Console.WriteLine($"{ShipPlacement}")
-                    }
-                    else if (i == 5)
-                    {
-                        Console.WriteLine($"Place the {ShipType.Submarine}");
-                        Console.WriteLine($"Enter coordinate: {UserIO.EnterCoordinates}");
-                        string subShip = Console.ReadLine();
-                        Console.WriteLine($"{ShipPlacement}")
-                    }
+                    //check result
+                    response = nextPlayer.Board.FireShot(coord);
+                    DisplayShotStatus(currentPlayer, response);
+
                 }
-                continue;
+                while (response.ShotStatus == ShotStatus.Invalid || response.ShotStatus == ShotStatus.Duplicate);
             }
+            while (response.ShotStatus != ShotStatus.Victory);
+
         }
 
-        public static Coordinate FireAway()
+        public static void ClearConsole(string prompt)
         {
-            ShotHistory
-            ShotStatus
+            Console.WriteLine(prompt);
+            Console.Read();
+            Console.Clear();
         }
 
-        public static string 
+
+        public static void User1(Player player)
+        {
+            Console.WriteLine("User 1. What is your name?");
+            string name1 = Console.ReadLine();
+            player.Name = name1;
+        }
+
+        public static void User2(Player player)
+        {
+            Console.WriteLine("User 2. What is your name?");
+            string name2 = Console.ReadLine();
+            player.Name = name2;
+        }
+
+
     }
 }
