@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using ListData.ArtistManager;
 using ListData.Artists;
 
 namespace ListDataTemplate
 {
-    public class ArtistManager
+    public class DragManager
     {
         public static void Run()
         {
-            ArtistRepository repo = new ArtistRepository();
+            DragRepository repo = new DragRepository();
 
         }
     }

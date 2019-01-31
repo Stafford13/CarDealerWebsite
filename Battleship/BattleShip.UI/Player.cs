@@ -15,3 +15,7 @@ namespace BattleShip.UI
         }
     }
 }
+
+ //*
+ //* Display Shot - does not end after one valid shot
+ //* 

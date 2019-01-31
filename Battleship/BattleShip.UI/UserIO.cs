@@ -17,7 +17,7 @@ namespace BattleShip.UI
             Console.WriteLine("<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>");
             Console.WriteLine("<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>");
             Console.WriteLine("<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>");
-            Console.WriteLine("<<>><<>><<>>)(PRESS__ANY__KEY__TO__START)(<<>><<>><<>>");
+            Console.WriteLine("<<>><<>><<>>)(PRESS__ANY__ENTER__TO__START)(<<>><<>><<>>");
             Console.WriteLine("\n \n");
             Console.ReadLine();
         }
@@ -25,6 +25,7 @@ namespace BattleShip.UI
         public static void WelcomeUser()
         {
             Console.WriteLine("Welcome to Battleship");
+            Console.WriteLine("\n");
         }
 
         public static Coordinate EnterCoordinates()
@@ -32,16 +33,19 @@ namespace BattleShip.UI
             while (true)
             {
                 Console.WriteLine("Please enter your coordinate (e.g. B5): ");
-                //string strang = Console.ReadLine();
-                //string coords = Console.ReadLine();
-                //coords = coords.ToUpper();
                 string coords = Console.ReadLine();
+                if (coords == null || coords == "")
+                {
+                    Console.WriteLine("WTF");
+                    continue;
+                }
+                coords = coords.ToUpper();
 
                 string xStr = "ABCDEFJHIJKLMNOPQRSTUVWXYZ";
                 int xCoord = 0;
                 int yCoord = 0;
                 if (int.TryParse(coords.Substring(1), out yCoord))
-                {
+                { 
                     if (yCoord < 1 || yCoord > 10)
                     {
                         Console.WriteLine("Wrong. Try again.");
@@ -50,36 +54,30 @@ namespace BattleShip.UI
                 }
                 for (int i = 0; i < xStr.Length; i++)
                 {
-                    if (xCoord > 10)
+                    if (coords[0] == xStr[i])
                     {
-                        continue;
+                        xCoord = i + 1;
                     }
-                    else
-                    {
-                        if (coords[0] == xStr[i])
-                        {
-                            xCoord = i + 1;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Excuse me? Try again.");
-                            continue;
-                        }
-                    }
-
                 }
+
+                if (xCoord > 10)
+                {
+                    Console.WriteLine("Excuse me? Try again.");
+                    continue;
+                }
+
                 Coordinate xy = new Coordinate(xCoord, yCoord);
 
                 return xy;
             }
-        }
 
+        }
         public static void DisplayBoard(Board board)
         {
             string xStr = "ABCDEFGHIJ";
             char row = 'Z';
             ShotHistory displayShot = new ShotHistory();
-            Console.WriteLine("   [1  2  3  4  5  6  7  8  9  10]");
+            Console.WriteLine("   [1  2  3  4  5  6  7  8  9 10]");
 
             for (int x = 0; x < 10; x++)
             {
@@ -88,23 +86,33 @@ namespace BattleShip.UI
 
                 for (int y = 0; y < 10; y++)
                 {
-                    if (x == 0 && y == 0)
-                    {
-                        Console.ReadLine();
-                        Coordinate coord = new Coordinate(x+1, y+1);
+                        Coordinate coord = new Coordinate(x + 1, y + 1);
                         displayShot = board.CheckCoordinate(coord);
-                        Console.Write($"[{displayShot}]");
+                    if (displayShot == ShotHistory.Hit)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("[H]");
                     }
-                    // give it the board for the opponent, not displaying the current player's board
+                    if (displayShot == ShotHistory.Miss)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("[M]");
+                    }
+                    if (displayShot == ShotHistory.Unknown)
+                    {
+                    Console.Write($"[ ]");
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
+            Console.WriteLine("\n");
         }
 
         public static ShipDirection Direction()
         {
             while (true)
             {
-                Console.WriteLine("Please enter the Ship direction: ");
+                Console.WriteLine("Please enter the Ship direction (up, down, left, right): ");
                 string direction = Console.ReadLine();
                 switch (direction.ToUpper())
                 {
@@ -146,27 +154,28 @@ namespace BattleShip.UI
             Console.WriteLine("You're a winnah, baby");
             Console.WriteLine("\n \n");
             while (true)
-            { 
-            Console.WriteLine("Would you like to play again?");
-            string input = Console.ReadLine();
-            input = input.ToLower();
-             
-                    if (input == "yes")
-                    {
-                        return true;
-                    }
-                    else if (input == "no")
-                    {
-                        Console.WriteLine("Thanks for playing!");
-                        Environment.Exit(0);
-                        return false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Could you try that again? I didn't understand you. Try typing yes or no.");
-                    }
+            {
+                Console.WriteLine("Would you like to play again?");
+                string input = Console.ReadLine();
+                input = input.ToLower();
+
+                if (input == "yes")
+                {
+                    Console.Clear();
+                    return true;
                 }
-        }        
+                if (input == "no")
+                {
+                    Console.WriteLine("Thanks for playing!");
+                    Environment.Exit(0);
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Could you try that again? I didn't understand you. Try typing yes or no.");
+                }
+            }
+        }
 
         public static void PlaceShips(Board board)
         {
@@ -174,7 +183,7 @@ namespace BattleShip.UI
             {
                 while (true)
                 {
-                    Console.WriteLine($"Place your {item}");
+                    Console.WriteLine($"\nPlace your {item}");
 
                     PlaceShipRequest request = new PlaceShipRequest
                     {
@@ -220,7 +229,6 @@ namespace BattleShip.UI
                 case ShotStatus.Hit:
                     Console.WriteLine($"\n{response.ShotStatus}!");
                     break;
-                // need to add which ship sunk
                 case ShotStatus.HitAndSunk:
                     Console.WriteLine($"\n{response.ShotStatus}!!");
                     break;
@@ -263,6 +271,7 @@ namespace BattleShip.UI
 
                 }
                 while (response.ShotStatus == ShotStatus.Invalid || response.ShotStatus == ShotStatus.Duplicate);
+                ClearConsole($"Press any Key to end {currentPlayer.Name}'s turn");
             }
             while (response.ShotStatus != ShotStatus.Victory);
 
@@ -293,3 +302,4 @@ namespace BattleShip.UI
 
     }
 }
+
