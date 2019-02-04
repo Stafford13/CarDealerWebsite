@@ -303,3 +303,6 @@ namespace BattleShip.UI
     }
 }
 
+// If Else can be switch
+// I use UserIO a lot, more so than actual input and output. Getting data and displaying data
+// Workflow - 
