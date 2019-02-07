@@ -1,0 +1,2 @@
+When to use interfaces?
+ - between layers is the best location for an interface. ~ Answered by Randall

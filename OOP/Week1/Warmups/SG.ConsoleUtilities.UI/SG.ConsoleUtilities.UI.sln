@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SG.CU.UI", "SG.ConsoleUtilities.UI\SG.CU.UI.csproj", "{CA625462-B8B6-4A2D-8BC2-C810B3B3835E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SG.ConsoleUtil2.BLL", "SG.ConsoleUtil2.BLL\SG.ConsoleUtil2.BLL.csproj", "{EBABF503-AD72-495A-8414-606C3B98481C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA625462-B8B6-4A2D-8BC2-C810B3B3835E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA625462-B8B6-4A2D-8BC2-C810B3B3835E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA625462-B8B6-4A2D-8BC2-C810B3B3835E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA625462-B8B6-4A2D-8BC2-C810B3B3835E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBABF503-AD72-495A-8414-606C3B98481C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBABF503-AD72-495A-8414-606C3B98481C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBABF503-AD72-495A-8414-606C3B98481C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBABF503-AD72-495A-8414-606C3B98481C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
