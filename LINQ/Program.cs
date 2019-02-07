@@ -24,9 +24,9 @@ namespace LINQ
             //Exercise9();
             //Exercise10();
             //Exercise11();
-            //Exercise12();
-            //Exercise13();
-            //Exercise14();
+            Exercise12();
+            Exercise13();
+            Exercise14();
             //Exercise15();
             //Exercise16();
             //Exercise17();
@@ -43,7 +43,7 @@ namespace LINQ
             //Exercise28();
             //Exercise29();
             //Exercise30();
-            Exercise31();
+            //Exercise31();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -206,7 +206,7 @@ namespace LINQ
         {
             List<Product> all = DataLoader.LoadProducts();
             var queue = from p in all
-                        select new { ProductID = p.ProductID, ProductName = p.ProductName, Category = p.Category, UnitPrice = p.UnitPrice, UnitsInStock = p.UnitsInStock, ReOrder = (p.UnitsInStock > 3 == true) };
+                        select new { ProductID = p.ProductID, ProductName = p.ProductName, Category = p.Category, UnitPrice = p.UnitPrice, UnitsInStock = p.UnitsInStock, ReOrder = (p.UnitsInStock < 3 == true) };
             string line = "{0,-5} {1,-35} {2,-15} {3,6:c} {4,6} {5, -6}";
             Console.WriteLine(line, "ID", "Product Name", "Category", "Unit", "Stock", "ReOrder");
             Console.WriteLine("==============================================================================");
