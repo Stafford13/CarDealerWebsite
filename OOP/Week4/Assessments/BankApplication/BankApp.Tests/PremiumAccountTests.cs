@@ -36,7 +36,7 @@ namespace BankApp.Tests
         [TestCase("22222", "Premium Account", 100, AccountType.Free, -100, 100, false)]
         [TestCase("22222", "Premium Account", 100, AccountType.Premium, 100, 100, false)]
         [TestCase("22222", "Premium Account", 150, AccountType.Premium, -50, 100, true)]
-        [TestCase("22222", "Premium Account", 100, AccountType.Premium, -150, -60, true)]
+        [TestCase("22222", "Premium Account", 100, AccountType.Premium, -150, -50, true)]
         public void PremiumAccountWithdrawRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
         {
             IWithdraw withdrawal = new PremiumAccountWithdrawRule();
