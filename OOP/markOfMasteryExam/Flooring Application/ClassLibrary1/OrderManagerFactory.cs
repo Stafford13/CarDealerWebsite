@@ -17,9 +17,13 @@ namespace Flooring.BLL
             switch (mode)
             {
                 case "Test":
+                    //
+                    //
                     return new OrderManager(new OrderTestRepository());
                 case "Production":
-                    return new OrderManager(new OrderTestRepository());
+                    //
+                    //
+                    return new OrderManager(new OrderFileRepository(""));
                 default:
                     throw new Exception("Mode value in app config is not valid");
             }

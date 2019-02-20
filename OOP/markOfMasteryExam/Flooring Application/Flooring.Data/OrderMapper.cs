@@ -14,7 +14,7 @@ namespace Flooring.Data
             return $"{order.OrderNumber}|{order.date}||{order.CustomerName}||{order.State}||{order.TaxRate}||{order.ProductType}||{order.Area}||{order.CostPerSquareFoot}||{order.LaborCostPerSquareFoot}||{order.MaterialCost}||{order.LaborCost}||{order.Tax}||{order.Total}";
         }
 
-        public static FlooringOrder ToOrder(string row, string date)
+        public static FlooringOrder ToOrder(string row)
         {
             FlooringOrder o = new FlooringOrder();
             string[] fields = row.Split(new string[] { "||" }, StringSplitOptions.None);
@@ -31,8 +31,13 @@ namespace Flooring.Data
             o.LaborCost = decimal.Parse(fields[9]);
             o.Tax = decimal.Parse(fields[10]);
             o.Total = decimal.Parse(fields[11]);
-            o.date = DateTime.Parse(fields[12]);
+            //o.date = DateTime.Parse(fields[12]);
             return o;
+        }
+
+        internal static char toStringCSV(FlooringOrder orders)
+        {
+            throw new NotImplementedException();
         }
     }
 }

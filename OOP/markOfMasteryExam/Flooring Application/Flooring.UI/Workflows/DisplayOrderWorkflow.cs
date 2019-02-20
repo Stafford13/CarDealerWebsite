@@ -23,7 +23,7 @@ namespace Flooring.UI.Workflows
             Console.WriteLine("Display an order");
             Console.WriteLine("------------------------");
             string date = io.GetDateFromUser("Please provide a date");
-            DisplayOrderResponse response = manager.LoadOrders(date);
+            DisplayOrderResponse response = manager.LoadOrders($"Orders_{date}.txt");
 
                 foreach (FlooringOrder order in response.Orders)
                 {

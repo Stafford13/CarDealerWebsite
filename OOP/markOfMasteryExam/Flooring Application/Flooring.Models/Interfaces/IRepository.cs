@@ -19,6 +19,6 @@ namespace Flooring.Models.Interfaces
         //update order
         void Update(string datestring, FlooringOrder newOrder, List<FlooringOrder> List);
         //delete order
-        void Delete(string datestring, FlooringOrder newOrder, List<FlooringOrder> List);
+        void Delete(DateTime orderDate, int orderNumber);
     }
 }

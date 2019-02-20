@@ -48,7 +48,7 @@ namespace Flooring.UI.Workflows
                 }
             }
 
-            DisplayOrderResponse oldResponse = manager.LoadOrders(date1);
+            DisplayOrderResponse oldResponse = manager.LoadOrders($"Orders_{date1}.txt");
 
             foreach (FlooringOrder order in oldResponse.Orders)
             {
@@ -116,6 +116,10 @@ namespace Flooring.UI.Workflows
                         Console.WriteLine("That state isn't in our region yet.");
                     }
                 }
+                else
+                {
+                    isValidTax = true;
+                }
             }
 
             List<FlooringProduct> ProductList = yo.LoadProducts();
@@ -147,6 +151,10 @@ namespace Flooring.UI.Workflows
                         Console.WriteLine("That product isn't available yet.");
                     }
                 }
+                else
+                {
+                    isValidProduct = true;
+                }
             }
 
             decimal area1 = 0;
@@ -172,19 +180,17 @@ namespace Flooring.UI.Workflows
                         }
                     }
                 }
+                else
+                {
+                    isValidArea = true;
+                }
             }
-
-            //// Which type?
-            ////EditOrderResponse response = manager.EditOrder();
 
             //ask user for order number
             //if order exisits - ask user for each piece of order data && display exisiting data
-            //StreamWriter.WriteLine(order.CustomerName, FlooringTax.StateAbbreviation, FlooringProduct.ProductType, Order.Area);
-            //if user enters new input for row, that will replace that specific data
             //if user presses Enter key without entering data - leave existing data in place
 
             //Only CustomerName, State, ProductType, Area can be changed
-            //if state, productType, or Area changes -> order recalculated
             //Order date may NOT change
 
             Console.Clear();
@@ -194,16 +200,16 @@ namespace Flooring.UI.Workflows
             while (isSave == false)
             {
                 string place = PromptUser("Would you like to place this order? Please enter yes or no");
-                if (place == "yes")
+                if (place.ToLower() == "yes")
                 {
-                    manager.EditOrder(date1, newOrder, oldResponse.Orders);
+                    manager.EditOrder(date1, newOrder, oldResponse.Orders); //still saving the new file even if selecting no
                     isSave = true;
-                    // save final to file with approps date
+                    // save final to file with approp date
                 }
-                else if (place == "no")
+                else if (place.ToLower() == "no")
                 {
                     isSave = true;
-                    //return to main menu, maybe break?
+                    //return to main menu
                 }
                 else
                 {

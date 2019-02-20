@@ -20,7 +20,7 @@ namespace Flooring.BLL
         public OrderManager(IRepository displayOrderRepository)
         {
             _orderRepository = displayOrderRepository;
-            
+
         }
 
         public List<FlooringProduct> GetProducts()
@@ -36,18 +36,27 @@ namespace Flooring.BLL
             return response;
         }
 
-        public DisplayOrderResponse LoadOrders(string date)
+        public DisplayOrderResponse LoadOrders(string FILENAME)
         {
             DisplayOrderResponse response = new DisplayOrderResponse();
 
-            response.Orders = _orderRepository.LoadOrders(date);
+            response.Orders = _orderRepository.LoadOrders(FILENAME);
+
+            string dateString = FILENAME.Substring(FILENAME.Length - 12, 8);
+            dateString = dateString.Substring(0, 2) + "/" + dateString.Substring(2, 2) + "/" + dateString.Substring(4);
+            DateTime dateTime = DateTime.Parse(dateString);
+
+            foreach (var item in response.Orders)
+            {
+                item.date = dateTime;
+            }
 
 
             return response;
         }
         public void AddOrder(string datestring, FlooringOrder newOrder)
         {
-           
+
             _orderRepository.Create(datestring, newOrder);
             return;
         }
@@ -58,9 +67,9 @@ namespace Flooring.BLL
             return;
         }
 
-        public void DeleteOrder(string datestring, FlooringOrder newOrder, List<FlooringOrder> List)
+        public void DeleteOrder(DateTime orderDate, int orderNumber)
         {
-            _orderRepository.Delete(datestring, newOrder, List);
+            _orderRepository.Delete(orderDate, orderNumber);
             return;
         }
     }

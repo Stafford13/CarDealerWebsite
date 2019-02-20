@@ -43,7 +43,6 @@ namespace Flooring.UI.Workflows
                     isValidDate = true;
                 }
             }
-
             
             orderNumberResponse =  manager.NextOrderNumber(date1);
 
@@ -105,8 +104,6 @@ namespace Flooring.UI.Workflows
                     Console.WriteLine("That product isn't available yet.");
                 }
             }
-            //io.DisplayProducts(manager.GetProducts());
-            //string product = PromptUser("What kind of product would you like to use?");
 
             //Need to select product, if not (product) then show an error and loop
 
@@ -145,14 +142,12 @@ namespace Flooring.UI.Workflows
                 {
                     manager.AddOrder(date1, newOrder);
                     isSave = true;
-                    // create new file if first order of date
-                    //system should generate order number for user based on next available order number
                     // save final to file with approps date
                 }
                 else if (place.ToLower() == "no")
                 {
                     isSave = true;
-                    //return to main menu, maybe break?
+                    //return to main menu
                 }
                 else
                 {

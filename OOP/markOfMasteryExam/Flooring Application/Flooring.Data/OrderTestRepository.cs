@@ -44,7 +44,7 @@ namespace Flooring.Data
             SaveOrder(orders, datestring);
         }
 
-        public void Delete(string datestring, FlooringOrder newOrder, List<FlooringOrder> List)
+        public void Delete(DateTime orderDate, int orderNumber)
         {
             throw new NotImplementedException();
         }

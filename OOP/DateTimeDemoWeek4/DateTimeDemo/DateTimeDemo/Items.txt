@@ -1,0 +1,2 @@
+﻿1::Shield::Guards against attacks::1
+2::Armor::Really sweet looking::1000
