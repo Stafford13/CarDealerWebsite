@@ -44,7 +44,7 @@ namespace Flooring.UI.Workflows
                 }
             }
             
-            orderNumberResponse =  manager.NextOrderNumber(date1);
+           // orderNumberResponse =  manager.NextOrderNumber(date1);
 
             string name = PromptUser("What is your name?");
 
@@ -128,10 +128,11 @@ namespace Flooring.UI.Workflows
             Console.WriteLine("");
             newOrder.OrderNumber = orderNumberResponse.OrderNumber;
             newOrder.Area = area1;
-            newOrder.OrderTax = orderTax;
+            newOrder.State = orderTax.StateAbbreviation;
+            newOrder.TaxRate = orderTax.TaxRate;
             newOrder.CustomerName = name;
             newOrder.date = orderDate;
-            newOrder.OrderProduct = orderProduct;
+            newOrder.ProductType = orderProduct.ProductType;
             io.DisplayOrderDetails(newOrder);
 
             bool isSave = false;

@@ -49,7 +49,7 @@ namespace Flooring.UI
             Console.WriteLine($"{order.OrderNumber} | {order.date.ToShortDateString()}");
             Console.WriteLine($"{order.CustomerName}");
             Console.WriteLine($"{order.State}");
-            Console.WriteLine($"Product: {order.OrderProduct.ProductType}");
+            Console.WriteLine($"Product: {order.ProductType}");
             Console.WriteLine($"Materials: {Math.Round(order.MaterialCost, 2)}");
             Console.WriteLine($"Labor: {Math.Round(order.LaborCost, 2)}");
             Console.WriteLine($"Tax: {Math.Round(order.Tax, 2)}");

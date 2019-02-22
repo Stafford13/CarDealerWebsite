@@ -17,25 +17,26 @@ namespace Flooring.Data
             date = DateTime.Today,
             CustomerName = "Acme",
             Area = 100,
-            OrderTax = new FlooringTax
-            {
-                StateAbbreviation = "OH",
-                StateName = "Ohio",
-                TaxRate = 10
-            },
-            OrderProduct = new FlooringProduct
-            {
-                ProductType = "Wood",
-                CostPerSquareFoot = 5.15m,
-                LaborCostPerSquareFoot = 6m
-            },
+            State = "OH",
+            //OrderTax = new FlooringTax
+            //{
+            //    StateAbbreviation = "OH",
+            //    StateName = "Ohio",
+            //    TaxRate = 10
+            //},
+            ProductType = "Wood",
+            CostPerSquareFoot = 5.15m,
+            LaborCostPerSquareFoot = 6m,
+                //ProductType = "Wood",
+                //CostPerSquareFoot = 5.15m,
+                //SquareFoot = 5.15m,
         };
 
-        public int nextOrderNumber(string date)
-        {
-            int result = 2;
-            return result;
-        }
+        //public int nextOrderNumber(string date)
+        //{
+        //    int result = 2;
+        //    return result;
+        //}
 
         public void Create(string datestring, FlooringOrder newOrder)
         {
@@ -44,7 +45,7 @@ namespace Flooring.Data
             SaveOrder(orders, datestring);
         }
 
-        public void Delete(DateTime orderDate, int orderNumber)
+        public void Delete(string datestring, int orderNumber)
         {
             throw new NotImplementedException();
         }
@@ -56,7 +57,12 @@ namespace Flooring.Data
             return orders;
         }
 
-        public void Update(string datestring, FlooringOrder newOrder, List<FlooringOrder> List)
+        public FlooringOrder ReadByOrder(string datestring, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(string datestring, FlooringOrder newOrder)
         {
             return;
             //throw new NotImplementedException();

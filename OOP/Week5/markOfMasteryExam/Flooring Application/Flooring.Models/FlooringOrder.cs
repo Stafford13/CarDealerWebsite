@@ -10,52 +10,12 @@ namespace Flooring.Models
     {
         public int OrderNumber { get; set; }
         public string CustomerName { get; set; }
-        public string State
-        {
-            get
-            {
-                return OrderTax.StateAbbreviation;
-            }
-            set
-            { }
-        }
-        public decimal TaxRate
-        {
-            get
-            {
-                return OrderTax.TaxRate;
-            }
-            set
-            { }
-        }
-        public string ProductType
-        {
-            get
-            {
-                return OrderProduct.ProductType;
-            }
-            set
-            { }
-        }
+        public string State { get; set; }
+        public decimal TaxRate { get; set;}
+        public string ProductType { get; set; }
         public decimal Area { get; set; }
-        public decimal CostPerSquareFoot
-        {
-            get
-            {
-                return OrderProduct.CostPerSquareFoot;
-            }
-            set
-            { }
-        }
-        public decimal LaborCostPerSquareFoot
-        {
-            get
-            {
-                return OrderProduct.LaborCostPerSquareFoot;
-            }
-            set
-            { }
-        }
+        public decimal CostPerSquareFoot { get; set; }
+        public decimal LaborCostPerSquareFoot { get; set; }
         public decimal MaterialCost
         {
             get
@@ -78,7 +38,7 @@ namespace Flooring.Models
             {
                 return (MaterialCost + LaborCost) * (TaxRate / 100);
             }
-            set { }
+            
         }
         public decimal Total
         {
@@ -90,8 +50,8 @@ namespace Flooring.Models
         }
 
         public DateTime date { get; set; }
-        public FlooringTax OrderTax { get; set; }
-        public FlooringProduct OrderProduct { get; set; }
+        //public FlooringTax OrderTax { get; set; }
+        //public FlooringProduct OrderProduct { get; set; }
 
 
         //finish order mapper

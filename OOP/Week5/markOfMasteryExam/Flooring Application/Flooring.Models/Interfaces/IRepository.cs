@@ -9,16 +9,17 @@ namespace Flooring.Models.Interfaces
 {
     public interface IRepository
     {
-        int nextOrderNumber(string date);
+        //int nextOrderNumber(string date);
         
         //R
         List<FlooringOrder> LoadOrders(string datestring);
+        FlooringOrder ReadByOrder(string datestring, int id);
         //CRUD
         //create order
         void Create(string datestring, FlooringOrder newOrder);
         //update order
-        void Update(string datestring, FlooringOrder newOrder, List<FlooringOrder> List);
+        void Update(string datestring, FlooringOrder newOrder);
         //delete order
-        void Delete(DateTime orderDate, int orderNumber);
+        void Delete(string datestring, int orderNumber);
     }
 }

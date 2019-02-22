@@ -11,16 +11,16 @@ namespace Flooring.Data
 {
     public class OrderFileRepository : IRepository
     {
-        protected List<FlooringOrder> orders;
-        private readonly string FILENAME;
+        //protected List<FlooringOrder> orders;
+        //private readonly string FILENAME;
 
         public OrderFileRepository(string filename)
         {
-            FILENAME = filename;
-            LoadOrders(filename);
+            //FILENAME = filename;
+            //LoadOrders(filename);
         }
 
-        public int nextOrderNumber(string date)
+        public int nextOrderNumber(List<FlooringOrder> orders)
         {
             int id = 0;
             foreach (FlooringOrder order in orders)
@@ -37,28 +37,29 @@ namespace Flooring.Data
         // CREATE
         public void Create(string datestring, FlooringOrder newOrder)
         {
-            if (!File.Exists(FILENAME))
+            string filepath = $"Orders_{datestring}.txt";
+            if (!File.Exists(filepath))
             {
-                File.Create(FILENAME).Close();
+                File.Create(filepath).Close();
             }
-
-            newOrder.OrderNumber = nextOrderNumber("");
+            List<FlooringOrder> orders = LoadOrders(datestring);
+            newOrder.OrderNumber = nextOrderNumber(orders);
             newOrder.date = DateTime.Now;
             orders.Add(newOrder);
-            SaveOrders();
+            SaveOrders(orders, datestring);
             //return newOrder;
         }
 
         // READALL
-        public List<FlooringOrder> ReadAll()
-        {
-            return orders;
-        }
+        //public List<FlooringOrder> ReadAll()
+        //{
+        //    return orders;
+        //}
 
         // READBY
-        public virtual FlooringOrder ReadById(int id)
+        public FlooringOrder ReadByOrder(string datestring, int id)
         {
-
+            var orders = LoadOrders(datestring);
             foreach (FlooringOrder order in orders)
             {
                 if (order.OrderNumber == id)
@@ -69,16 +70,20 @@ namespace Flooring.Data
             return null;
         }
         // UPDATE
-        public void Update(string datestring, FlooringOrder newOrder, List<FlooringOrder> List)
+        public void Update(string datestring, FlooringOrder newOrder)
         {
+            var orders = LoadOrders(datestring);
             // Loop until find the index, and modify way
             for (int i = 0; i < orders.Count; i++)
             {
-                if (orders[i].OrderNumber != newOrder.OrderNumber) continue;
-                orders[i] = newOrder;
-                break;
+                if (orders[i].OrderNumber != newOrder.OrderNumber)
+                {
+                    orders[i] = newOrder;
+                    break;
+                }
+                
             }
-            SaveOrders();
+            SaveOrders(orders, datestring);
             //int index = _orders.FindIndex((FlooringOrder c) => c.Id == id);
             //if (index >= 0)
             //{
@@ -88,35 +93,37 @@ namespace Flooring.Data
 
         }
         // DELETE
-        public void Delete(DateTime orderDate, int orderNumber)
+        public void Delete(string datestring, int orderNumber)
         {
+            var orders = LoadOrders(datestring);
             orders.RemoveAll((FlooringOrder orderInfo) => orderInfo.OrderNumber == orderNumber);
-            SaveOrders();
+            SaveOrders(orders, datestring);
         }
 
         /// <summary>
         /// Saving to a text file what is in a order list
         /// </summary>
-        private void SaveOrders()
+        private void SaveOrders(List<FlooringOrder> orders, string datestring)
         {
+            string filepath = $"Orders_{datestring}.txt";
             StreamWriter sw = null;
 
             try
             {
-                sw = new StreamWriter(FILENAME);
-                sw.Write("OrderNumber||CustomerName||State||TaxRate||ProductType||Area||CostPerSquareFoot||LaborCostPerSquareFoot||MaterialCost||LaborCost||Tax||Total");
+                sw = new StreamWriter(filepath);
+                sw.WriteLine("OrderNumber||CustomerName||State||TaxRate||ProductType||Area||CostPerSquareFoot||LaborCostPerSquareFoot||MaterialCost||LaborCost||Tax||Total");
 
-                foreach (FlooringOrder orders in orders)
+                foreach (FlooringOrder order in orders)
                 {
-                    sw.WriteLine(OrderMapper.toStringCSV(orders));
+                    sw.WriteLine(OrderMapper.ToString(order));
                     sw.Flush();
                 }
 
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Something went wrong");
-            }
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine("Something went wrong");
+            //}
             finally
             {
                 if (sw != null) sw.Close();
@@ -126,13 +133,14 @@ namespace Flooring.Data
 
         public List<FlooringOrder> LoadOrders(string datestring)
         {
+            string filepath = $"Orders_{datestring}.txt";
             List<FlooringOrder> orders = new List<FlooringOrder>();
 
             StreamReader sr = null;
 
             try
             {
-                sr = new StreamReader(FILENAME);
+                sr = new StreamReader(filepath);
                 string row = "";
                 sr.ReadLine();
                 while ((row = sr.ReadLine()) != null)

@@ -107,7 +107,8 @@ namespace Flooring.UI.Workflows
                     {
                         if (nation > 0 && nation <= TaxList.Count)
                         {
-                            newOrder.OrderTax = TaxList[nation - 1];
+                            newOrder.State = TaxList[nation - 1].StateAbbreviation;
+                            newOrder.TaxRate = TaxList[nation - 1].TaxRate;
                             isValidTax = true;
                         }
                     }
@@ -142,7 +143,7 @@ namespace Flooring.UI.Workflows
                     {
                         if (supply > 0 && supply <= ProductList.Count)
                         {
-                            newOrder.OrderProduct = ProductList[supply - 1];
+                            newOrder.ProductType = ProductList[supply - 1].ProductType;
                             isValidProduct = true;
                         }
                     }
@@ -202,7 +203,7 @@ namespace Flooring.UI.Workflows
                 string place = PromptUser("Would you like to place this order? Please enter yes or no");
                 if (place.ToLower() == "yes")
                 {
-                    manager.EditOrder(date1, newOrder, oldResponse.Orders); //still saving the new file even if selecting no
+                    manager.EditOrder(date1, newOrder); //still saving the new file even if selecting no
                     isSave = true;
                     // save final to file with approp date
                 }

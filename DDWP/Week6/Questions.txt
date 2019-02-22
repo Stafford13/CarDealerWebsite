@@ -1,0 +1,10 @@
+ACID properties
+two subsets of SQL
+	1. Data Definition Language - data structures
+		a.Create
+		b.Alter
+		c.Drop
+	2.Data Manipulation Language - actual data
+		a.Insert
+		b.Update
+		c.Delete

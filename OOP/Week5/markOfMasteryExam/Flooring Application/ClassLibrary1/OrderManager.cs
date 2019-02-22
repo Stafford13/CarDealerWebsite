@@ -29,12 +29,12 @@ namespace Flooring.BLL
             return products;
         }
 
-        public NextOrderNumberResponse NextOrderNumber(string date)
-        {
-            NextOrderNumberResponse response = new NextOrderNumberResponse();
-            response.OrderNumber = _orderRepository.nextOrderNumber(date);
-            return response;
-        }
+        //public NextOrderNumberResponse NextOrderNumber(string date)
+        //{
+        //    NextOrderNumberResponse response = new NextOrderNumberResponse();
+        //    response.OrderNumber = _orderRepository.nextOrderNumber(date);
+        //    return response;
+        //}
 
         public DisplayOrderResponse LoadOrders(string FILENAME)
         {
@@ -42,14 +42,14 @@ namespace Flooring.BLL
 
             response.Orders = _orderRepository.LoadOrders(FILENAME);
 
-            string dateString = FILENAME.Substring(FILENAME.Length - 12, 8);
-            dateString = dateString.Substring(0, 2) + "/" + dateString.Substring(2, 2) + "/" + dateString.Substring(4);
-            DateTime dateTime = DateTime.Parse(dateString);
+            //string dateString = FILENAME.Substring(FILENAME.Length - 12, 8);
+            //dateString = dateString.Substring(0, 2) + "/" + dateString.Substring(2, 2) + "/" + dateString.Substring(4);
+            //DateTime dateTime = DateTime.Parse(dateString);
 
-            foreach (var item in response.Orders)
-            {
-                item.date = dateTime;
-            }
+            //foreach (var item in response.Orders)
+            //{
+            //    item.date = dateTime;
+            //}
 
 
             return response;
@@ -61,15 +61,15 @@ namespace Flooring.BLL
             return;
         }
 
-        public void EditOrder(string datestring, FlooringOrder newOrder, List<FlooringOrder> List)
+        public void EditOrder(string datestring, FlooringOrder newOrder)
         {
-            _orderRepository.Update(datestring, newOrder, List);
+            _orderRepository.Update(datestring, newOrder);
             return;
         }
 
-        public void DeleteOrder(DateTime orderDate, int orderNumber)
+        public void DeleteOrder(string datestring, int orderNumber)
         {
-            _orderRepository.Delete(orderDate, orderNumber);
+            _orderRepository.Delete(datestring, orderNumber);
             return;
         }
     }
