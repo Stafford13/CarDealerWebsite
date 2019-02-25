@@ -48,7 +48,7 @@ namespace Flooring.UI.Workflows
                 }
             }
 
-            DisplayOrderResponse oldResponse = manager.LoadOrders($"Orders_{date1}.txt");
+            DisplayOrderResponse oldResponse = manager.LoadOrders(date1);
 
             foreach (FlooringOrder order in oldResponse.Orders)
             {
@@ -81,14 +81,14 @@ namespace Flooring.UI.Workflows
             //if theres more than one order in date, remove the order number from list -> remove with LINQ
             //save list back to file for that date
          
-                Console.WriteLine(newOrder);
+            io.DisplayOrderDetails(newOrder);
             bool isSave = false;
             while (isSave == false)
             {
                 string place = PromptUser("Are you entireley sure that you want to remove this order? Choose yes or no.");
                 if (place.ToLower() == "yes")
                 {
-                    //manager.DeleteOrder(date1, newOrder, oldResponse.Orders);
+                    manager.DeleteOrder(date1, newOrder.OrderNumber);
                     isSave = true;
                     // save final to file with approps date
                 }

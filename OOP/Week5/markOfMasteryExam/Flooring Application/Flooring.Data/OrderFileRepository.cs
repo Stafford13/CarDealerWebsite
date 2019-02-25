@@ -44,7 +44,6 @@ namespace Flooring.Data
             }
             List<FlooringOrder> orders = LoadOrders(datestring);
             newOrder.OrderNumber = nextOrderNumber(orders);
-            newOrder.date = DateTime.Now;
             orders.Add(newOrder);
             SaveOrders(orders, datestring);
             //return newOrder;
@@ -76,7 +75,7 @@ namespace Flooring.Data
             // Loop until find the index, and modify way
             for (int i = 0; i < orders.Count; i++)
             {
-                if (orders[i].OrderNumber != newOrder.OrderNumber)
+                if (orders[i].OrderNumber == newOrder.OrderNumber)
                 {
                     orders[i] = newOrder;
                     break;
@@ -111,7 +110,7 @@ namespace Flooring.Data
             try
             {
                 sw = new StreamWriter(filepath);
-                sw.WriteLine("OrderNumber||CustomerName||State||TaxRate||ProductType||Area||CostPerSquareFoot||LaborCostPerSquareFoot||MaterialCost||LaborCost||Tax||Total");
+                sw.WriteLine("OrderNumber||date||CustomerName||State||TaxRate||ProductType||Area||CostPerSquareFoot||LaborCostPerSquareFoot||MaterialCost||LaborCost||Tax||Total");
 
                 foreach (FlooringOrder order in orders)
                 {

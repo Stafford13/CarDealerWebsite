@@ -18,6 +18,7 @@ namespace Flooring.UI.Workflows
 
         FlooringOrder newOrder = new FlooringOrder();
         NextOrderNumberResponse orderNumberResponse = new NextOrderNumberResponse();
+        
 
         public void Execute()
         {
@@ -133,6 +134,8 @@ namespace Flooring.UI.Workflows
             newOrder.CustomerName = name;
             newOrder.date = orderDate;
             newOrder.ProductType = orderProduct.ProductType;
+            newOrder.CostPerSquareFoot = orderProduct.CostPerSquareFoot;
+            newOrder.LaborCostPerSquareFoot = orderProduct.LaborCostPerSquareFoot;
             io.DisplayOrderDetails(newOrder);
 
             bool isSave = false;

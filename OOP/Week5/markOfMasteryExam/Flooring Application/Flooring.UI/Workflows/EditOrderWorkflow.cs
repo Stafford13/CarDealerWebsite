@@ -48,7 +48,7 @@ namespace Flooring.UI.Workflows
                 }
             }
 
-            DisplayOrderResponse oldResponse = manager.LoadOrders($"Orders_{date1}.txt");
+            DisplayOrderResponse oldResponse = manager.LoadOrders(date1);
 
             foreach (FlooringOrder order in oldResponse.Orders)
             {
@@ -144,6 +144,8 @@ namespace Flooring.UI.Workflows
                         if (supply > 0 && supply <= ProductList.Count)
                         {
                             newOrder.ProductType = ProductList[supply - 1].ProductType;
+                            newOrder.LaborCostPerSquareFoot = ProductList[supply - 1].LaborCostPerSquareFoot;
+                            newOrder.CostPerSquareFoot = ProductList[supply - 1].CostPerSquareFoot;
                             isValidProduct = true;
                         }
                     }
