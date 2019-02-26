@@ -1,4 +1,5 @@
 ﻿using Flooring.BLL;
+using Flooring.Data;
 using Flooring.Models;
 using NUnit.Framework;
 using System;
@@ -15,57 +16,65 @@ namespace Flooring.Tests
          [Test]
         public void OrderToStringTests()
         {
-            Product product = new Product
+            FlooringProduct product = new FlooringProduct
             {
                 ProductType = "Wood",
                 CostPerSquareFoot = 5.15m,
                 LaborCostPerSquareFoot = 4.75m
             };
-            Tax tax = new Tax
+            FlooringTax tax = new FlooringTax
             {
                 TaxRate = 6.25m,
                 StateAbbreviation = "OH"
             };
-            Order order = new Order()
+            FlooringOrder order = new FlooringOrder()
             {
                 OrderNumber = 1,
+                date = new DateTime(2013, 6, 1, 0, 00, 00),
                 CustomerName = "Wise",
-                OrderTax = tax,
-                OrderProduct = product,
-                Area = 100m,
+                TaxRate = tax.TaxRate,
+                State = "OH",
+                ProductType = product.ProductType,
+                Area = 100.00m,
+                CostPerSquareFoot = 5.15m,
+                LaborCostPerSquareFoot = 4.75m
             };
             string actual = OrderMapper.ToString(order);
-            string expected = "1||Wise||OH||6.25||Wood||100.00||5.15||4.75||515.00||475.00||61.88||1051.88";
+            string expected = "1||6/1/2013 12:00:00 AM||Wise||OH||6.25||Wood||100.00||5.15||4.75||515.00||475.00||61.88||1051.88";
             Assert.AreEqual(expected, actual);
         }
-        [TestCase("1||Wise||OH||6.25||Wood||100.00||5.15||4.75||515.00||475.00||61.88||1051.88", 1, "Wise", "OH", 6.25, "Wood", 100.00, 5.15, 4.75, 515.00, 475.00, 61.88, 1051.88)]
+        [TestCase("1||6/1/2013 12:00:00 AM||Wise||OH||6.25||Wood||100.00||5.15||4.75||515.00||475.00||61.88||1051.88", 1, "Wise", "OH", 6.25, "Wood", 100.00, 5.15, 4.75, 515.00, 475.00, 61.88, 1051.88)]
         public void OrderFromStringTest(string row, int id, string name, string abbreviation, decimal taxRate, string productType, decimal area, decimal materialCostPerSquareFoot, decimal laborCostPerSquareFoot, decimal materialCost, decimal LaborCost, decimal Tax, decimal Total)
         {
-            Order actual = OrderMapper.FromString(row);
-            Product product = new Product
-            {
-                ProductType = productType,
-                CostPerSquareFoot = materialCostPerSquareFoot,
-                LaborCostPerSquareFoot = laborCostPerSquareFoot,
-            };
-            Tax tax = new Tax
-            {
-                TaxRate = taxRate,
-                StateAbbreviation = abbreviation
-            };
-            Order expected = new Order()
+            FlooringOrder actual = OrderMapper.ToOrder(row);
+            //FlooringProduct product = new FlooringProduct
+            //{
+            //    ProductType = productType,
+            //    CostPerSquareFoot = materialCostPerSquareFoot,
+            //    LaborCostPerSquareFoot = laborCostPerSquareFoot,
+            //};
+            //FlooringTax tax = new FlooringTax
+            //{
+            //    TaxRate = taxRate,
+            //    StateAbbreviation = abbreviation
+            //};
+            FlooringOrder expected = new FlooringOrder()
             {
                 OrderNumber = id,
                 CustomerName = name,
-                OrderTax = tax,
-                OrderProduct = product,
                 Area = area,
+                TaxRate = taxRate,
+                State = abbreviation,
+                ProductType = productType,
+                CostPerSquareFoot = materialCostPerSquareFoot,
+                LaborCostPerSquareFoot = laborCostPerSquareFoot,
+
             };
-            Assert.AreEqual(expected.OrderTax.StateAbbreviation, actual.OrderTax.StateAbbreviation);
-            Assert.AreEqual(expected.OrderTax.TaxRate, actual.OrderTax.TaxRate);
-            Assert.AreEqual(expected.OrderProduct.ProductType, actual.OrderProduct.ProductType);
-            Assert.AreEqual(expected.OrderProduct.CostPerSquareFoot, actual.OrderProduct.CostPerSquareFoot);
-            Assert.AreEqual(expected.OrderProduct.LaborCostPerSquareFoot, actual.OrderProduct.LaborCostPerSquareFoot);
+            Assert.AreEqual(expected.State, actual.State);
+            Assert.AreEqual(expected.TaxRate, actual.TaxRate);
+            Assert.AreEqual(expected.ProductType, actual.ProductType);
+            Assert.AreEqual(expected.CostPerSquareFoot, actual.CostPerSquareFoot);
+            Assert.AreEqual(expected.LaborCostPerSquareFoot, actual.LaborCostPerSquareFoot);
             Assert.AreEqual(expected.OrderNumber, actual.OrderNumber);
             Assert.AreEqual(expected.CustomerName, actual.CustomerName);
             Assert.AreEqual(expected.Area, actual.Area);
@@ -80,8 +89,8 @@ namespace Flooring.Tests
         [TestCase("IN,Indiana,6.00", "IN", "Indiana", 6.00)]
         public void TaxFromStringTest(string row, string abbreviation, string name, decimal taxRate)
         {
-            Tax actual = TaxMapper.FromString(row);
-            Tax expected = new Tax
+            FlooringTax actual = TaxMapper.ToTax(row);
+            FlooringTax expected = new FlooringTax
             {
                 StateAbbreviation = abbreviation,
                 StateName = name,
@@ -97,8 +106,8 @@ namespace Flooring.Tests
         [TestCase("Wood,5.15,4.75","Wood", 5.15, 4.75)]
         public void ProductFromString(string row, string type, decimal matCost, decimal laborCost)
         {
-            Product actual = ProductMapper.ProductFromString(row);
-            Product expected = new Product
+            FlooringProduct actual = ProductMapper.ToProduct(row);
+            FlooringProduct expected = new FlooringProduct
             {
                 ProductType = type,
                 CostPerSquareFoot = matCost,

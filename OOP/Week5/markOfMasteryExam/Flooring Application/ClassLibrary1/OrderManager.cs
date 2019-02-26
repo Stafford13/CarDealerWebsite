@@ -23,17 +23,10 @@ namespace Flooring.BLL
 
         }
 
-        public List<FlooringProduct> GetProducts()
-        {
-            List<FlooringProduct> products = _productRepo.LoadProducts();
-            return products;
-        }
-
-        //public NextOrderNumberResponse NextOrderNumber(string date)
+        //public List<FlooringProduct> GetProducts()
         //{
-        //    NextOrderNumberResponse response = new NextOrderNumberResponse();
-        //    response.OrderNumber = _orderRepository.nextOrderNumber(date);
-        //    return response;
+        //    List<FlooringProduct> products = _productRepo.LoadProducts();
+        //    return products;
         //}
 
         public DisplayOrderResponse LoadOrders(string FILENAME)
@@ -42,35 +35,68 @@ namespace Flooring.BLL
 
             response.Orders = _orderRepository.LoadOrders(FILENAME);
 
-            //string dateString = FILENAME.Substring(FILENAME.Length - 12, 8);
-            //dateString = dateString.Substring(0, 2) + "/" + dateString.Substring(2, 2) + "/" + dateString.Substring(4);
-            //DateTime dateTime = DateTime.Parse(dateString);
-
-            //foreach (var item in response.Orders)
-            //{
-            //    item.date = dateTime;
-            //}
-
-
+            if (response.Orders.Count == 0)
+            {
+                response.Success = false;
+                response.Message = "get help!";
+            }
+            else
+            {
+                response.Success = true;
+            }
             return response;
         }
-        public void AddOrder(string datestring, FlooringOrder newOrder)
-        {
 
-            _orderRepository.Create(datestring, newOrder);
-            return;
+        public AddOrderResponse AddOrder(string datestring, FlooringOrder newOrder)
+        {
+            AddOrderResponse response = new AddOrderResponse();
+            try
+            {
+                _orderRepository.Create(datestring, newOrder);
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Message = e.Message;
+
+            }
+            response.Success = true;
+            response.Order = newOrder;
+            return response;
         }
 
-        public void EditOrder(string datestring, FlooringOrder newOrder)
+        public EditOrderResponse EditOrder(string datestring, FlooringOrder newOrder)
         {
-            _orderRepository.Update(datestring, newOrder);
-            return;
+            EditOrderResponse response = new EditOrderResponse();
+            try
+            {
+                _orderRepository.Update(datestring, newOrder);
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Message = e.Message;
+            }
+            response.Success = true;
+            response.newOrder = newOrder;
+            return response;
         }
 
-        public void DeleteOrder(string datestring, int orderNumber)
+        public DeleteOrderResponse DeleteOrder(string datestring, int orderNumber)
         {
-            _orderRepository.Delete(datestring, orderNumber);
-            return;
+            DeleteOrderResponse response = new DeleteOrderResponse();
+            try
+            {
+                _orderRepository.Delete(datestring, orderNumber);
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Message = e.Message;
+            }
+            response.Success = true;
+            response.OrderNumber= orderNumber;
+            return response;
         }
     }
 }

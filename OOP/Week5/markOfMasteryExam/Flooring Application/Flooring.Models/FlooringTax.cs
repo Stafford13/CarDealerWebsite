@@ -10,7 +10,7 @@ namespace Flooring.Models
     public class FlooringTax
     {
         public string StateAbbreviation { get; set; }
-        public string ProductType { get; set; }
+        //public string ProductType { get; set; }
         public decimal TaxRate { get; set; }
         public string StateName { get; set; }
     }

@@ -20,7 +20,7 @@ namespace Flooring.Data
             //LoadOrders(filename);
         }
 
-        public int nextOrderNumber(List<FlooringOrder> orders)
+        private int nextOrderNumber(List<FlooringOrder> orders)
         {
             int id = 0;
             foreach (FlooringOrder order in orders)

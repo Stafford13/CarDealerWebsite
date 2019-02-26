@@ -15,7 +15,7 @@ namespace Flooring.Data
             string[] fields = row.Split(',');
 
             t.StateAbbreviation = fields[0];
-            t.ProductType = fields[1];
+            t.StateName = fields[1];
             t.TaxRate = decimal.Parse(fields[2]);
 
             return t;

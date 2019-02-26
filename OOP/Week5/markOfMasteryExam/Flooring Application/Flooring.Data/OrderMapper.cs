@@ -11,7 +11,8 @@ namespace Flooring.Data
     {
         public static string ToString(FlooringOrder order)
         {
-            return $"{order.OrderNumber}||{order.date}||{order.CustomerName}||{order.State}||{order.TaxRate}||{order.ProductType}||{order.Area}||{order.CostPerSquareFoot}||{order.LaborCostPerSquareFoot}||{order.MaterialCost}||{order.LaborCost}||{order.Tax}||{order.Total}";
+            string format = "0.00";
+            return $"{order.OrderNumber}||{order.date}||{order.CustomerName}||{order.State}||{order.TaxRate.ToString(format)}||{order.ProductType}||{order.Area}||{order.CostPerSquareFoot.ToString(format)}||{order.LaborCostPerSquareFoot.ToString(format)}||{order.MaterialCost.ToString(format)}||{order.LaborCost.ToString(format)}||{order.Tax.ToString(format)}||{order.Total.ToString(format)}";
         }
 
         public static FlooringOrder ToOrder(string row)

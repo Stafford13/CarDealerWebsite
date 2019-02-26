@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Flooring.Models.Response
 {
-    public class NextOrderNumberResponse : Response
-    { 
-        public int OrderNumber { get; set; }
+    public class EditOrderResponse : Response
+    {
+        public FlooringOrder newOrder { get; set; }
     }
 }

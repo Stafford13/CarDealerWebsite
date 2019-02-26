@@ -50,8 +50,8 @@ namespace Flooring.Models
         }
 
         public DateTime date { get; set; }
-        //public FlooringTax OrderTax { get; set; }
-        //public FlooringProduct OrderProduct { get; set; }
+        public FlooringTax OrderTax { get; set; }
+        public FlooringProduct OrderProduct { get; set; }
 
 
         //finish order mapper

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flooring.Models.Response;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Flooring.Models.Interfaces
 {
     public interface ITaxRepository
     {
-        List<FlooringTax> LoadTax();
+        TaxStateResponse LoadTax();
     }
 }

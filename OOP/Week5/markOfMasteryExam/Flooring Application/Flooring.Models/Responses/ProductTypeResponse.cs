@@ -8,5 +8,6 @@ namespace Flooring.Models.Response
 {
     public class ProductTypeResponse : Response
     {
+        public List<FlooringProduct> flooringProducts { get; set; }
     }
 }

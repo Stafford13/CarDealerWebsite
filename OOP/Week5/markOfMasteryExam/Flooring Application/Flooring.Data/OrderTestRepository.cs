@@ -14,29 +14,14 @@ namespace Flooring.Data
         private static FlooringOrder _order = new FlooringOrder
         {
             OrderNumber = 1,
-            date = DateTime.Today,
+            date = new DateTime(2013, 2, 1),
             CustomerName = "Acme",
             Area = 100,
             State = "OH",
-            //OrderTax = new FlooringTax
-            //{
-            //    StateAbbreviation = "OH",
-            //    StateName = "Ohio",
-            //    TaxRate = 10
-            //},
             ProductType = "Wood",
             CostPerSquareFoot = 5.15m,
             LaborCostPerSquareFoot = 6m,
-                //ProductType = "Wood",
-                //CostPerSquareFoot = 5.15m,
-                //SquareFoot = 5.15m,
         };
-
-        //public int nextOrderNumber(string date)
-        //{
-        //    int result = 2;
-        //    return result;
-        //}
 
         public void Create(string datestring, FlooringOrder newOrder)
         {
@@ -47,7 +32,9 @@ namespace Flooring.Data
 
         public void Delete(string datestring, int orderNumber)
         {
-            throw new NotImplementedException();
+            var orders = LoadOrders(datestring);
+            orders.RemoveAll((FlooringOrder orderInfo) => orderInfo.OrderNumber == orderNumber);
+            SaveOrder(orders, datestring);
         }
 
         public List<FlooringOrder> LoadOrders(string date)
@@ -59,18 +46,56 @@ namespace Flooring.Data
 
         public FlooringOrder ReadByOrder(string datestring, int id)
         {
-            throw new NotImplementedException();
+            var orders = LoadOrders(datestring);
+            foreach (FlooringOrder order in orders)
+            {
+                if (order.OrderNumber == id)
+                {
+                    return order;
+                }
+            }
+            return null;
         }
 
         public void Update(string datestring, FlooringOrder newOrder)
         {
-            return;
-            //throw new NotImplementedException();
+            var orders = LoadOrders(datestring);
+            // Loop until find the index, and modify way
+            for (int i = 0; i < orders.Count; i++)
+            {
+                if (orders[i].OrderNumber == newOrder.OrderNumber)
+                {
+                    orders[i] = newOrder;
+                    break;
+                }
+
+            }
+            SaveOrder(orders, datestring);
         }
 
         private void SaveOrder(List<FlooringOrder> order, string date)
         {
-            return;
+            string filepath = $"Orders_{date}.txt";
+            StreamWriter sw = null;
+
+            try
+            {
+                sw = new StreamWriter(filepath);
+                sw.WriteLine("OrderNumber||date||CustomerName||State||TaxRate||ProductType||Area||CostPerSquareFoot||LaborCostPerSquareFoot||MaterialCost||LaborCost||Tax||Total");
+
+                foreach (FlooringOrder Order in order)
+                {
+                    sw.WriteLine(OrderMapper.ToString(Order));
+                    sw.Flush();
+                }
+            }
+            finally
+            {
+                if(sw != null)
+                {
+                    sw.Close();
+                }
+            }
         }
     }
 }

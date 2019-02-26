@@ -9,8 +9,6 @@ namespace Flooring.Models.Interfaces
 {
     public interface IRepository
     {
-        //int nextOrderNumber(string date);
-        
         //R
         List<FlooringOrder> LoadOrders(string datestring);
         FlooringOrder ReadByOrder(string datestring, int id);

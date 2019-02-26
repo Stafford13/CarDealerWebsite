@@ -8,6 +8,6 @@ namespace Flooring.Models.Response
 {
     public class TaxStateResponse : Response
     {
-        public FlooringTax TaxRate; 
+        public List<FlooringTax> TaxRate; 
     }
 }

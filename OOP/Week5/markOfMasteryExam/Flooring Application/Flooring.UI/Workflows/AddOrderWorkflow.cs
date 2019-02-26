@@ -17,7 +17,7 @@ namespace Flooring.UI.Workflows
         IProductRepository yo = new ProductListRepository();
 
         FlooringOrder newOrder = new FlooringOrder();
-        NextOrderNumberResponse orderNumberResponse = new NextOrderNumberResponse();
+        TaxStateResponse taxStateResponse = new TaxStateResponse();
         
 
         public void Execute()
@@ -49,27 +49,27 @@ namespace Flooring.UI.Workflows
 
             string name = PromptUser("What is your name?");
 
-            while (!name.All(c => Char.IsLetterOrDigit(c) || c == ',' || c == '_' || c == '.'))
+            while (!name.All(c => Char.IsLetterOrDigit(c) || c == ',' || c == '_' || c == '.') || name.Trim()=="")
             {
                 Console.WriteLine("Names must include either letters, numbers, spaces, periods, or commas (or any combonation thereof)");
                 name = PromptUser("What is your name?");
             }
 
-            List<FlooringTax> TaxList = uo.LoadTax();
+            TaxStateResponse taxResponse = uo.LoadTax();
             FlooringTax orderTax = new FlooringTax();
             bool isValidTax = false;
             while (isValidTax == false)
             {
-                foreach (FlooringTax tax in TaxList)
+                foreach (FlooringTax tax in taxResponse.TaxRate)
                 {
-                    Console.WriteLine("  " + (TaxList.IndexOf(tax) + 1) + ". " + tax.StateAbbreviation);
+                    Console.WriteLine("  " + (taxResponse.TaxRate.IndexOf(tax) + 1) + ". " + tax.StateAbbreviation);
                 }
                 string state = PromptUser("Please specify the number of the state you're planning on building in.");
                 if (int.TryParse(state, out int nation))
                 {
-                    if (nation > 0 && nation <= TaxList.Count)
+                    if (nation > 0 && nation <= taxResponse.TaxRate.Count)
                     {
-                        orderTax = TaxList[nation - 1];
+                        orderTax = taxResponse.TaxRate[nation - 1];
                         isValidTax = true;
                     }
                 }
@@ -111,23 +111,23 @@ namespace Flooring.UI.Workflows
             string area = PromptUser("What is the square footage of the area you are looking to cover?");
             decimal area1;
 
-            while (decimal.TryParse(area, out area1) == null)
+            while (decimal.TryParse(area, out area1) && area1 < 100)
             {
-                if (area1 < 100)
-                {
+                //if (area1 < 100)
+                //{
                     Console.WriteLine("You must enter a positive amount above 100");
-                    Console.WriteLine("Please enter a valid square footage.");
-                }
-                else
-                {
-                }
-                area = area1.ToString();
+                    Console.WriteLine("Please enter a valid square footage."); 
+                    area = PromptUser("What is the square footage of the area you are looking to cover?");
+                //}
+                //else
+                //{
+                //    area = area1.ToString();
+                //}
             }
 
             Console.Clear();
 
             Console.WriteLine("");
-            newOrder.OrderNumber = orderNumberResponse.OrderNumber;
             newOrder.Area = area1;
             newOrder.State = orderTax.StateAbbreviation;
             newOrder.TaxRate = orderTax.TaxRate;
@@ -144,7 +144,7 @@ namespace Flooring.UI.Workflows
                 string place = PromptUser("Would you like to place this order? Please enter yes or no");
                 if (place.ToLower() == "yes")
                 {
-                    manager.AddOrder(date1, newOrder);
+                    AddOrderResponse addResponse = manager.AddOrder(date1, newOrder);
                     isSave = true;
                     // save final to file with approps date
                 }

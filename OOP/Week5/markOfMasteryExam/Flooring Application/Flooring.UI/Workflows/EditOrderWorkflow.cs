@@ -20,7 +20,6 @@ namespace Flooring.UI.Workflows
         IProductRepository yo = new ProductListRepository();
 
         FlooringOrder newOrder = new FlooringOrder();
-        DisplayOrderResponse response = new DisplayOrderResponse();
 
         public void Execute()
         {
@@ -48,9 +47,9 @@ namespace Flooring.UI.Workflows
                 }
             }
 
-            DisplayOrderResponse oldResponse = manager.LoadOrders(date1);
+            DisplayOrderResponse response = manager.LoadOrders(date1);
 
-            foreach (FlooringOrder order in oldResponse.Orders)
+            foreach (FlooringOrder order in response.Orders)
             {
                 io.DisplayOrderDetails(order);
             }
@@ -66,7 +65,7 @@ namespace Flooring.UI.Workflows
                 }
                 else
                 {
-                    foreach (var item in oldResponse.Orders)
+                    foreach (var item in response.Orders)
                     {
                         if (item.OrderNumber == ordernumber)
                         {
@@ -90,14 +89,14 @@ namespace Flooring.UI.Workflows
                 newOrder.CustomerName = newName;
             }
 
-            List<FlooringTax> TaxList = uo.LoadTax();
+            TaxStateResponse taxResponse = uo.LoadTax();
             FlooringTax orderTax = new FlooringTax();
             bool isValidTax = false;
             while (isValidTax == false)
             {
-                foreach (FlooringTax tax in TaxList)
+                foreach (FlooringTax tax in taxResponse.TaxRate)
                 {
-                    Console.WriteLine("  " + (TaxList.IndexOf(tax) + 1) + ". " + tax.StateAbbreviation);
+                    Console.WriteLine("  " + (taxResponse.TaxRate.IndexOf(tax) + 1) + ". " + tax.StateAbbreviation);
                 }
                 Console.WriteLine("Order is currently in " + newOrder.State);
                 string newState = PromptUser("Enter a new state or press enter to continue.");
@@ -105,10 +104,10 @@ namespace Flooring.UI.Workflows
                 { 
                     if (int.TryParse(newState, out int nation))
                     {
-                        if (nation > 0 && nation <= TaxList.Count)
+                        if (nation > 0 && nation <= taxResponse.TaxRate.Count)
                         {
-                            newOrder.State = TaxList[nation - 1].StateAbbreviation;
-                            newOrder.TaxRate = TaxList[nation - 1].TaxRate;
+                            newOrder.State = taxResponse.TaxRate[nation - 1].StateAbbreviation;
+                            newOrder.TaxRate = taxResponse.TaxRate[nation - 1].TaxRate;
                             isValidTax = true;
                         }
                     }
@@ -205,7 +204,7 @@ namespace Flooring.UI.Workflows
                 string place = PromptUser("Would you like to place this order? Please enter yes or no");
                 if (place.ToLower() == "yes")
                 {
-                    manager.EditOrder(date1, newOrder); //still saving the new file even if selecting no
+                    EditOrderResponse editResponse =  manager.EditOrder(date1, newOrder); //still saving the new file even if selecting no
                     isSave = true;
                     // save final to file with approp date
                 }

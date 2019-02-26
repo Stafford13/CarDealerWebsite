@@ -20,7 +20,6 @@ namespace Flooring.UI.Workflows
         IProductRepository yo = new ProductListRepository();
 
         FlooringOrder newOrder = new FlooringOrder();
-        DisplayOrderResponse response = new DisplayOrderResponse();
 
         public void Execute()
         {
@@ -48,9 +47,9 @@ namespace Flooring.UI.Workflows
                 }
             }
 
-            DisplayOrderResponse oldResponse = manager.LoadOrders(date1);
+            DisplayOrderResponse response = manager.LoadOrders(date1);
 
-            foreach (FlooringOrder order in oldResponse.Orders)
+            foreach (FlooringOrder order in response.Orders)
             {
                 io.DisplayOrderDetails(order);
             }
@@ -66,7 +65,7 @@ namespace Flooring.UI.Workflows
                 }
                 else
                 {
-                    foreach (var item in oldResponse.Orders)
+                    foreach (var item in response.Orders)
                     {
                         if (item.OrderNumber == ordernumber)
                         {
@@ -88,7 +87,7 @@ namespace Flooring.UI.Workflows
                 string place = PromptUser("Are you entireley sure that you want to remove this order? Choose yes or no.");
                 if (place.ToLower() == "yes")
                 {
-                    manager.DeleteOrder(date1, newOrder.OrderNumber);
+                    DeleteOrderResponse deleteResponse = manager.DeleteOrder(date1, newOrder.OrderNumber);
                     isSave = true;
                     // save final to file with approps date
                 }
