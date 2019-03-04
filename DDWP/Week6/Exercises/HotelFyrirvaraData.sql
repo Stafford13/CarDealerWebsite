@@ -15,12 +15,10 @@ insert into PromotionCode (Name, isValidStart, isValidEnd) values
 ('MonthLong', '2019-3-1', '2019-8-12'),
 ('Lovebirds', '2019-2-1', '2019-2-28');
 
-insert into AddOn (RoomService, Movie, Snacks, Price) values
-(null, null, null, 0),
-('MacNCheese', null, null, 10),
-(null, 'Casablanca', null, 5),
-(null, null, 'Champagne', 15),
-('Hamburger', 'Jurassic World', 'Twizzlers', 30);
+insert into AddOn (Name, Price) values
+('MacNCheese', 10),
+('Casablanca', 5),
+('Champagne', 15);
 
 insert into Reservation (LastName, FirstName, StartDate, EndDate, AllGuests, PromotionCode, PromotionCodeId, AddOnId) values
 ('Stafford', 'Eric', '2019-3-15', '2019-3-22', 3, null, null, 1),
@@ -29,14 +27,15 @@ insert into Reservation (LastName, FirstName, StartDate, EndDate, AllGuests, Pro
 ('Kinsmore', 'Dan', '2019-3-21', '2019-3-27',1 , null, null, null),
 ('Cincotta', 'Jacob', '2019-3-21', '2019-3-28', 2, null, null, 2),
 ('Crampton', 'Cameron', '2019-3-20', '2019-4-20', 2, 1, 2, 4),
-('Knowles', 'Beyonce', '2019-5-23', '2019-6-23', 2, 1, 2, 2);
+('Knowles', 'Beyonce', '2019-5-23', '2019-6-23', 2, 1, 2, 2),
+('Stafford','Eric', '2019-5-14', '2019-5-27', 1, 1, 1, 4);
 
-insert into Amenity (BathType, Minibar, ClosetType, Price) values
-('standard', 'standard', 'standard', 60),
-('jacuzzi', 'deluxe', 'walkIn', 120),
-('standard', 'deluxe', 'standard', 80),
-('standard', 'deluxe', 'walkIn', 100),
-('jacuzzi', null, 'walkIn', 80);
+insert into Amenity ([Name], Price) values
+('standardBar', 20),
+('jacuzzi', 40),
+('standardBath', 20),
+('standardCloset',20),
+('WalkInCloset', 40);
 
 insert into RoomType (RoomType) values
 ('one single'),
@@ -49,21 +48,35 @@ insert into Rate (ColdSeason, WarmSeason) values
 (1, null),
 (0, 1);
 
-insert into Room (RoomNumber, RoomFloor, Limit, RoomTypeId, Reserved, RateId, AmenityId) values
-(10, 1, 1, 1, 0, 1, 1),
-(14, 1, 4, 4, 1, 1, 4),
-(20, 2, 2, 2, 1, 1, 5),
-(21, 2, 2, 5, 0, 1, 3),
-(35, 3, 2, 3, 0, 2, 4),
-(40, 4, 2, 5, 1, 1, 2);
+insert into Room (RoomNumber, RoomFloor, Limit, RoomTypeId, Reserved, RateId) values
+(10, 1, 1, 1, 0, 1),
+(14, 1, 4, 4, 1, 1),
+(20, 2, 2, 2, 1, 1),
+(21, 2, 2, 5, 0, 1),
+(35, 3, 2, 3, 0, 2),
+(40, 4, 2, 5, 1, 1);
 
 insert into RoomReservation (RoomId, ReservationId) values
 (1, 102),
 (2, 105),
-(3, 103)
+(3, 103),
+(4, 101),
+(5, 100);
 
 insert into Billing (Tax, AddOnId, ReservationId) values
 (1.10, 2, 100),
 (1.10, 4, 101),
 (1.10, 1, 102),
 (1.10, 5, 103);
+
+insert into ReservationGuest (ReservationId, GuestId) values
+(102, 1),
+(105, 2),
+(103, 3);
+
+insert into RoomAmenity (RoomId, AmenityId) values
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);

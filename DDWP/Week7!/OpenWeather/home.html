@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather</title>
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+    </head>
+<body>
+  <div class="container">
+    <h1 id="header" class="text-center">Your Weather Forecast</h1>
+    <p id="headp" class="text-center">Check the weather wherever you find yourself!</p>
+  </div>
+    <div class="container">
+    <hr/>
+        <ul class="list-group" id="errorMessages"></ul>
+        <!--
+        Add a row to our container - this will hold the summary table and the new contact form.
+        -->
+      </div>
+            <!-- #2: Add a col to hold the summary table - have it take up half the row -->
+
+    <div>
+    <div id="editFormDiv" class="text-center">
+    <h3>Weather Where? Weather Here.</h3>
+
+    <form class="form-horizontal" role="form" id="edit-form">
+        <div class="form-group">
+            <label for="edit-zip-code" class="col-md-4">Zip Code:</label>
+
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="edit-zip-code" placeholder="Enter Zip Code" pattern="\d{5}" required >
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="edit-city-name" class="col-md-4 control-label">
+                City:
+            </label>
+
+            <div class="col-md-3">
+                <input type="text"
+                       class="form-control"
+                       id="edit-city-name"
+                       placeholder="City"/>
+            </div>
+        </div>
+        <div>
+        <button type="button" class="btn-primary">Celsius</button>
+        <button type="button" class="btn-danger">Farenheit</button>
+        </div>
+      </br>
+        <div class="form-group">
+                <!--<input type="hidden" id="edit-contact-id"> -->
+                <button type="button"
+                        id="get-weather-button"
+                        class="button btn-default btn-lg"
+                        onclick="getWeatherForm()">
+                    Get Weather
+                </button>
+        </div>
+            </form>
+      </div>
+</div>
+</div>
+  <div>
+    <h4 id="current" class="text-center">Current Conditions in: </h4>
+    <!-- two columns: icon, temp, current conditions; temp, humidity, and wind data -->
+      <div id="weatherTableDiv">
+
+          <table id="weatherTable" class="table table-hover">
+              <tr>
+                  <th width="50%">Basics</th>
+                  <th width="50%">Details</th>
+              </tr>
+              <!--
+               #3: This holds the list of contacts - we will add rows
+              dynamically
+               using jQuery
+               -->
+              <tbody id="contentRows"></tbody>
+          </table>
+
+</div>
+</div>
+<hr/>
+<div>
+  <h4 id="fiveday" class="text-center">Five Day Forecast<h4>
+    <!--5 Columns, header lines, shows icon of expected weather, then high and low temps -->
+    <div class="container">
+  <div class="row align-items-start">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
+      <h6>Date column</h6>
+      <p>show icon</p>
+      <p>High Temps</p>
+      <p>Low Temps</p>
+    </div>
+    <div class="col-md-2">
+      <h6>Date column</h6>
+      <p>show icon</p>
+      <p>High Temps</p>
+      <p>Low Temps</p>
+    </div>
+    <div class="col-md-2">
+      <h6>Date column</h6>
+      <p>show icon</p>
+      <p>High Temps</p>
+      <p>Low Temps</p>
+    </div>
+    <div class="col-md-2">
+      <h6>Date column</h6>
+      <p>show icon</p>
+      <p>High Temps</p>
+      <p>Low Temps</p>
+    </div>
+    <div class="col-md-2">
+      <h6>Date column</h6>
+      <p>show icon</p>
+      <p>High Temps</p>
+      <p>Low Temps</p>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>
