@@ -1,0 +1,10 @@
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+  WHERE ROUTINE_NAME = 'GetAllReservations')
+     DROP PROCEDURE GetAllReservations
+GO
+
+CREATE PROCEDURE GetAllReservations AS
+    SELECT *
+    FROM Reservation
+
+    GO
