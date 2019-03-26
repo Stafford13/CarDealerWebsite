@@ -53,6 +53,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GuildCars.Data\GuildCars.Data.csproj">
+      <Project>{1C4FD307-E9E5-45CA-BE11-9BA7C1EBFA31}</Project>
+      <Name>GuildCars.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuildCars.Models\GuildCars.Models.csproj">
+      <Project>{8d98d080-f26e-4133-8192-0a8f1f0987cd}</Project>
+      <Name>GuildCars.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using GuildCars.Data.Interfaces;
+using GuildCars.Models.Tables;
 
 namespace GuildCars.Data.ADO
 {

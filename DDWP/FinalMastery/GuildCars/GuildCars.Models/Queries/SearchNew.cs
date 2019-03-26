@@ -1,6 +1,6 @@
-﻿namespace GuildCars.ModelsNew.Queries
+﻿namespace GuildCars.Models.Queries
 {
-    public class SearchUsed
+    class SearchNew
     {
         public string MakeName { get; set; }
         public string ModelName { get; set; }

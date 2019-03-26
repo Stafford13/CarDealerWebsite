@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GuildCars.Models.Tables;
 
 namespace GuildCars.Data.Interfaces
 {

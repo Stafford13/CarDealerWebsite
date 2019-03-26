@@ -1,4 +1,4 @@
-﻿namespace GuildCars.ModelsNew.Tables
+﻿namespace GuildCars.Models.Tables
 {
     public class Make
     {

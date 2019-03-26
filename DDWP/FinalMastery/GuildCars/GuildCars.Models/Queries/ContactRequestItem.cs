@@ -1,4 +1,4 @@
-﻿namespace GuildCars.ModelsNew.Queries
+﻿namespace GuildCars.Models.Queries
 {
     public class ContactRequestItem
     {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GuildCars.Data.ADO;
+using GuildCars.Models.Tables;
 using NUnit.Framework;
 
 namespace GuildCars.Tests.IntegrationTests
@@ -16,7 +18,7 @@ namespace GuildCars.Tests.IntegrationTests
         {
             var repo = new SpecialRepositoryADO();
 
-            var special = repo.GetAll();
+            List<Special> special = repo.GetAll();
 
             Assert.AreEqual(3, special.Count());
 
