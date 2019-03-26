@@ -1,4 +1,6 @@
-﻿namespace GuildCars.Models.Tables
+﻿using System;
+
+namespace GuildCars.Models.Tables
 {
     public class Make
     {
