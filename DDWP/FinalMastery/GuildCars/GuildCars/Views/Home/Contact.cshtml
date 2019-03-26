@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title Us!</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="col-md-4">
+        <div class="container">
+            <form action>
+                First name:<br>
+                <input type="text" name="firstname">
+                <br>
+                Last name:<br>
+                <input type="text" name="lastname">
+                <br>
+                Email:<br>
+                <input type="email" name="email">
+                <br>
+                Phone:<br>
+                <input type="tel" name="phone">
+                <br>
+                Message:<br>
+                <textare name="message"></textare>
+                <br>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+</div>
+<div class="col-md-8">
+        <img src="/images/Dealership.PNG" alt="Map to where to find us" style="width:600px;height:400px;" />
+        <address>
+            One Microsoft Way<br />
+            Redmond, WA 98052-6399<br />
+            <abbr title="Phone">P:</abbr>
+            425.555.0101
+        </address>
+
+        <address>
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>
+</div>

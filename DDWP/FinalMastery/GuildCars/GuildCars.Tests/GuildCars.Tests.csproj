@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GuildCars.Data\GuildCars.Data.csproj" />
+    <ProjectReference Include="..\GuildCars.Models\GuildCars.Models.csproj" />
+  </ItemGroup>
+
+</Project>
