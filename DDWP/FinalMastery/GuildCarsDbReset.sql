@@ -5,8 +5,10 @@ go
 
 create procedure DbReset as
 begin
+	delete from Customer;
 	delete from Special;
 	delete from Car;
+	delete from AspNetUsers where id = '00000000-0000-0000-0000-000000000000';
 
 	set IDENTITY_INSERT Special ON;
 	insert into Special (SpecialId, SpecialName, SpecialText)
@@ -23,4 +25,14 @@ begin
 	(3, 'SUV', '2015', 'Black', 'Grey', '50', '1', 'New', '50000', '60000','2', '1', 'Car3');
 
 	set IDENTITY_INSERT Car OFF;
+
+	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, CarId, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
+	values('00000000-0000-0000-0000-000000000000', 0, 0, 'test@test.com', 1 , 0, 0, 0, 'test');
+
+	set IDENTITY_INSERT Customer ON;
+	insert into Customer ( CustomerId, LastName, Phone, Email, Message)
+	values (1, 'Stafford', '555-111-5555', 'test@test.com', 'This website ROCKS!');
+
+	set IDENTITY_INSERT Customer OFF;
+
 end

@@ -10,5 +10,6 @@ namespace GuildCars.Models.Queries
         public string ModelName { get; set; }
         public int Year { get; set; }
         public int Price { get; set; }
+        public string ImageFileName { get; set; }
     }
 }

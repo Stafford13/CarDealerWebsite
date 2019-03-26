@@ -16,6 +16,7 @@ namespace GuildCars.Models.Tables
         public string Type { get; set; }
         public int MSRP { get; set; }
         public int Price { get; set; }
+        public string ImageFileName { get; set; }
         public Make MakeName { get; set; }
         public Model ModelName { get; set; }
     }

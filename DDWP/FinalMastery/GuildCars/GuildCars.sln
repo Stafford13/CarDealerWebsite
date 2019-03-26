@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildCars", "GuildCars\GuildCars.csproj", "{3388F9FE-9435-4586-B2B2-A70161EDE7D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildCars.Models", "GuildCars.Models\GuildCars.Models.csproj", "{EAA28E06-05BA-4831-AD5D-52F289A62CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuildCars.Models", "GuildCars.Models\GuildCars.Models.csproj", "{EAA28E06-05BA-4831-AD5D-52F289A62CFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildCars.Data", "GuildCars.Data\GuildCars.Data.csproj", "{E3A2566A-7A96-4BE6-9306-FECC11C7A7DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuildCars.Data", "GuildCars.Data\GuildCars.Data.csproj", "{E3A2566A-7A96-4BE6-9306-FECC11C7A7DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildCars.Tests", "GuildCars.Tests\GuildCars.Tests.csproj", "{439E61EA-2FF7-4128-96E5-8C8470AEFF25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuildCars.Tests", "GuildCars.Tests\GuildCars.Tests.csproj", "{439E61EA-2FF7-4128-96E5-8C8470AEFF25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

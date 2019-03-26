@@ -1,17 +1,29 @@
-use [master]
-go
-
-if exists (select * from sys.databases where name = N'GuildCars')
-begin
-	EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'GuildCars';
-	ALTER DATABASE GuildCars SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-	DROP DATABASE GuildCars;
-end
-
-create database GuildCars
-go
-
 use GuildCars
+go
+
+if exists(select * from sys.tables where name='Sale')
+	drop table Sale
+go
+
+if exists(select * from sys.tables where name='Special')
+	drop table Special
+go
+
+
+if exists(select * from sys.tables where name='Customer')
+	drop table Customer
+go
+
+if exists(select * from sys.tables where name='Car')
+	drop table Car
+go
+
+if exists(select * from sys.tables where name='Make')
+	drop table Make
+go
+
+if exists(select * from sys.tables where name='Model')
+	drop table Model
 go
 
 create table Special (
@@ -80,7 +92,7 @@ City varchar(25) not null,
 create table Customer (
 CustomerId int primary key identity(1,1),
 LastName nvarchar(20) not null,
-Phone int not null,
+Phone nvarchar(15) not null,
 Email nvarchar(35) not null,
 [Message] varchar(300) null
 )
