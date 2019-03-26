@@ -1,10 +1,9 @@
-﻿using GuildCars.Data.Interfaces;
-using GuildCars.Models.Tables;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using GuildCars.Data.Interfaces;
+using GuildCars.Models.Tables;
 
 namespace GuildCars.Data.ADO
 {
@@ -65,7 +64,7 @@ namespace GuildCars.Data.ADO
                         car.Year = (int)dr["Year"];
                         car.ExColor = dr["ExColor"].ToString();
                         car.IntColor = dr["IntColor"].ToString();
-                        car.Milage = (int)dr["Mileage"];
+                        car.Mileage = (int)dr["Mileage"];
                         car.Transmission = (bool)dr["Transmission"];
                         car.Type = dr["Type"].ToString();
                         car.MSRP = (int)dr["MSRP"];

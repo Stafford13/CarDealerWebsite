@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GuildCars.Models.Tables
+﻿namespace GuildCars.Models.Tables
 {
     public class Car
     {
         public int CarId { get; set; }
         public string Body { get; set; }
         public int Year { get; set; }
-        public int Milage { get; set; }
+        public int Mileage { get; set; }
         public string ExColor { get; set; }
         public string IntColor { get; set; }
         public bool Transmission { get; set; }
