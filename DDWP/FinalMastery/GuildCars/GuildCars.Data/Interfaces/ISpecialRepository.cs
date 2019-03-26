@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GuildCars.Models.Tables;
+﻿using System.Collections.Generic;
 
 namespace GuildCars.Data.Interfaces
 {

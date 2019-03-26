@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GuildCars.Models.Tables
+﻿namespace GuildCars.ModelsNew.Tables
 {
     public class Customer
     {

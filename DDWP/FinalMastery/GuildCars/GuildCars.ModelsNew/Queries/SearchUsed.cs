@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GuildCars.Models.Queries
+﻿namespace GuildCars.ModelsNew.Queries
 {
     public class SearchUsed
     {

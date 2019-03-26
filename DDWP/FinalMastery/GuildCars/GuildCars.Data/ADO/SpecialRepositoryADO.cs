@@ -1,10 +1,7 @@
-﻿using System;
-using GuildCars.Data.Interfaces;
-using System.Collections.Generic;
-using System.Text;
-using GuildCars.Models.Tables;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using GuildCars.Data.Interfaces;
 
 namespace GuildCars.Data.ADO
 {

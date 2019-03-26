@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
-using GuildCars.Data.ADO;
 
 namespace GuildCars.Tests.IntegrationTests
 {
@@ -17,7 +18,7 @@ namespace GuildCars.Tests.IntegrationTests
 
             var special = repo.GetAll();
 
-            Assert.AreEqual(3, special.Count);
+            Assert.AreEqual(3, special.Count());
 
             Assert.AreEqual("2", special[2].SpecialId);
             Assert.AreEqual("FallSale", special[2].SpecialName);
