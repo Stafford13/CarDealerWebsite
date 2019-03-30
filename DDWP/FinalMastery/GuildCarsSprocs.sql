@@ -130,3 +130,23 @@ begin
 	where CarId = @CarId
 end
 go
+
+
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'CustomerInsert')
+		drop procedure CustomerInsert
+go
+
+create procedure CustomerInsert (
+@LastName nvarchar(20),
+@Phone nvarchar(15),
+@Email nvarchar(35),
+@Message varchar(300)
+)
+as
+
+begin
+	INSERT INTO Customer (LastName, Phone, Email, Message)
+	values(@LastName, @Phone, @Email, @Message);
+end
+go

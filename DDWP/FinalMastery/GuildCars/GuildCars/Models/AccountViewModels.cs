@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using CompareAttribute = System.Web.Mvc.CompareAttribute;
 
 namespace GuildCars.Models
 {
@@ -60,6 +62,7 @@ namespace GuildCars.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+        public string UserName { get; internal set; }
     }
 
     public class RegisterViewModel

@@ -1,37 +1,48 @@
-﻿@{
+﻿@model GuildCars.Models.Tables.Customer
+
+@{ 
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title Us!</h2>
+<h2>@ViewBag.Title Us</h2>
 <h3>@ViewBag.Message</h3>
 
 <div class="col-md-4">
-        <div class="container">
-            <form action>
-                First name:<br>
-                <input type="text" name="firstname">
-                <br>
-                Last name:<br>
-                <input type="text" name="lastname">
-                <br>
-                Email:<br>
-                <input type="email" name="email">
-                <br>
-                Phone:<br>
-                <input type="tel" name="phone">
-                <br>
-                Message:<br>
-                <textare name="message"></textare>
-                <br>
-                <br>
-                <input type="submit" value="Submit">
-            </form>
-        </div>
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                <label>First Name</label>
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Phone)
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Phone" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Message)
+                @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        }
+    </div>
 </div>
 <div class="col-md-8">
-        <img src="/images/Dealership.PNG" alt="Map to where to find us" style="width:600px;height:400px;" />
+        <img src="/images/dealership2.PNG" alt="Map to where to find us" style="width:500px;height:450px;" />
+    <br />
         <address>
-            One Microsoft Way<br />
-            Redmond, WA 98052-6399<br />
+            20 Martin Pl. <br />
+            Sydney NSW 2000 <br />
+            Australia<br />
             <abbr title="Phone">P:</abbr>
             425.555.0101
         </address>

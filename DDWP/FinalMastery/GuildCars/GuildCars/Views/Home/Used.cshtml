@@ -8,7 +8,9 @@
 <h2>@ViewBag.Title Inventory!</h2>
 <h3>@ViewBag.Message</h3>
 
-
+<div>
+    <ul id="errorList" class="text-danger"></ul>
+</div>
 <div class="container">
     <div class="col-lg-12 fields">
         <div class="container">
@@ -21,8 +23,8 @@
                         <div class="form-group">
                             <input type="text"
                                    class="form-control"
-                                   id="add-description"
-                                   placeholder="Enter Make, Model, or Year" required></input>
+                                   id="searchTerm"
+                                   placeholder="Enter Make, Model, or Year" required>
 
                         </div>
                     </div>
@@ -33,16 +35,16 @@
                                 Price:
                             </label>
                             <div class="col-md-5">
-                                <input type="text"
+                                <input type="number"
                                        class="form-control"
-                                       id="edit-description"
-                                       placeholder="" required></input>
+                                       id="minPrice"
+                                       placeholder="" required>
                             </div>
                             <div class="col-md-5">
-                                <input type="text"
+                                <input type="number"
                                        class="form-control"
-                                       id="edit-description"
-                                       placeholder="" required></input>
+                                       id="maxPrice"
+                                       placeholder="" required>
                             </div>
                         </div>
                     </div>
@@ -52,56 +54,69 @@
                                 Year:
                             </label>
                             <div class="col-md-5">
-                                <input type="text"
-                                       class="form-control"
-                                       id="edit-description"
-                                       placeholder="" required></input>
+                                <select id="minYear" class="u-full-width form-control">
+                                    <option value=1990>Min</option>
+                                    <option value=1990>1990</option>
+                                    <option value=1995>1995</option>
+                                    <option value=2000>2000</option>
+                                    <option value=2005>2005</option>
+                                    <option value=2010>2010</option>
+                                    <option value=2015>2015</option>
+                                    <option value=2020>2020</option>
+                                </select>
                             </div>
                             <div class="col-md-5">
-                                <input type="text"
-                                       class="form-control"
-                                       id="edit-description"
-                                       placeholder="" required></input>
+                                <select id="maxYear" class="u-full-width form-control">
+                                    <option value=1990>Max</option>
+                                    <option value=1990>1990</option>
+                                    <option value=1995>1995</option>
+                                    <option value=2000>2000</option>
+                                    <option value=2005>2005</option>
+                                    <option value=2010>2010</option>
+                                    <option value=2015>2015</option>
+                                    <option value=2020>2020</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="row">
-                <div class="col-md-offset-5"
                 <div class="col-md-6">
-                    <a href="#@*ViewBag.Details*@" class="button1">Search</a>
+                    <button type="submit" class="button1" id="searchButton">Search</button>
                 </div>
-            </div>
             </div>
         </div>
     </div>
 </div>
 <div class="container">
     <h3>Search Results</h3>
-    <div class="col-lg-12 fields">
-        <div class="col-md-3">
-            <h4>2006 Kia Soul</h4>
-            <img src="/images/Car1.jpg" alt="Oohh shiny" style="width:175px;height:100px" />
-        </div>
-        <div class="col-md-3">
-            <h4></h4>
-            <p>Body type: </p>
-            <p>Trans: </p>
-            <p>Color: </p>
-        </div>
-        <div class="col-md-3">
-            <h4></h4>
-            <p>Interior: </p>
-            <p>Mileage: </p>
-            <p>VIN#: </p>
-        </div>
-        <div class="col-md-3">
-            <h4></h4>
-            <p>MSRP: </p>
-            <p>Price: </p>
-            <a href="#@*ViewBag.Details*@" class="button1">details</a>
+    <div id="searchResults">
+        <div class="col-lg-12 fields">
+            <div class="col-md-3">
+                <h4>2006 Kia Soul</h4>
+                <img src="/images/Car1.jpg" alt="Oohh shiny" style="width:175px;height:100px" />
+            </div>
+            <div class="col-md-3">
+                <h4></h4>
+                <p>Body type: </p>
+                <p>Trans: </p>
+                <p>Color: </p>
+            </div>
+            <div class="col-md-3">
+                <h4></h4>
+                <p>Interior: </p>
+                <p>Mileage: </p>
+                <p>VIN#: </p>
+            </div>
+            <div class="col-md-3">
+                <h4></h4>
+                <p>MSRP: </p>
+                <p>Price: </p>
+                <a href="~/Home/Details" class="button1">details</a>
+            </div>
         </div>
     </div>
-</div>
-<br />
+    </div>
+    <br />
+

@@ -1,19 +1,13 @@
 use GuildCars
 go
 
-if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'DbReset')
-		drop procedure DbReset
-go
-
-create procedure DbReset as
-begin
 	delete from Customer;
 	delete from Special;
 	delete from Car;
 	delete from Make;
 	delete from Model;
 	delete from AspNetUsers where id = '00000000-0000-0000-0000-000000000000';
+go
 
 	set IDENTITY_INSERT Special ON;
 	insert into Special (SpecialId, SpecialName, SpecialText)
@@ -22,6 +16,16 @@ begin
 	(3, 'HondaSale', 'A sale just for hondas');
 
 	set IDENTITY_INSERT Special OFF;
+	go
+
+		set IDENTITY_INSERT Model ON;
+	insert into Model (ModelId, ModelName, DateAdded)
+	values (1, 'Accord', '2019-01-01'),
+	(2, 'Forester', '2019-01-01'),
+	(3, 'Soul', '2019-01-01');
+
+	set IDENTITY_INSERT Model OFF;
+	go
 
 	set IDENTITY_INSERT Make ON;
 	insert into Make (MakeId, MakeName, DateAdded, ModelId)
@@ -30,14 +34,8 @@ begin
 	(3, 'Kia', '2019-01-01', 3);
 
 	set IDENTITY_INSERT Make OFF;
+	go
 
-	set IDENTITY_INSERT Model ON;
-	insert into Model (ModelId, ModelName, DateAdded)
-	values (1, 'Accord', '2019-01-01'),
-	(2, 'Forester', '2019-01-01'),
-	(3, 'Soul', '2019-01-01');
-
-	set IDENTITY_INSERT Model OFF;
 
 	set IDENTITY_INSERT Car ON;
 	insert into Car (CarId, Body, Year, ExColor, IntColor, Mileage, Transmission, Type, MSRP, Price, MakeId, ModelId, ImageFileName)
@@ -46,14 +44,15 @@ begin
 	(3, 'SUV', '2015', 'Black', 'Grey', 50, '1', 'New', 50000, 60000, 3, 3, 'Car3');
 
 	set IDENTITY_INSERT Car OFF;
+	go
 
 	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
 	values('00000000-0000-0000-0000-000000000000', 0, 0, 'test@test.com', 0, 0, 0, 'test');
+	go
 
 	set IDENTITY_INSERT Customer ON;
 	insert into Customer ( CustomerId, LastName, Phone, Email, Message)
 	values (1, 'Stafford', '555-111-5555', 'test@test.com', 'This website ROCKS!');
 
 	set IDENTITY_INSERT Customer OFF;
-
-end
+	go
