@@ -2,7 +2,7 @@
 {
     public class Car
     {
-        public static object Make { get; set; }
+        //public static object Make { get; set; }
         public int CarId { get; set; }
         public string Body { get; set; }
         public int Year { get; set; }

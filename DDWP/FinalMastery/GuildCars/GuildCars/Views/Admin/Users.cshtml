@@ -11,23 +11,24 @@
     Add a row to our container - this will hold the summary table and the new contact form.
     -->
     <div id="userTableDiv">
-        <a href="#" id="add-link">Add a New User</a>
-        <table id="userTable" class="table table-hover">
-            <tr>
-                <th width="20%">First Name</th>
-                <th width="20%">Last Name</th>
-                <th width="30%">Email</th>
-                <th width="15%">Role</th>
-                <th width="15%"></th>
-            </tr>
-            <!--
-             #3: This holds the list of contacts - we will add rows
-            dynamically
-             using jQuery
-             -->
-            <tbody id="contentRows"></tbody>
-        </table>
-    </div>
+        <a id="new-link">Add New User</a>
+            <table id="userTable" class="table table-hover">
+                <tr>
+                    <th width="20%">First Name</th>
+                    <th width="20%">Last Name</th>
+                    <th width="30%">Email</th>
+                    <th width="16%">Role</th>
+                    <th width="7%"></th>
+                    <th width="7%"></th>
+                </tr>
+                <!--
+         #3: This holds the list of contacts - we will add rows
+        dynamically
+         using jQuery
+         -->
+                <tbody id="contentRows"></tbody>
+            </table>
+</div>
 
 
     <div id="editFormDiv" style="display:none;">
@@ -236,7 +237,7 @@
                         <button type="button"
                                 id="add-button"
                                 class="btn btn-default">
-                            Update Contact
+                            Save
                         </button>
                     </div>
                 </div>
@@ -247,18 +248,3 @@
 
 <script src="~/Scripts/jquery-2.2.3.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-
-@section scripts {
-    $(document).ready(function () {
-    
-    loadUsers();
-
-    $('#add-link').click(function (event) {
-    
-    });
-
-    $('#edit-link').click(function (event) {
-    
-    });
-});
-    }  

@@ -14,7 +14,7 @@ namespace LINQ
             //PrintAllCustomers();
 
             //Exercise1();
-            //Exercise2();
+            Exercise2();
             //Exercise3();
             //Exercise4();
             //Exercise5();
@@ -24,9 +24,9 @@ namespace LINQ
             //Exercise9();
             //Exercise10();
             //Exercise11();
-            Exercise12();
-            Exercise13();
-            Exercise14();
+            //Exercise12();
+            //Exercise13();
+            //Exercise14();
             //Exercise15();
             //Exercise16();
             //Exercise17();

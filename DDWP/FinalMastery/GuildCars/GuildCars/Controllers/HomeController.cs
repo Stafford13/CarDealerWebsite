@@ -41,6 +41,7 @@ namespace GuildCars.Controllers
             return View("Index");
         }
 
+        [Route("Home/New")]
         public ActionResult New()
         {
             ViewBag.Message = "Check out our new vehicles.";
@@ -70,7 +71,7 @@ namespace GuildCars.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            var model = new LoginViewModel();
+            var model = new LoginVM();
 
             return View(model);
         }
@@ -78,7 +79,7 @@ namespace GuildCars.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginVM model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace GuildCars.Controllers
 {
+    [Authorize (Roles ="admin")]
     public class AdminController : Controller
     {
         // GET: Admin
@@ -18,6 +19,7 @@ namespace GuildCars.Controllers
         [Route("Admin/addvehicle")]
         public ActionResult addVehicle()
         {
+            //model reference
             return View();
         }
 
@@ -42,12 +44,14 @@ namespace GuildCars.Controllers
         [Route("Admin/makes")]
         public ActionResult Makes()
         {
+            //IEnumerable<Models.Make> list = new IEnumerable<Models.Makes>
             return View();
         }
 
         [Route("Admin/models")]
         public ActionResult Models()
         {
+            //IEnumerable<Models.Models> list2 = new IEnumerable<Models.Models>
             return View();
         }
     }

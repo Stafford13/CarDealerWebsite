@@ -5,6 +5,9 @@
 
 @*AJAX CALL - search both new and used inventory*@
 
+<div>
+    <ul id="errorList" class="text-danger"></ul>
+</div>
 <<div class="container">
     <div class="col-lg-12 fields">
         <div class="container">
@@ -18,7 +21,7 @@
                             <input type="text"
                                    class="form-control"
                                    id="add-description"
-                                   placeholder="Enter Make, Model, or Year" required></input>
+                                   placeholder="Enter Make, Model, or Year" required>
 
                         </div>
                     </div>
@@ -32,13 +35,13 @@
                                 <input type="text"
                                        class="form-control"
                                        id="edit-description"
-                                       placeholder="" required></input>
+                                       placeholder="" required>
                             </div>
                             <div class="col-md-5">
                                 <input type="text"
                                        class="form-control"
                                        id="edit-description"
-                                       placeholder="" required></input>
+                                       placeholder="" required>
                             </div>
                         </div>
                     </div>
@@ -48,27 +51,37 @@
                                 Year:
                             </label>
                             <div class="col-md-5">
-                                <input type="text"
-                                       class="form-control"
-                                       id="edit-description"
-                                       placeholder="" required></input>
+                                <select id="minYear" class="u-full-width form-control">
+                                    <option value=1990>Min</option>
+                                    <option value=1990>1990</option>
+                                    <option value=1995>1995</option>
+                                    <option value=2000>2000</option>
+                                    <option value=2005>2005</option>
+                                    <option value=2010>2010</option>
+                                    <option value=2015>2015</option>
+                                    <option value=2020>2020</option>
+                                </select>
                             </div>
                             <div class="col-md-5">
-                                <input type="text"
-                                       class="form-control"
-                                       id="edit-description"
-                                       placeholder="" required></input>
+                                <select id="maxYear" class="u-full-width form-control">
+                                    <option value=1990>Max</option>
+                                    <option value=1990>1990</option>
+                                    <option value=1995>1995</option>
+                                    <option value=2000>2000</option>
+                                    <option value=2005>2005</option>
+                                    <option value=2010>2010</option>
+                                    <option value=2015>2015</option>
+                                    <option value=2020>2020</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="row">
-                <div class="col-md-offset-5"
                 <div class="col-md-6">
-                    <a href="#@*ViewBag.Details*@" class="button1">Search</a>
+                    <button type="submit" class="button1" id="searchButton">Search</button>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -96,7 +109,7 @@
             <h4></h4>
             <p>MSRP: </p>
             <p>Price: </p>
-            <a href="#@*ViewBag.Details*@" class="button1">details</a>
+            <a href="~/Sale/purchaseVehicle" class="button1">purchase</a>
         </div>
     </div>
 </div>

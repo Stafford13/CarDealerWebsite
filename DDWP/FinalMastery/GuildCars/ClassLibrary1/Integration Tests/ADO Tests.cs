@@ -6,18 +6,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Integration_Tests
 {
+
+    //Check out Execute format for tests
     [TestFixture]
     public class ADO_Tests
     {
-        //[Test]
-        //public void CanLoadSpecials()
-        //{
-        //    var repo = new ....
-        //      CHECK OUT VIDEO 7
-        //}
+        [SetUp]
+        public void Init()
+        {
+            using (var cn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = "DbReset";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Connection = cn;
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        [Test]
+        public void CanLoadSpecials()
+        {
+            var repo = new SpecialRepositoryADO();
+
+            var specials = repo.GetAll();
+
+            Assert.AreEqual(1, specials[0].SpecialId);
+            Assert.AreEqual("OneTime", specials[0].SpecialName);
+            Assert.AreEqual("One time deal", specials[0].SpecialText);
+            //CHECK OUT VIDEO 7
+        }
 
         [Test]
         public void CanLoadCar()
@@ -70,11 +96,81 @@ namespace Integration_Tests
             carToAdd.Price = 45000;
             //carToAdd.MakeName = "Honda";
             //carToAdd.ModelName = "Accord";
-            carToAdd.ImageFileName = "Car1";
+            carToAdd.ImageFileName = "Car1.PNG";
 
             repo.Insert(carToAdd);
 
             Assert.AreEqual(2, carToAdd.CarId);
+        }
+
+        [Test]
+        public void CanUpdateCar()
+        {
+            Car carToAdd = new Car();
+            var repo = new CarRepositoryADO();
+
+            carToAdd.CarId = 1;
+            carToAdd.Body = "SUV";
+            carToAdd.Year = 2010;
+            carToAdd.ExColor = "Black";
+            carToAdd.IntColor = "Tan";
+            carToAdd.Transmission = true;
+            carToAdd.Type = "Used";
+            carToAdd.MSRP = 40000;
+            carToAdd.Price = 45000;
+            //carToAdd.MakeName = "Honda";
+            //carToAdd.ModelName = "Accord";
+            carToAdd.ImageFileName = "Car1.PNG";
+
+            repo.Insert(carToAdd);
+
+            carToAdd.ExColor = "Silver";
+            carToAdd.IntColor = "Grey";
+            carToAdd.Year = 2013;
+            carToAdd.Body = "Sedan";
+            carToAdd.Transmission = false;
+            carToAdd.ImageFileName = "Car2.PNG";
+
+            repo.Update(carToAdd);
+
+            var updatedCar = repo.GetById(2);
+
+            Assert.AreEqual("Silver", updatedCar.ExColor);
+            Assert.AreEqual("Grey", updatedCar.IntColor);
+            Assert.AreEqual(2013, updatedCar.Year);
+            Assert.AreEqual("Sedanr", updatedCar.Body);
+            Assert.AreEqual(false, updatedCar.Transmission);
+            Assert.AreEqual("Car2.PNG", updatedCar.ImageFileName);
+        }
+
+        [Test]
+        public void CanDeleteCar()
+        {
+            Car carToAdd = new Car();
+            var repo = new CarRepositoryADO();
+
+            carToAdd.CarId = 1;
+            carToAdd.Body = "SUV";
+            carToAdd.Year = 2010;
+            carToAdd.ExColor = "Black";
+            carToAdd.IntColor = "Tan";
+            carToAdd.Transmission = true;
+            carToAdd.Type = "Used";
+            carToAdd.MSRP = 40000;
+            carToAdd.Price = 45000;
+            //carToAdd.MakeName = "Honda";
+            //carToAdd.ModelName = "Accord";
+            carToAdd.ImageFileName = "Car1.PNG";
+
+            repo.Insert(carToAdd);
+
+            var loaded = repo.GetById(2);
+            Assert.IsNotNull(loaded);
+
+            repo.Delete(2);
+            loaded = repo.GetById(2);
+
+            Assert.IsNull(loaded);
         }
     }
 }

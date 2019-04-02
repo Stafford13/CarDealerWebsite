@@ -206,13 +206,13 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CarAddViewModel.cs" />
     <Compile Include="Models\CarEditViewModel.cs" />
+    <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SecurityDb.cs" />
     <Compile Include="Models\UpdateAccountViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AjaxCalls.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

@@ -15,6 +15,8 @@ begin
 	delete from Model;
 	delete from AspNetUsers where id = '00000000-0000-0000-0000-000000000000';
 
+	DBCC checkident ('car', reseed, 1)
+
 	set IDENTITY_INSERT Special ON;
 	insert into Special (SpecialId, SpecialName, SpecialText)
 	values (1, 'OneTime', 'One time deal'),

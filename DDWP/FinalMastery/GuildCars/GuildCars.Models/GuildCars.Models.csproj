@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\CarSearchParameters.cs" />
+    <Compile Include="Queries\CarShortItem.cs" />
     <Compile Include="Queries\ContactRequestItem.cs" />
     <Compile Include="Queries\SearchNew.cs" />
     <Compile Include="Queries\SearchUsed.cs" />

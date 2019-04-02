@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace GuildCars.Controllers
 {
+    [Authorize(Roles = "sales,admin")]
     public class SaleController : Controller
     {
         // GET: Sale
