@@ -11,7 +11,7 @@
     Add a row to our container - this will hold the summary table and the new contact form.
     -->
     <div id="userTableDiv">
-        <a id="new-link">Add New User</a>
+        <a href="~/Admin/Users" id="new-link">Add New User</a>
             <table id="userTable" class="table table-hover">
                 <tr>
                     <th width="20%">First Name</th>
@@ -28,7 +28,7 @@
          -->
                 <tbody id="contentRows"></tbody>
             </table>
-</div>
+    </div>
 
 
     <div id="editFormDiv" style="display:none;">
@@ -139,7 +139,7 @@
     <!--
     #4: Add col to hold the new contact form - have it take up the other half of the row
     -->
-    <div id="addFormDiv" style="display:none;>
+    <div id="addFormDiv">
         <h2>New User</h2>
         <form class="form-horizontal" role="form" id="add-form">
             <div class="row">
@@ -228,8 +228,7 @@
                         <input type="hidden" id="add-contact-id">
                         <button type="button"
                                 id="add-cancel-button"
-                                class="btn btn-default"
-                                onclick="hideEditForm()">
+                                class="btn btn-default">
                             Cancel
                         </button>
                     </div>
@@ -245,6 +244,3 @@
         </form>
     </div>
 </div>
-
-<script src="~/Scripts/jquery-2.2.3.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>

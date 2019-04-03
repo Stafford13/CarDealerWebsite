@@ -79,6 +79,7 @@ namespace GuildCars.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("/Account/Login")]
         public ActionResult Login(LoginVM model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -110,6 +111,16 @@ namespace GuildCars.Controllers
                 else
                     return RedirectToAction("Index");
             }
+        }
+
+        [Authorize]
+        [Route("/Account/Logout")]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOut()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+            return RedirectToAction("Index");
         }
     }
 }

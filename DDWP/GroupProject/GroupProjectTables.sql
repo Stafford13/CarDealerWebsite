@@ -1,9 +1,6 @@
 use GroupProject
 go
 
-if exists(select * from sys.tables where name='User')
-	drop table [User]
-go
 
 if exists(select * from sys.tables where name='BlogPost')
 	drop table BlogPost
@@ -18,9 +15,3 @@ DateAdded datetime not null,
 DateEdited datetime not null
 )
 
-
-create table [User] (
-UserId int primary key identity(1,1),
-UserName varchar(25) not null,
-UserPassword varchar(10)
-)
