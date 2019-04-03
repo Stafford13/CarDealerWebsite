@@ -6,6 +6,7 @@ namespace GuildCars.Models.Tables
     {
         public int ModelId { get; set; }
         public string ModelName { get; set; }
+        public int MakeId { get; set; }
         public DateTime DateAdded { get; set; }
     }
 }

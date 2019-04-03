@@ -124,7 +124,9 @@ $('#searchButton').on('click', function () {
 });
 
 
-
+//ajax
+//mockrepo
+//connect views to mockrepo
 
 
 $(document).ready(function () {
@@ -140,8 +142,14 @@ $('#new-link').on('click', function () {
 
 $('#add-cancel-button').on('click', function () {
     event.preventDefault();
-    $('#userTableDiv').show();
+    $('#errorMessages').empty();
+    // clear the form and then hide it
+    $('#add-first-name').val('');
+    $('#add-last-name').val('');
+    $('#add-email').val('');
+    $('#add-role').val('');
     $('#addFormDiv').hide();
+    $('#userTableDiv').show();
 });
 
 $('#add-button').on('click', function () {
@@ -160,6 +168,7 @@ $('#add-button').on('click', function () {
         },
         'dataType': 'json',
         success: function (data, status) {
+            alert("ULURU")
             // clear errorMessages
             $('#errorMessages').empty();
             // Clear the form and reload the table
@@ -170,6 +179,7 @@ $('#add-button').on('click', function () {
             loadUsers();
         },
         error: function () {
+            alert("G'DAY MATE")
             $('#errorMessages')
                 .append($('<li>')
                     .attr({ class: 'list-group-item list-group-item-danger' })
@@ -218,7 +228,7 @@ function loadUsers() {
 
     $.ajax({
         type: 'GET',
-        url: 'http://lvh.me:63501/apu/user',
+        url: 'http://lvh.me:63501/api/user',
         success: function (data, status) {
             $.each(data, function (index, user) {
                 var name1 = user.firstName;

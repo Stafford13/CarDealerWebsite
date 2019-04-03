@@ -86,19 +86,61 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("New Inventory", "New", "Home")</li>
-                    <li>@Html.ActionLink("Used Inventory", "Used", "Home")</li>
-                    <li>@Html.ActionLink("Specials", "Specials", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("sales,admin"))
+                    @if (!User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Sales", "Sales", "Home")</li>
+                        <li>@Html.ActionLink("New Inventory", "New", "Home")</li>
                     }
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                    @if (!User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Admin", "Admin", "Home")</li>
+                        <li>@Html.ActionLink("Used Inventory", "Used", "Home")</li>
                     }
-                </ul>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Specials", "Specials", "Home")</li>
+                    }
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    }
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Sales", "Index", "Sale")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Vehicles", "Vehicles", "Admin")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Add", "addVehicle", "Admin")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                        @*{
+                <li>@Html.ActionLink("Edit", "editVehicle", "Admin")</li>
+            }*@
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Specials", "editSpecial", "Admin")</li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Reports", "Index", "Report")</li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Makes", "Makes", "Admin")</li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Models", "Models", "Admin")</li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Users", "Users", "Admin")</li>
+                        }
+                    </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
