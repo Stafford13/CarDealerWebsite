@@ -66,10 +66,10 @@
             cursor: pointer;
         }
 
-        .button1:hover {
-            background-color: #0245a3;
-            color: white;
-        }
+            .button1:hover {
+                background-color: #0245a3;
+                color: white;
+            }
     </style>
 </head>
 <body>
@@ -106,7 +106,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Sales", "Index", "Sale")</li>
+                        <li>@Html.ActionLink("sale", "Index", "Sale")</li>
                     }
                     @if (User.IsInRole("Admin"))
                     {
@@ -117,45 +117,45 @@
                         <li>@Html.ActionLink("Add", "addVehicle", "Admin")</li>
                     }
                     @if (User.IsInRole("Admin"))
-                        @*{
-                <li>@Html.ActionLink("Edit", "editVehicle", "Admin")</li>
-            }*@
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Specials", "editSpecial", "Admin")</li>
-                        }
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li>@Html.ActionLink("Reports", "Index", "Report")</li>
-                        }
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Makes", "Makes", "Admin")</li>
-                        }
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Models", "Models", "Admin")</li>
-                        }
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Users", "Users", "Admin")</li>
-                        }
-                    </ul>
-                @Html.Partial("_LoginPartial")
+                    {
+                        <li>@Html.ActionLink("Edit", "editVehicle", "Admin")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Specials", "editSpecial", "Admin")</li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Reports", "Index", "Report")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Makes", "Makes", "Admin")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Models", "Models", "Admin")</li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Users", "Users", "Admin")</li>
+                    }
+                </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/Scripts/Home.js")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/Scripts/Home.js")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

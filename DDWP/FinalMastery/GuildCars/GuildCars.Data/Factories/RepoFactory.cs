@@ -16,14 +16,12 @@ namespace GuildCars.Data.Factories
         {
 
             string mode = ConfigurationManager.AppSettings["Mode"].ToString();
-            ICarRepository carRepo;
+          
             switch (mode)
             {
 
                 case "SampleData":
-                    carRepo = new CarMockRepository();
-                    return carRepo;
-
+                   return new CarMockRepository();
                 default:
                     throw new Exception("Mode value in app config is not valid");
             }

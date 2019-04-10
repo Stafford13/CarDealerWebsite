@@ -14,7 +14,9 @@
         public int MSRP { get; set; }
         public int Price { get; set; }
         public string ImageFileName { get; set; }
-        public Make MakeName { get; set; }
-        public Model ModelName { get; set; }
+        public int MakeId { get; set; }
+        public int ModelId { get; set; }
+        public bool isFeatured { get; set; }
+        public bool isSold { get; set; }
     }
 }

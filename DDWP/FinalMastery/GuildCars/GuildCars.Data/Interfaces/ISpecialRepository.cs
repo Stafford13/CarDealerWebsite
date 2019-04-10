@@ -8,3 +8,7 @@ namespace GuildCars.Data.Interfaces
         List<Special> GetAll();
     }
 }
+
+//create
+//    read
+//    delete

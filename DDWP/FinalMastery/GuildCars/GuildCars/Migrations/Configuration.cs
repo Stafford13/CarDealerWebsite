@@ -32,7 +32,7 @@ namespace GuildCars.Migrations
 
             // create the admin role
             roleMgr.Create(new AppRole() { Name = "Admin" });
-            roleMgr.Create(new AppRole() { Name = "Sales" });
+            roleMgr.Create(new AppRole() { Name = "sale" });
             roleMgr.Create(new AppRole() { Name = "Disabled" });
 
             // create the default user

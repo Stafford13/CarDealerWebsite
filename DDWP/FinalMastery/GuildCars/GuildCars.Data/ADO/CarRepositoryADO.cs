@@ -79,8 +79,8 @@ namespace GuildCars.Data.ADO
                         car.Type = dr["Type"].ToString();
                         car.MSRP = (int)dr["MSRP"];
                         car.Price = (int)dr["Price"];
-                        car.MakeName.MakeId = (int)dr["MakeId"];
-                        car.ModelName.ModelId = (int)dr["ModelId"];
+                        //car.MakeName.MakeId = (int)dr["MakeId"];
+                        //car.ModelName.ModelId = (int)dr["ModelId"];
                         car.ImageFileName = dr["ImageFileName"].ToString();
                     }
                 }
@@ -148,51 +148,51 @@ namespace GuildCars.Data.ADO
             }
         }
 
-        public Car Search(string type, string term, decimal minPrice, decimal maxPrice, int minYear, int maxYear)
-        {
-            IEnumerable<Car> cars = new List<Car>();
-            switch (type)
-            {
-                case "new":
-                    cars = GetAll().Where(v => v.Type == "New");
-                    break;
-                case "used":
-                    cars = GetAll().Where(v => v.Type == "Used");
-                    break;
-                case "all":
-                    cars = GetAll();
-                    break;
-                default:
-                    break;
-            }
-            List<Car> found = new List<Car>();
-            int year = 0;
-            int.TryParse(term, out year);
+        //public Car Search(string type, string term, decimal minPrice, decimal maxPrice, int minYear, int maxYear)
+        //{
+        //    IEnumerable<Car> cars = new List<Car>();
+        //    switch (type)
+        //    {
+        //        case "new":
+        //            cars = GetAll().Where(v => v.Type == "New");
+        //            break;
+        //        case "used":
+        //            cars = GetAll().Where(v => v.Type == "Used");
+        //            break;
+        //        case "all":
+        //            cars = GetAll();
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //    List<Car> found = new List<Car>();
+        //    int year = 0;
+        //    int.TryParse(term, out year);
 
-            foreach (var car in cars)
-            {
-                car.Make = makeRepo.GetById(car.MakeId);
-                car.Model = modelRepo.GetById(car.ModelId);
+        //    foreach (var car in cars)
+        //    {
+        //        car.Make = makeRepo.GetById(car.MakeId);
+        //        car.Model = modelRepo.GetById(car.ModelId);
 
-                if (car.Year >= minYear && car.Year <= maxYear && car.Price >= minPrice && car.Price <= maxPrice)
-                {
-                    if (term != "hamster")
-                    {
-                        if (car.Year == year || car.Make.MakeName.ToLower().Contains(term.ToLower()) || car.Model.ModelName.ToLower().Contains(term.ToLower()))
-                        {
-                            found.Add(car);
-                        }
-                    }
-                    else
-                    {
-                        found.Add(car);
-                    }
-                }
-            }
+        //        if (car.Year >= minYear && car.Year <= maxYear && car.Price >= minPrice && car.Price <= maxPrice)
+        //        {
+        //            if (term != "hamster")
+        //            {
+        //                if (car.Year == year || car.Make.MakeName.ToLower().Contains(term.ToLower()) || car.Model.ModelName.ToLower().Contains(term.ToLower()))
+        //                {
+        //                    found.Add(car);
+        //                }
+        //            }
+        //            else
+        //            {
+        //                found.Add(car);
+        //            }
+        //        }
+        //    }
 
-            cars = found;
-            return cars;
-        }
+        //    cars = found;
+        //    return cars;
+        //}
 
         //public IEnumerable<CarViewModel> GetNewCarsSorted(string searchText = "", decimal minPrice = 0, decimal maxPrice = 900000000, int minYear = 0, int maxYear = 2500)
         //{

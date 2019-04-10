@@ -2,7 +2,7 @@
 {
     public class Sale
     {
-        public int SalesId { get; set; }
+        public int SaleId { get; set; }
         public int Price { get; set; }
         public Special SpecialId{ get; set; }
         public Car CarId { get; set; }
