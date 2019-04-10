@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using GuildCars.Data.ADO;
 using GuildCars.Models.Tables;
+using GuildCars.Data.MockRepo;
 
 namespace GuildCars.Controllers
 {
@@ -59,8 +60,9 @@ namespace GuildCars.Controllers
         public ActionResult Specials()
         {
             ViewBag.Message = "";
-
-            return View();
+            SpecialMockRepo specialRepo = new SpecialMockRepo();
+            IEnumerable<Special> specials = specialRepo.GetAllSpecials();
+            return View(specials);
         }
 
         public ActionResult Details()

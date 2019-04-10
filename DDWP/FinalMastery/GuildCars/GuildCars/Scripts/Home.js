@@ -1,63 +1,4 @@
-﻿
-$("#search-button").click(function (event) {
-    SearchVehicles();
-});
-
-
-function SearchVehicles() {
-    $('#results').text("");
-    var searchInput = {
-        MinYear: $("#minYear").val(),
-        MaxYear: $("#maxYear").val(),
-        MinPrice: $("#minPrice").val(),
-        MaxPrice: $("#maxPrice").val(),
-        MakeModel: $("#make-model-input").val()
-    }
-
-    $.ajax({
-        url: 'http://localhost:63501/api/inventoryapi/SearchNewVehicles',
-        type: 'post',
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function (data) {
-            $.each(data, function (index, item) {
-                var row = '<div class="border row" style="margin-bottom: 15px;">';
-
-                row += '<div class="col-md-3">';
-                row += '<h6>' + item.Year + ' ' + item.Make + ' ' + item.Model + '</h6>';
-                row += '<img src="../Images/Inventory-' + item.CarId + '.jpg" style="width: 200px; height: auto;">';
-                row += '</div>';
-
-                row += '<div class="col-md-3">';
-                row += 'Body Type: ' + item.Style + '<br/>';
-                row += 'Trans: ' + item.Transmission + '<br/>';
-                row += 'Color: ' + item.Color + '<br/>';
-                row += '</div>';
-
-
-                row += '<div class="col-md-3">';
-                row += 'Interior: ' + item.Interior + '<br/>';
-                row += 'Mileage: ' + item.Mileage + '<br/>';
-                row += 'VIN #: ' + item.Vin + '<br/>';
-                row += '</div>';
-
-
-                row += '<div class="col-md-3">';
-                row += 'Sale Price: $' + item.SalePrice + '<br/>';
-                row += 'MSRP: $' + item.MSRP + '<br/>';
-                row += '<a href="http://localhost:63501/Inventory/Details/' + item.CarId + '" class = "btn btn-dark">Details</a>';
-                row += '</div>';
-                row += '</div>';
-                $('#results').append(row);
-            });
-        },
-        data: JSON.stringify(searchInput)
-    });
-}
-
-
-
-$('#searchButton').on('click', function () {
+﻿$('#searchButton').on('click', function () {
     $('#errorList').empty();
 
     var searchType = $('#searchButton').val();
@@ -92,7 +33,7 @@ $('#searchButton').on('click', function () {
             url: 'http://localhost:63501/api/inventory/search/' + searchType + '/' + term + '/' + minPrice + '/' + maxPrice + '/' + minYear + '/' + maxYear,
             success: function (data) {
                 $.each(data, function (index, item) {
-                    var id = item.VehicleId;
+                    var id = item.CarId;
                     var year = item.Year;
                     var make = item.Make.MakeName;
                     var model = item.Model.ModelName;
@@ -106,8 +47,7 @@ $('#searchButton').on('click', function () {
                     var msrp = item.MSRP;
 
                     $('#searchResults').append(
-                        '<div class=col-lg-12 fields><div class=col-md-3><h4>' + year + ' ' + make + ' ' + model + '</h4><img src=/images/Car1.jpg alt=Oohh shiny style=width:175px;height:100px; /></div><div class=col-md-3><br/><p>' + body + '</p><p>' + trans + '</p><p>' + color + '</p></div ><div class=col-md-3><br/><p>' + interior + ' </p><p>' + mileage + '</p><p>V' + vin + '</p></div><div class=col-md-3><br/><p>' + msrp + '</p><p>' + price + '</p><a href=~/Home/Details class=button1>details</a></div></div> '
-                    )
+                        '<div class="col-lg-12 fields row"><div class=col-md-3><h4>'+ year +' '+make+' '+model+'</h4><img src=/Image/car'+id+'.jpg alt=ohhshiny style=width:175px;height:100px /></div><div class= col-md-3><h4></h4><p>Body type:' + body + '</p><p>Trans:'+ trans +'</p><p>Color:' + color + '</p></div><div class=col-md-3><h4></h4><p>Interior:' +interior+'</p><p>Mileage:'+mileage+'</p><p>VIN#:'+vin+'</p></div><div class=col-md-3><h4></h4><p>MSRP:'+msrp+'</p><p>Price:'+price+'</p><a href=~/Home/Details class=button1>details</a></div></div><p> </p>')
                 })
                 if (data.length == 0) {
                     alert("No Results Found With Selected Parameters.");

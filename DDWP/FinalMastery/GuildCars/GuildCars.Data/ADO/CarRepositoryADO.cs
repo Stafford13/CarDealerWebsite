@@ -75,7 +75,7 @@ namespace GuildCars.Data.ADO
                         car.ExColor = dr["ExColor"].ToString();
                         car.IntColor = dr["IntColor"].ToString();
                         car.Mileage = (int)dr["Mileage"];
-                        car.Transmission = (bool)dr["Transmission"];
+                        car.Transmission = dr["Transmission"].ToString();
                         car.Type = dr["Type"].ToString();
                         car.MSRP = (int)dr["MSRP"];
                         car.Price = (int)dr["Price"];

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GuildCars.Data.MockRepo;
+using GuildCars.Models;
+using GuildCars.Models.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -38,7 +41,21 @@ namespace GuildCars.Controllers
         [Route("Admin/editspecial")]
         public ActionResult editSpecial()
         {
-            return View();
+            SpecialMockRepo specialRepo = new SpecialMockRepo();
+            SpecialsViewModel vm = new SpecialsViewModel();
+            vm.Specials = specialRepo.GetAllSpecials();
+            return View(vm);
+            
+        }
+
+        [HttpPost]
+        [Route("Admin/editspecial")]
+        public ActionResult editSpecial(SpecialsViewModel vm)
+        {
+            SpecialMockRepo specialRepo = new SpecialMockRepo();
+            specialRepo.Create(vm.Special);
+            return RedirectToAction("editSpecial");
+
         }
 
         [Route("Admin/makes")]

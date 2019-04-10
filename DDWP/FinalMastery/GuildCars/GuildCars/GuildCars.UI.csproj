@@ -212,6 +212,7 @@
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SecurityDb.cs" />
+    <Compile Include="Models\SpecialsViewModel.cs" />
     <Compile Include="Models\UpdateAccountViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
