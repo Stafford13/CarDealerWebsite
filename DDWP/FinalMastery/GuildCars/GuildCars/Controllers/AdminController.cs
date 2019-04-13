@@ -61,15 +61,37 @@ namespace GuildCars.Controllers
         [Route("Admin/makes")]
         public ActionResult Makes()
         {
-            //IEnumerable<Models.Make> list = new IEnumerable<Models.Makes>
-            return View();
+            MakeMockRepo makeRepo = new MakeMockRepo();
+            MakeMockRepo vm = new MakeMockRepo();
+            vm.Makes = makeRepo.GetAllMakes();
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Route("Admin/makes")]
+        public ActionResult Makes(MakeViewModel vm)
+        {
+            MakeMockRepo makeRepo = new MakeMockRepo();
+            makeRepo.Create(vm.Make);
+            return RedirectToAction("Makes");
         }
 
         [Route("Admin/models")]
         public ActionResult Models()
         {
-            //IEnumerable<Models.Models> list2 = new IEnumerable<Models.Models>
-            return View();
+            ModelMockRepo modelRepo = new ModelMockRepo();
+            ModelViewModel vm = new ModelViewModel();
+            vm.Models = modelRepo.GetAllModels();
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Route("Admin/models")]
+        public ActionResult Models(ModelViewModel vm)
+        {
+            ModelMockRepo modelRepo = new ModelMockRepo();
+            modelRepo.Create(vm.Model);
+            return RedirectToAction("Models");
         }
     }
 }

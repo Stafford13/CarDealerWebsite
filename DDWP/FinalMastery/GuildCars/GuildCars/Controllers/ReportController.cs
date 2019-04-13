@@ -22,7 +22,7 @@ namespace GuildCars.Controllers
         }
 
         [Route("reports/sales")]
-        public ActionResult salesReport()
+        public ActionResult saleReport()
         {
             return View();
         }

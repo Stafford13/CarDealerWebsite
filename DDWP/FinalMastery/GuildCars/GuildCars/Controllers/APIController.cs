@@ -31,27 +31,5 @@ namespace GuildCars.Controllers
 
             return Ok(found);
         }
-
-        //[HttpPost]
-        //public HttpResponseMessage SearchNewVehicles(JObject searchInput)
-        //{
-        //    JavaScriptSerializer jr = new JavaScriptSerializer();
-        //    ICarRepository repo = RepoFactory.CreateCarRepo();
-        //    var response = new HttpResponseMessage();
-
-
-        //    try
-        //    {
-        //        SearchCarJsonModel searchData = jr.Deserialize<SearchCarJsonModel>(searchInput.ToString());
-        //        var cars = repo.GetNewCarsSorted(searchData.MakeModel, searchData.MinPrice, searchData.MaxPrice, searchData.MinYear, searchData.MaxYear);
-        //        response.Content = new StringContent(jr.Serialize(cars));
-        //        response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/json");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        response.StatusCode = (HttpStatusCode)400;
-        //    };
-        //    return response;
-        //}
     }
 }
