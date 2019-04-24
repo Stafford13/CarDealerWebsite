@@ -26,7 +26,7 @@ namespace GuildCars.Data.MockRepo
                 IntColor = "Tan",
                 Transmission = "Automatic",
                 Type = "New",
-                MSRP = 5,
+                MSRP = 10000,
                 Price = 10000,
                 ImageFileName = "Car1.PNG",
                 MakeId = 1,
@@ -45,52 +45,52 @@ namespace GuildCars.Data.MockRepo
                 IntColor = "Tan",
                 Transmission = "Manual",
                 Type = "New",
-                MSRP = 5,
+                MSRP = 10000,
                 Price = 10000,
                 ImageFileName = "Car2.PNG",
                 MakeId = 1,
                 ModelId = 2,
                 isFeatured = true,
                 isSold = false,
-                VIN = "1000"
+                VIN = "1001"
             },
             new Car
             {
                 CarId = 3,
                 Body = "Sedan",
-                Year = 2015,
+                Year = 2020,
                 Mileage = 0,
                 ExColor = "Red",
                 IntColor = "Rainbow",
                 Transmission = "Manual",
                 Type = "New",
-                MSRP = 5,
+                MSRP = 10000,
                 Price = 10000,
                 ImageFileName = "Car2.PNG",
                 MakeId = 3,
                 ModelId = 1,
                 isFeatured = false,
                 isSold = false,
-                VIN = "1000"
+                VIN = "1002"
             },
             new Car
             {
                 CarId = 4,
                 Body = "Sedan",
                 Year = 2015,
-                Mileage = 0,
+                Mileage = 10000,
                 ExColor = "Red",
                 IntColor = "Rainbow",
                 Transmission = "Manual",
                 Type = "Used",
-                MSRP = 5,
+                MSRP = 10000,
                 Price = 10000,
                 ImageFileName = "Car2.PNG",
                 MakeId = 3,
                 ModelId = 1,
                 isFeatured = false,
                 isSold = false,
-                VIN = "1001"
+                VIN = "1003"
             },
             new Car
             {
@@ -102,33 +102,33 @@ namespace GuildCars.Data.MockRepo
                 IntColor = "Tan",
                 Transmission = "Automatic",
                 Type = "Used",
-                MSRP = 5,
-                Price = 10,
+                MSRP = 5000,
+                Price = 10000,
                 ImageFileName = "Car1.PNG",
                 MakeId = 2,
                 ModelId = 1,
                 isFeatured = false,
                 isSold = true,
-                VIN = "1000"
+                VIN = "1004"
             },
             new Car
             {
                 CarId = 6,
                 Body = "Sedan",
                 Year = 2000,
-                Mileage = 0,
+                Mileage = 2000,
                 ExColor = "Red",
                 IntColor = "Rainbow",
                 Transmission = "Manual",
                 Type = "Used",
-                MSRP = 5,
+                MSRP = 10000,
                 Price = 10000,
                 ImageFileName = "Car2.PNG",
                 MakeId = 3,
                 ModelId = 1,
                 isFeatured = false,
                 isSold = false,
-                VIN = "1000"
+                VIN = "1005"
             },
         };
             }

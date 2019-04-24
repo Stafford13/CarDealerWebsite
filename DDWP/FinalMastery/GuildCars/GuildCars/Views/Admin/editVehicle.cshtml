@@ -184,17 +184,11 @@
                     Description:
                 </label>
                 <div class="col-md-10">
-                    <textarea class="form-control"
-                              width="400px"
-                              height="300px"
-                              id="add-description"
-                              placeholder="Description" required></textarea>
+                    @Html.TextAreaFor(m => m.Car.Description, new { @class = "form-control", type = "number", placeholder = "Description", required = "required" })
                 </div>
             </div>
         </div>
         <br />
-
-
 
         <div class="row">
             <div class="col-md-2">
@@ -202,7 +196,7 @@
                     Picture:
                 </label>
                 <div class="col-md-10">
-                    <input type="file" name="pic" accept="image/*">
+                    @Html.TextBoxFor(m => m.Car.ImageFileName, new { @class = "form-control", type = "file", placeholder = "Picture", accept = "image/*", required = "required" })
                 </div>
             </div>
         </div>
