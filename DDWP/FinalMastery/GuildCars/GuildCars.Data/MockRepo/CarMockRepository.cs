@@ -136,6 +136,7 @@ namespace GuildCars.Data.MockRepo
         public Car Create(Car car)
         {
             int id = _cars.Max(c => c.CarId) + 1;
+            car.CarId = id;
             _cars.Add(car);
 
             return car;
@@ -236,8 +237,7 @@ namespace GuildCars.Data.MockRepo
 
         public Car Update(Car car)
         {
-            Car update = _cars.FirstOrDefault(c => c.CarId == car.CarId);
-            _cars.Remove(update);
+            _cars.Remove(_cars.FirstOrDefault(c => c.CarId == car.CarId));
             _cars.Add(car);
 
             return car;

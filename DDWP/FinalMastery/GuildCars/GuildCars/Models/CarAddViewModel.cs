@@ -11,7 +11,8 @@ namespace GuildCars.Models
 {
     public class CarAddViewModel
     {
-        public IEnumerable<SelectListItem> Specials { get; set; }
+        public IEnumerable<SelectListItem> Makes { get; set; }
+        public IEnumerable<SelectListItem> Models { get; set; }
         public Car Car { get; set; }
         public HttpPostedFileBase ImageUpload { get; set; }
 

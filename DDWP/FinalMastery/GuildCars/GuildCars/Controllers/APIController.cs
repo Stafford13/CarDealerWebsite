@@ -31,5 +31,19 @@ namespace GuildCars.Controllers
 
             return Ok(found);
         }
+
+        [Route("modellist/{make}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult ModelList(int make)
+        {
+            ModelMockRepo repo = new ModelMockRepo();
+            IEnumerable<Model> found = repo.GetAllModels().Where(m => m.MakeId == make);
+
+            if (found == null)
+            {
+                return NotFound();
+            }
+            return Ok(found);
+        }
     }
 }

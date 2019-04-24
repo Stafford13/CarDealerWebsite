@@ -13,6 +13,8 @@
             <label for="new-model" class="col-md-2 control-label">
                 New Model:
             </label>
+            @Html.DropDownListFor(m => m.Model.MakeId, Model.Makes, new { @class = "form-control", required = "required" })
+
             @Html.TextBoxFor(m => m.Model.ModelName, new { @class = "form-control", type = "text", placeholder = "Title", id = "add-new-model", required = "required" })
 
         </div>
@@ -24,12 +26,17 @@
     <div id="modelTableDiv" class="col-md-6">
         <table id="userTable" class="table table-hover">
             <tr>
-                <th width="20%">Model</th>
-                <th width="20%">Make</th>
-                <th width="20%">Date Added</th>
+                <th width="30%">Model</th>
+                <th width="30%">Date Added</th>
                 <th width="40%">User</th>
             </tr>
-            <tbody id="contentRows"></tbody>
+            @foreach (var item in Model.Models)
+            {
+                <tr>
+                    <td>@item.ModelName</td>
+                    <td>@item.DateAdded</td>
+                    <td>@item.UserId</td>
+                </tr>}
         </table>
 
     </div>

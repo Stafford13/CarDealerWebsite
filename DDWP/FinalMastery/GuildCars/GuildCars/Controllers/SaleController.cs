@@ -6,17 +6,17 @@ using System.Web.Mvc;
 
 namespace GuildCars.Controllers
 {
-    [Authorize(Roles = "sales,admin")]
+    //[Authorize(Roles = "sales,admin")]
     public class SaleController : Controller
     {
         // GET: Sale
-        [Route("sales/index")]
+        [Route("sale/index")]
         public ActionResult Index()
         {
             return View();
         }
 
-        [Route("sales/purchase")]
+        [Route("sale/purchase")]
         public ActionResult purchaseVehicle()
         {
             return View();

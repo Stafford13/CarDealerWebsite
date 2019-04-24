@@ -20,19 +20,22 @@ namespace GuildCars.Data.MockRepo
             {
                 MakeId = 1,
                 MakeName = "Honda",
-                DateAdded = DateTime.ParseExact("2010/01/01","yyyy/dd/MM",CultureInfo.InvariantCulture)
+                DateAdded = DateTime.ParseExact("2010/01/01","yyyy/dd/MM",CultureInfo.InvariantCulture),
+                UserId = "Bob"
             },
             new Make
             {
                MakeId = 2,
                MakeName = "Subaru",
-               DateAdded = DateTime.ParseExact("2010/01/01","yyyy/dd/MM",CultureInfo.InvariantCulture)
+               DateAdded = DateTime.ParseExact("2010/01/01","yyyy/dd/MM",CultureInfo.InvariantCulture),
+               UserId = "Bob"
             },
             new Make
             {
                 MakeId = 3,
                 MakeName = "Kia",
-                DateAdded = DateTime.ParseExact("2010/01/01","yyyy/dd/MM",CultureInfo.InvariantCulture)
+                DateAdded = DateTime.ParseExact("2010/01/01","yyyy/dd/MM",CultureInfo.InvariantCulture),
+                UserId = "BillyBob"
             },
         };
         }
@@ -49,7 +52,8 @@ namespace GuildCars.Data.MockRepo
 
         public Make Create(Make make)
         {
-            int id = _makes.Max(c => c.MakeId) + 1;
+            make.MakeId = _makes.Max(c => c.MakeId) + 1;
+            make.DateAdded = DateTime.Now;
             _makes.Add(make);
 
             return make;

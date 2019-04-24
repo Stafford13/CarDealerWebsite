@@ -106,7 +106,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("sale", "Index", "Sale")</li>
+                        <li>@Html.ActionLink("Sale", "Index", "Sale")</li>
                     }
                     @if (User.IsInRole("Admin"))
                     {

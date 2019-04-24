@@ -1,6 +1,7 @@
 ﻿using GuildCars.Data.MockRepo;
 using GuildCars.Models;
 using GuildCars.Models.Tables;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,62 @@ namespace GuildCars.Controllers
         [Route("Admin/addvehicle")]
         public ActionResult addVehicle()
         {
-            //model reference
-            return View();
+            ModelMockRepo modelRepo = new ModelMockRepo();
+            MakeMockRepo makeRepo = new MakeMockRepo();
+            CarAddViewModel vm = new CarAddViewModel();
+            vm.Makes = new SelectList(makeRepo.GetAllMakes(), "MakeId", "MakeName");
+            vm.Models = new SelectList(modelRepo.GetAllModels(), "ModelId", "ModelName");
+            return View(vm);
+        }
+
+        [Route("Admin/addvehicle")]
+        [HttpPost]
+        public ActionResult addVehicle(CarAddViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                CarMockRepository carRepo = new CarMockRepository();
+                Car car = carRepo.Create(vm.Car);
+                vm.Car.CarId = car.CarId; 
+                return RedirectToAction("editVehicle/" + vm.Car.CarId);
+            }
+            ModelMockRepo modelRepo = new ModelMockRepo();
+            MakeMockRepo makeRepo = new MakeMockRepo();
+            vm.Makes = new SelectList(makeRepo.GetAllMakes(), "MakeId", "MakeName");
+            vm.Models = new SelectList(modelRepo.GetAllModels(), "ModelId", "ModelName");
+            return View(vm);
         }
 
         [Route("Admin/editvehicle")]
-        public ActionResult editVehicle()
+        public ActionResult editVehicle(int id)
         {
-            return View();
+            ModelMockRepo modelRepo = new ModelMockRepo();
+            MakeMockRepo makeRepo = new MakeMockRepo();
+            CarMockRepository carRepo = new CarMockRepository();
+            CarEditViewModel vm = new CarEditViewModel();
+            vm.Car = carRepo.GetById(id);
+            vm.Car.Make = makeRepo.GetById(vm.Car.MakeId);
+            vm.Car.Model = modelRepo.GetById(vm.Car.ModelId);
+            vm.Makes = new SelectList(makeRepo.GetAllMakes(), "MakeId", "MakeName");
+            vm.Models = new SelectList(modelRepo.GetAllModels(), "ModelId", "ModelName");
+            return View(vm);
+        }
+
+        [Route("Admin/editvehicle")]
+        [HttpPost]
+        public ActionResult editVehicle(CarEditViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                CarMockRepository carRepo = new CarMockRepository();
+                vm.Car = carRepo.Update(vm.Car);
+                return RedirectToAction("Vehicles");
+            }
+            ModelMockRepo modelRepo = new ModelMockRepo();
+            MakeMockRepo makeRepo = new MakeMockRepo();
+            vm.Makes = new SelectList(makeRepo.GetAllMakes(), "MakeId", "MakeName");
+            vm.Models = new SelectList(modelRepo.GetAllModels(), "ModelId", "ModelName");
+            return View(vm);
         }
 
         [Route("Admin/users")]
@@ -62,7 +111,7 @@ namespace GuildCars.Controllers
         public ActionResult Makes()
         {
             MakeMockRepo makeRepo = new MakeMockRepo();
-            MakeMockRepo vm = new MakeMockRepo();
+            MakeViewModel vm = new MakeViewModel();
             vm.Makes = makeRepo.GetAllMakes();
             return View(vm);
         }
@@ -72,6 +121,8 @@ namespace GuildCars.Controllers
         public ActionResult Makes(MakeViewModel vm)
         {
             MakeMockRepo makeRepo = new MakeMockRepo();
+            var authManager = HttpContext.GetOwinContext().Authentication;
+            vm.Make.UserId = authManager.User.Identity.GetUserId();
             makeRepo.Create(vm.Make);
             return RedirectToAction("Makes");
         }
@@ -80,8 +131,10 @@ namespace GuildCars.Controllers
         public ActionResult Models()
         {
             ModelMockRepo modelRepo = new ModelMockRepo();
+            MakeMockRepo makeRepo = new MakeMockRepo();
             ModelViewModel vm = new ModelViewModel();
             vm.Models = modelRepo.GetAllModels();
+            vm.Makes = new SelectList(makeRepo.GetAllMakes(), "MakeId", "MakeName");
             return View(vm);
         }
 
@@ -90,6 +143,8 @@ namespace GuildCars.Controllers
         public ActionResult Models(ModelViewModel vm)
         {
             ModelMockRepo modelRepo = new ModelMockRepo();
+            var authManager = HttpContext.GetOwinContext().Authentication;
+            vm.Model.UserId = authManager.User.Identity.GetUserId();
             modelRepo.Create(vm.Model);
             return RedirectToAction("Models");
         }

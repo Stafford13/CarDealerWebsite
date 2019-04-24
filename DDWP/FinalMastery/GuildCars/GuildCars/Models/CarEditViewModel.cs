@@ -11,7 +11,8 @@ namespace GuildCars.Models
 {
     public class CarEditViewModel
     {
-        public IEnumerable<SelectListItem> Specials { get; set; }
+        public IEnumerable<SelectListItem> Makes { get; set; }
+        public IEnumerable<SelectListItem> Models { get; set; }
         public Car Car { get; set; }
         public HttpPostedFileBase ImageUpload { get; set; }
 
@@ -21,7 +22,7 @@ namespace GuildCars.Models
 
             if (string.IsNullOrEmpty(Car.Body))
             {
-                errors.Add(new ValidationResult("A body type is required"));
+                errors.Add(new ValidationResult("Body is required"));
             }
 
             if (string.IsNullOrEmpty(Car.ExColor))
@@ -34,34 +35,58 @@ namespace GuildCars.Models
                 errors.Add(new ValidationResult("An interior color is required"));
             }
 
-            //    if (string.IsNullOrEmpty(Listing.ListingDescription))
-            //    {
-            //        errors.Add(new ValidationResult("Description is required"));
-            //    }
+            if (string.IsNullOrEmpty(Car.Type))
+            {
+                errors.Add(new ValidationResult("Type is required"));
+            }
 
-            //    if (ImageUpload != null && ImageUpload.ContentLength > 0)
-            //    {
-            //        var extensions = new string[] { ".jpg", ".png", ".gif", ".jpeg" };
+            if (Car.MSRP < 0)
+            {
+                errors.Add(new ValidationResult("MSRP must be greater than or equal to 0"));
+            }
 
-            //        var extension = Path.GetExtension(ImageUpload.FileName);
+            if (Car.Price < 0)
+            {
+                errors.Add(new ValidationResult("Price must be greater than or equal to 0"));
+            }
 
-            //        if (!extensions.Contains(extension))
-            //        {
-            //            errors.Add(new ValidationResult("Image file must be a jpg, png, gif, or jpeg."));
-            //        }
-            //    }
-
-            //    if (Listing.Rate <= 0)
-            //    {
-            //        errors.Add(new ValidationResult("Rate must be greater than 0"));
-            //    }
-
-            //    if (Listing.SquareFootage <= 0)
-            //    {
-            //        errors.Add(new ValidationResult("Square footage must be greater than 0"));
+            //if (string.IsNullOrEmpty(Car.MakeName))
+            //{
+            //    errors.Add(new ValidationResult("The make of the car is required"));
             //}
 
-            return errors;
+            //if (string.IsNullOrEmpty(Car.ModelName))
+            //{
+            //    errors.Add(new ValidationResult("The model of the car is required"));
+            //}
+
+            if (ImageUpload != null && ImageUpload.ContentLength > 0)
+            {
+                var extensions = new string[] { ".jpg", ".png", ".gif", ".jpeg" };
+
+                var extension = Path.GetExtension(ImageUpload.FileName);
+
+                if (!extensions.Contains(extension))
+                {
+                    errors.Add(new ValidationResult("Image file must be a jpg, png, gif, or jpeg."));
+                }
             }
-}
+            else
+            {
+                errors.Add(new ValidationResult("Image file is required"));
+            }
+
+            if (Car.Year <= 2000 && Car.Year >= 2020)
+            {
+                errors.Add(new ValidationResult("Year must be between 2000 and 2020"));
+            }
+
+            if (Car.Mileage < 0)
+            {
+                errors.Add(new ValidationResult("Milage must be greater than or equal to 0"));
+            }
+
+            return errors;
+        }
+    }
 }

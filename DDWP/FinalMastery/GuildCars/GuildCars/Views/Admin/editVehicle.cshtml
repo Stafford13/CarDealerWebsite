@@ -1,44 +1,34 @@
-﻿
+﻿@model GuildCars.Models.CarEditViewModel
 @{
     ViewBag.Title = "editVehicle";
-}
 
-@*TODO: ADD AJAX CALL  - populate model list based on selected make *@
+}
 
 <h2>Edit Vehicle</h2>
 
-
 <div class="container">
-    <form class="form-vertical" role="form" id="edit-form">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-make" class="col-md-2 control-label">
+
+                    <label for="add-make" class="col-md-2 control-label">
                         Make:
                     </label>
                     <div class="col-md-10">
-                        <select name="make">
-                            <option value="kia">Kia</option>
-                            <option value="subaru">Subaru</option>
-                            <option value="honda">Honda</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.MakeId, Model.Makes, new { @class = "form-control", id = "MakeDrop", required = "required" })
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-model" class="col-md-2 control-label">
+                    <label for="add-model" class="col-md-2 control-label">
                         Model:
                     </label>
                     <div class="col-md-10">
-                        <select name="model">
-                            <option value="accord">Accord</option>
-                            <option value="civic">Civic</option>
-                            <option value="forester">Forester</option>
-                            <option value="soul">Soul</option>
-                            <option value="A6">A6</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.ModelId, Model.Models, new { @class = "form-control", id = "ModelDrop", required = "required" })
                     </div>
                 </div>
             </div>
@@ -47,28 +37,30 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-type" class="col-md-2 control-label">
+                    <label for="add-type" class="col-md-2 control-label">
                         Type:
                     </label>
                     <div class="col-md-10">
-                        <select name="type">
-                            <option value="new">New</option>
-                            <option value="used">Used</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.Type, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="New", Value = "New" },
+                            new SelectListItem{ Text="Used", Value = "Used" },
+                        })
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-body" class="col-md-2 control-label">
+                    <label for="add-body" class="col-md-2 control-label">
                         Body Type:
                     </label>
                     <div class="col-md-10">
-                        <select name="body">
-                            <option value="suv">SUV</option>
-                            <option value="sedan">Sedan</option>
-                            <option value="truck">Truck</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.Body, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="SUV", Value = "SUV" },
+                            new SelectListItem{ Text="Sedan", Value = "Sedan" },
+                            new SelectListItem{ Text="Truck", Value = "Truck" },
+                        })
                     </div>
                 </div>
             </div>
@@ -77,27 +69,25 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-year" class="col-md-2 control-label">
+                    <label for="add-year" class="col-md-2 control-label">
                         Year:
                     </label>
                     <div class="col-md-10">
-                        <input type="number"
-                               class="form-control"
-                               id="edit-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.Year, new { @class = "form-control", type = "number", placeholder = "Year", required = "required" })
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-trans" class="col-md-2 control-label">
+                    <label for="add-trans" class="col-md-2 control-label">
                         Transmisson:
                     </label>
                     <div class="col-md-10">
-                        <select name="type">
-                            <option value="manual">Manual</option>
-                            <option value="automatic">Automatic</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.Transmission, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Automatic", Value = "Automatic" },
+                            new SelectListItem{ Text="Manual", Value = "Manual" },
+                        })
                     </div>
                 </div>
             </div>
@@ -106,27 +96,35 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-ext-color" class="col-md-2 control-label">
+                    <label for="add-ext-color" class="col-md-2 control-label">
                         Color:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="edit-description"
-                               placeholder="" required>
+                        @Html.DropDownListFor(m => m.Car.ExColor, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Black", Value = "Black" },
+                            new SelectListItem{ Text="Silver", Value = "Silver" },
+                            new SelectListItem{ Text="White", Value = "White" },
+                            new SelectListItem{ Text="Red", Value = "Red" },
+                            new SelectListItem{ Text="Blue", Value = "Blue" },
+                        })
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-int-color" class="col-md-2 control-label">
+                    <label for="add-int-color" class="col-md-2 control-label">
                         Interior Color:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="edit-description"
-                               placeholder="" required>
+                        @Html.DropDownListFor(m => m.Car.IntColor, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Black", Value = "Black" },
+                            new SelectListItem{ Text="Tan", Value = "Tan" },
+                            new SelectListItem{ Text="White", Value = "White" },
+                            new SelectListItem{ Text="Grey", Value = "Grey" },
+                            new SelectListItem{ Text="Rainbow", Value = "Rainbow" },
+                        })
                     </div>
                 </div>
             </div>
@@ -135,27 +133,21 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-mileage" class="col-md-2 control-label">
+                    <label for="add-mileage" class="col-md-2 control-label">
                         Mileage:
                     </label>
                     <div class="col-md-10">
-                        <input type="number"
-                               class="form-control"
-                               id="edit-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.Mileage, new { @class = "form-control", type = "number", placeholder = "Mileage", required = "required" })
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-vin" class="col-md-2 control-label">
+                    <label for="add-vin" class="col-md-2 control-label">
                         VIN #:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="edit-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.VIN, new { @class = "form-control", type = "number", placeholder = "VIN", required = "required" })
                     </div>
                 </div>
             </div>
@@ -164,27 +156,21 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-msrp" class="col-md-2 control-label">
+                    <label for="add-msrp" class="col-md-2 control-label">
                         MSRP:
                     </label>
                     <div class="col-md-10">
-                        <input type="number"
-                               class="form-control"
-                               id="edit-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.MSRP, new { @class = "form-control", type = "number", placeholder = "MSRP", required = "required" })
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="edit-price" class="col-md-2 control-label">
+                    <label for="add-price" class="col-md-2 control-label">
                         Price:
                     </label>
                     <div class="col-md-10">
-                        <input type="number"
-                               class="form-control"
-                               id="edit-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.Price, new { @class = "form-control", type = "number", placeholder = "Price", required = "required" })
                     </div>
                 </div>
             </div>
@@ -194,14 +180,14 @@
 
         <div class="row">
             <div class="form-group">
-                <label for="edit-description" class="col-md-2 control-label">
+                <label for="add-description" class="col-md-2 control-label">
                     Description:
                 </label>
                 <div class="col-md-10">
                     <textarea class="form-control"
-                              width="300px"
-                              height="200px"
-                              id="edit-description"
+                              width="400px"
+                              height="300px"
+                              id="add-description"
                               placeholder="Description" required></textarea>
                 </div>
             </div>
@@ -212,7 +198,7 @@
 
         <div class="row">
             <div class="col-md-2">
-                <label for="edit-picture" class="col-md-2 control-label">
+                <label for="add-picture" class="col-md-2 control-label">
                     Picture:
                 </label>
                 <div class="col-md-10">
@@ -220,9 +206,48 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="edit-featured" class="col-md-2 control-label">
+                    Featured:
+                </label>
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(m => m.Car.isFeatured, new { @class = "form-control"})
+                </div>
+            </div>
+        </div>
         <br />
 
-        <a href="#@*append to Specials*@" class="button1">Save</a>
+        <button class="button1">Save</button>
         <br />
-    </form>
+    }
 </div>
+
+@section scripts
+{
+    <script>
+
+        $('#MakeDrop').on('change', function () {
+            $("#ModelDrop").empty();
+            var make = $('#MakeDrop').val();
+            if (make != "") {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:63501/modellist/' + make,
+                    success: function (data) {
+                        $.each(data, function (index, item) {
+                            var modelName = item.ModelName;
+                            var modelId = item.ModelId
+
+                            $('#ModelDrop').append('<option value="' + modelId + '">' + modelName + '</option>');
+
+                        })
+
+                    },
+                    error: function () {
+                        alert("NO");
+                    }
+                });
+            }
+        })
+    </script>}

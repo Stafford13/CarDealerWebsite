@@ -28,7 +28,13 @@
                 <th width="30%">Date Added</th>
                 <th width="50%">User</th>
             </tr>
-            <tbody id="contentRows"></tbody>
+                @foreach (var item in Model.Makes)
+                {
+            <tr>
+                <td>@item.MakeName</td>
+                <td>@item.DateAdded</td>
+                <td>@item.UserId</td>
+            </tr>}
         </table>
 
     </div>

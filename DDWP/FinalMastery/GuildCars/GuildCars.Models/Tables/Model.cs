@@ -8,5 +8,6 @@ namespace GuildCars.Models.Tables
         public string ModelName { get; set; }
         public int MakeId { get; set; }
         public DateTime DateAdded { get; set; }
+        public string UserId { get; set; }
     }
 }

@@ -1,15 +1,15 @@
-﻿
+﻿@model GuildCars.Models.CarAddViewModel
 @{
     ViewBag.Title = "addVehicle";
 
 }
 
-@*TODO: ADD AJAX CALL  - populate model list based on selected make *@
-
 <h2>Add Vehicle</h2>
 
 <div class="container">
-    <form class="form-vertical" role="form" id="add-form">
+    @using (Html.BeginForm())
+    {
+    @Html.ValidationSummary()
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -18,12 +18,7 @@
                         Make:
                     </label>
                     <div class="col-md-10">
-                        <select name="make">
-                            <option value="kia">Kia</option>
-                            <option value="subaru">Subaru</option>
-                            <option value="honda" selected>Honda</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.MakeId, Model.Makes, new { @class = "form-control", id = "MakeDrop", required = "required" })
                     </div>
                 </div>
             </div>
@@ -33,13 +28,7 @@
                         Model:
                     </label>
                     <div class="col-md-10">
-                        <select name="model">
-                            <option value="accord">Accord</option>
-                            <option value="civic">Civic</option>
-                            <option value="forester">Forester</option>
-                            <option value="soul">Soul</option>
-                            <option value="A6">A6</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.ModelId, Model.Models, new { @class = "form-control", id = "ModelDrop", required = "required" })
                     </div>
                 </div>
             </div>
@@ -52,10 +41,11 @@
                         Type:
                     </label>
                     <div class="col-md-10">
-                        <select name="type">
-                            <option value="new">New</option>
-                            <option value="used">Used</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.Type, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="New", Value = "New" },
+                            new SelectListItem{ Text="Used", Value = "Used" },
+                        })
                     </div>
                 </div>
             </div>
@@ -65,11 +55,12 @@
                         Body Type:
                     </label>
                     <div class="col-md-10">
-                        <select name="body">
-                            <option value="suv">SUV</option>
-                            <option value="sedan">Sedan</option>
-                            <option value="truck">Truck</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.Body, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="SUV", Value = "SUV" },
+                            new SelectListItem{ Text="Sedan", Value = "Sedan" },
+                            new SelectListItem{ Text="Truck", Value = "Truck" },
+                        })
                     </div>
                 </div>
             </div>
@@ -82,10 +73,7 @@
                         Year:
                     </label>
                     <div class="col-md-10">
-                        <input type="number"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.Year, new { @class = "form-control", type = "number", placeholder = "Year", required = "required" })
                     </div>
                 </div>
             </div>
@@ -95,10 +83,11 @@
                         Transmisson:
                     </label>
                     <div class="col-md-10">
-                        <select name="type">
-                            <option value="manual">Manual</option>
-                            <option value="automatic">Automatic</option>
-                        </select>
+                        @Html.DropDownListFor(m => m.Car.Transmission, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Automatic", Value = "Automatic" },
+                            new SelectListItem{ Text="Manual", Value = "Manual" },
+                        })
                     </div>
                 </div>
             </div>
@@ -111,10 +100,14 @@
                         Color:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.DropDownListFor(m => m.Car.ExColor, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Black", Value = "Black" },
+                            new SelectListItem{ Text="Silver", Value = "Silver" },
+                            new SelectListItem{ Text="White", Value = "White" },
+                            new SelectListItem{ Text="Red", Value = "Red" },
+                            new SelectListItem{ Text="Blue", Value = "Blue" },
+                        })
                     </div>
                 </div>
             </div>
@@ -124,10 +117,14 @@
                         Interior Color:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.DropDownListFor(m => m.Car.IntColor, new List<SelectListItem>
+                            {
+                            new SelectListItem{ Text="Black", Value = "Black" },
+                            new SelectListItem{ Text="Tan", Value = "Tan" },
+                            new SelectListItem{ Text="White", Value = "White" },
+                            new SelectListItem{ Text="Grey", Value = "Grey" },
+                            new SelectListItem{ Text="Rainbow", Value = "Rainbow" },
+                        })
                     </div>
                 </div>
             </div>
@@ -140,10 +137,7 @@
                         Mileage:
                     </label>
                     <div class="col-md-10">
-                        <input type="number"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.Mileage, new { @class = "form-control", type = "number", placeholder = "Mileage", required = "required" })
                     </div>
                 </div>
             </div>
@@ -153,10 +147,7 @@
                         VIN #:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.VIN, new { @class = "form-control", type = "number", placeholder = "VIN", required = "required" })
                     </div>
                 </div>
             </div>
@@ -169,10 +160,7 @@
                         MSRP:
                     </label>
                     <div class="col-md-10">
-                        <input type="number"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.MSRP, new { @class = "form-control", type = "number", placeholder = "MSRP", required = "required" })
                     </div>
                 </div>
             </div>
@@ -182,10 +170,7 @@
                         Price:
                     </label>
                     <div class="col-md-10">
-                        <input type="number"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Car.Price, new { @class = "form-control", type = "number", placeholder = "Price", required = "required" })
                     </div>
                 </div>
             </div>
@@ -199,11 +184,7 @@
                     Description:
                 </label>
                 <div class="col-md-10">
-                    <textarea class="form-control"
-                              width="400px"
-                              height="300px"
-                              id="add-description"
-                              placeholder="Description" required></textarea>
+                    @Html.TextAreaFor(m => m.Car.Description, new { @class = "form-control", type = "number", placeholder = "Price", required = "required" })
                 </div>
             </div>
         </div>
@@ -223,7 +204,35 @@
         </div>
         <br />
 
-        <a href="#@*append to Specials*@" class="button1">Save</a>
+        <button class="button1">Save</button>
         <br />
-    </form>
+    }
 </div>
+
+@section scripts
+{
+    <script> 
+        $('#MakeDrop').on('change', function () {
+            $("#ModelDrop").empty();
+            var make = $('#MakeDrop').val();
+            if (make != "") {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:63501/modellist/' + make,
+                    success: function (data) {
+                        $.each(data, function (index, item) {
+                            var modelName = item.ModelName;
+                            var modelId = item.ModelId
+
+                            $('#ModelDrop').append('<option value="' + modelId + '">' + modelName + '</option>');
+
+                        })
+
+                    },
+                    error: function () {
+                        alert("NO");
+                    }
+                });
+            }
+        })
+        </script>}

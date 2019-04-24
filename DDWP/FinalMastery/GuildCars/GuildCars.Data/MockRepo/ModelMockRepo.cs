@@ -66,7 +66,8 @@ namespace GuildCars.Data.MockRepo
 
         public Model Create(Model model)
         {
-            int id = _models.Max(c => c.ModelId) + 1;
+            model.ModelId = _models.Max(c => c.ModelId) + 1;
+            model.DateAdded = DateTime.Now;
             _models.Add(model);
 
             return model;

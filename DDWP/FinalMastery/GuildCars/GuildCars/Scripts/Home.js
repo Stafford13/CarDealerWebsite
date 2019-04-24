@@ -1,5 +1,6 @@
 ﻿$('#searchButton').on('click', function () {
     $('#errorList').empty();
+    $('#searchResults').empty();
 
     var searchType = $('#searchButton').val();
     //alert(searchType);
