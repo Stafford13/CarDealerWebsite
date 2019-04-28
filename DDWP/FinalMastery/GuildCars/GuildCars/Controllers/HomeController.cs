@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using GuildCars.Data.ADO;
 using GuildCars.Models.Tables;
 using GuildCars.Data.MockRepo;
+using GuildCars.Data.ViewModels;
+using GuildCars.Data.Models;
 
 namespace GuildCars.Controllers
 {
@@ -17,7 +19,19 @@ namespace GuildCars.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            SpecialMockRepo specialRepo = new SpecialMockRepo();
+            FeaturedCarsViewModel vm = new FeaturedCarsViewModel();
+            CarMockRepository carRepo = new CarMockRepository();
+            vm.Specials = specialRepo.GetAllSpecials();
+            vm.FeaturedCars = carRepo.GetAllCars().Where(m => m.isFeatured == true);
+            MakeMockRepo makeRepo = new MakeMockRepo();
+            ModelMockRepo modelRepo = new ModelMockRepo();
+            foreach (var car in vm.FeaturedCars)
+            {
+                car.Make = makeRepo.GetById(car.MakeId);
+                car.Model = modelRepo.GetById(car.ModelId);
+            }
+            return View(vm);
         }
 
         public ActionResult About()

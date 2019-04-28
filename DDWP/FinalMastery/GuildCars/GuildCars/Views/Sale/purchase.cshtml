@@ -1,4 +1,4 @@
-﻿
+﻿@model GuildCars.Models.PurchaseCarViewModel
 @{
     ViewBag.Title = "purchaseVehicle";
 }
@@ -9,41 +9,44 @@
     <div class="col-lg-12 fields">
         <div class="row">
             <div class="col-md-3">
-                <h4>2006 Kia Soul</h4>
-                <img src="/images/Car1.jpg" alt="Oohh shiny" style="width:175px;height:100px" />
+                <h4>@Model.Car.Year  @Model.Car.Make.MakeName @Model.Car.Model.ModelName</h4>
+                <img src="/images/@Model.Car.ImageFileName" alt="Oohh shiny" style="width:175px;height:100px" />
             </div>
             <div class="col-md-3">
                 <h4></h4>
-                <p>Body type: </p>
-                <p>Trans: </p>
-                <p>Color: </p>
+                <p>Body type: @Model.Car.Body</p>
+                <p>Trans: @Model.Car.Transmission</p>
+                <p>Color: @Model.Car.ExColor</p>
             </div>
             <div class="col-md-3">
                 <h4></h4>
-                <p>Interior: </p>
-                <p>Mileage: </p>
-                <p>VIN#: </p>
+                <p>Interior: @Model.Car.IntColor</p>
+                <p>Mileage: @Model.Car.Mileage</p>
+                <p>VIN#: @Model.Car.VIN</p>
             </div>
             <div class="col-md-3">
                 <h4></h4>
-                <p>MSRP: </p>
-                <p>Price: </p>
+                <p>MSRP: @Model.Car.MSRP</p>
+                <p>Price: @Model.Car.Price</p>
                 <p></p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-offset-3">
                 <p>Details:</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vestibulum odio, in consectetur purus. Maecenas mollis dictum enim eget posuere. Donec congue, tellus ut tincidunt aliquet, ipsum tortor aliquam nunc, maximus auctor ligula sapien posuere tortor. Proin malesuada justo vel eros vehicula ultrices. Morbi et augue sollicitudin, porta sapien semper, malesuada neque. Phasellus commodo nibh turpis. Suspendisse pulvinar urna sed erat ornare porttitor. Sed at fringilla massa. Mauris sed massa a erat vestibulum interdum. Mauris laoreet, ligula consectetur pulvinar ornare, odio est sagittis eros, a accumsan ligula massa a felis.</p>
+                <p>@Model.Car.Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec vestibulum odio, in consectetur purus. Maecenas mollis dictum enim eget posuere. Donec congue, tellus ut tincidunt aliquet, ipsum tortor aliquam nunc, maximus auctor ligula sapien posuere tortor. Proin malesuada justo vel eros vehicula ultrices. Morbi et augue sollicitudin, porta sapien semper, malesuada neque. Phasellus commodo nibh turpis. Suspendisse pulvinar urna sed erat ornare porttitor. Sed at fringilla massa. Mauris sed massa a erat vestibulum interdum. Mauris laoreet, ligula consectetur pulvinar ornare, odio est sagittis eros, a accumsan ligula massa a felis.</p>
             </div>
         </div>
     </div>
 </div>
 <br />
-<h3>sale Information</h3>
+<h3>Sale Information</h3>
 <br />
 <div class="container">
-    <form class="form-vertical" role="form" id="add-form">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(m => m.Car.CarId)
+    @Html.ValidationSummary()
         <div class="row">
             <div class="col-md-5">
                 <div class="form-group">
@@ -51,10 +54,7 @@
                         Name:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Sale.Name, new { @class = "form-control", type = "text", placeholder = "Name", required = "required" })
                     </div>
                 </div>
             </div>
@@ -64,10 +64,7 @@
                         Phone:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Sale.Phone, new { @class = "form-control", type = "number", placeholder = "Phone Number", required = "required" })
                     </div>
                 </div>
             </div>
@@ -80,10 +77,7 @@
                         Email:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Sale.Email, new { @class = "form-control", type = "text", placeholder = "Email", required = "required" })
                     </div>
                 </div>
             </div>
@@ -93,26 +87,20 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="street1" class="col-md-2 control-label">
-                        Street 1:
+                        Street:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Sale.Address1, new { @class = "form-control", type = "text", placeholder = "Address 1", required = "required" })
                     </div>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="street2" class="col-md-2 control-label">
-                        Street 2:
+                        Apartment # or other:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Sale.Address2, new { @class = "form-control", type = "text", placeholder = "Address 2" })
                     </div>
                 </div>
             </div>
@@ -125,10 +113,7 @@
                         City:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Sale.City, new { @class = "form-control", type = "text", placeholder = "City", required = "required" })
                     </div>
                 </div>
             </div>
@@ -138,10 +123,7 @@
                         State:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Sale.State, new { @class = "form-control", type = "text", placeholder = "State" })
                     </div>
                 </div>
             </div>
@@ -154,10 +136,7 @@
                         Zip Code:
                     </label>
                     <div class="col-md-10">
-                        <input type="text"
-                               class="form-control"
-                               id="add-description"
-                               placeholder="" required>
+                        @Html.TextBoxFor(m => m.Sale.ZipCode, new { @class = "form-control", type = "number", placeholder = "Zip", required = "required" })
                     </div>
                 </div>
             </div>
@@ -185,17 +164,19 @@
                             Purchase Type:
                         </label>
                         <div class="col-md-10">
-                            <input type="text"
-                                   class="form-control"
-                                   id="add-description"
-                                   placeholder="" required>
+                            @Html.DropDownListFor(m => m.Car.Body, new List<SelectListItem>
+                                 {
+                                 new SelectListItem{ Text="Bank Finance", Value = "Bank" },
+                                 new SelectListItem{ Text="Cash", Value = "Cash" },
+                                 new SelectListItem{ Text="Dealer Finance", Value = "Dealer" },
+                             })
                         </div>
                     </div>
                 </div>
             </div>
             <br />
 
-            <a href="# @*append to Specials*@" class="button1">Save</a>
+            <button class="button1">Purchase</button>
             <br />
-</form>
+    }
 </div>

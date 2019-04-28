@@ -213,6 +213,7 @@
     <Compile Include="Models\FeaturedCarsViewModel.cs" />
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PurchaseCarViewModel.cs" />
     <Compile Include="Models\SecurityDb.cs" />
     <Compile Include="Models\SpecialsViewModel.cs" />
     <Compile Include="Models\UpdateAccountViewModel.cs" />
@@ -268,7 +269,7 @@
     <Content Include="Views\Admin\editSpecial.cshtml" />
     <Content Include="Views\Admin\addVehicle.cshtml" />
     <Content Include="Views\Admin\editVehicle.cshtml" />
-    <Content Include="Views\Sale\purchaseVehicle.cshtml" />
+    <Content Include="Views\Sale\purchase.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
     <Content Include="Views\Admin\Vehicles.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />

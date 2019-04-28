@@ -28,7 +28,7 @@ namespace GuildCars.Data.MockRepo
                 Type = "New",
                 MSRP = 10000,
                 Price = 10000,
-                ImageFileName = "Car1.PNG",
+                ImageFileName = "car1.jpg",
                 MakeId = 1,
                 ModelId = 1,
                 isFeatured = true,
@@ -47,7 +47,7 @@ namespace GuildCars.Data.MockRepo
                 Type = "New",
                 MSRP = 10000,
                 Price = 10000,
-                ImageFileName = "Car2.PNG",
+                ImageFileName = "car1.jpg",
                 MakeId = 1,
                 ModelId = 2,
                 isFeatured = true,
@@ -66,7 +66,7 @@ namespace GuildCars.Data.MockRepo
                 Type = "New",
                 MSRP = 10000,
                 Price = 10000,
-                ImageFileName = "Car2.PNG",
+                ImageFileName = "car1.jpg",
                 MakeId = 3,
                 ModelId = 1,
                 isFeatured = false,
@@ -85,7 +85,7 @@ namespace GuildCars.Data.MockRepo
                 Type = "Used",
                 MSRP = 10000,
                 Price = 10000,
-                ImageFileName = "Car2.PNG",
+                ImageFileName = "car1.jpg",
                 MakeId = 3,
                 ModelId = 1,
                 isFeatured = false,
@@ -104,7 +104,7 @@ namespace GuildCars.Data.MockRepo
                 Type = "Used",
                 MSRP = 5000,
                 Price = 10000,
-                ImageFileName = "Car1.PNG",
+                ImageFileName = "car1.jpg",
                 MakeId = 2,
                 ModelId = 1,
                 isFeatured = false,
@@ -123,7 +123,7 @@ namespace GuildCars.Data.MockRepo
                 Type = "Used",
                 MSRP = 10000,
                 Price = 10000,
-                ImageFileName = "Car2.PNG",
+                ImageFileName = "car1.jpg",
                 MakeId = 3,
                 ModelId = 1,
                 isFeatured = false,
@@ -245,7 +245,11 @@ namespace GuildCars.Data.MockRepo
 
         public void ChangeToSold(int id)
         {
-            throw new NotImplementedException();
+            Car car = GetById(id);
+            _cars.Remove(car);
+            car.isFeatured = false;
+            car.isSold = true;
+            _cars.Add(car);
         }
     }
 }

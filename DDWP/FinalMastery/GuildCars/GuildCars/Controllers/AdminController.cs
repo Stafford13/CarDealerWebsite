@@ -38,6 +38,7 @@ namespace GuildCars.Controllers
             if (ModelState.IsValid)
             {
                 CarMockRepository carRepo = new CarMockRepository();
+                vm.Car.ImageFileName = vm.ImageUpload.FileName;
                 Car car = carRepo.Create(vm.Car);
                 vm.Car.CarId = car.CarId; 
                 return RedirectToAction("editVehicle/" + vm.Car.CarId);
@@ -71,6 +72,10 @@ namespace GuildCars.Controllers
             if (ModelState.IsValid)
             {
                 CarMockRepository carRepo = new CarMockRepository();
+                if (vm.ImageUpload != null)
+                {
+                    vm.Car.ImageFileName = vm.ImageUpload.FileName;
+                }
                 vm.Car = carRepo.Update(vm.Car);
                 return RedirectToAction("Vehicles");
             }

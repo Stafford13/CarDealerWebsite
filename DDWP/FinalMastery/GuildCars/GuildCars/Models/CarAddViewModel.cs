@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace GuildCars.Models
 {
-    public class CarAddViewModel
+    public class CarAddViewModel : IValidatableObject
     {
         public IEnumerable<SelectListItem> Makes { get; set; }
         public IEnumerable<SelectListItem> Models { get; set; }
@@ -50,6 +50,11 @@ namespace GuildCars.Models
                 errors.Add(new ValidationResult("Price must be greater than or equal to 0"));
             }
 
+            if (Car.Price >= (Car.MSRP*100))
+            {
+                errors.Add(new ValidationResult("Price can not be more than 100% of the MSRP"));
+            }
+
             //if (string.IsNullOrEmpty(Car.MakeName))
             //{
             //    errors.Add(new ValidationResult("The make of the car is required"));
@@ -76,14 +81,24 @@ namespace GuildCars.Models
                 errors.Add(new ValidationResult("Image file is required"));
             }
 
-            if (Car.Year <= 2000 && Car.Year >= 2020)
+            if (Car.Year <= 2000 || Car.Year >= 2021)
             {
-                errors.Add(new ValidationResult("Year must be between 2000 and 2020"));
+                errors.Add(new ValidationResult("Year must be between 2000 and 2021"));
             }
 
             if (Car.Mileage < 0)
             {
                 errors.Add(new ValidationResult("Milage must be greater than or equal to 0"));
+            }
+
+            if (Car.Mileage < 1000 && Car.Type != "New")
+            {
+                errors.Add(new ValidationResult("Type must be new if mileage is less than 1000"));
+            }
+
+            if (Car.Mileage >= 1000 && Car.Type != "Used")
+            {
+                errors.Add(new ValidationResult("Type must be new if mileage is less than 1000"));
             }
 
             return errors;

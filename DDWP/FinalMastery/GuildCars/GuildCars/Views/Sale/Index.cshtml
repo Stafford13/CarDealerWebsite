@@ -1,16 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sale";
 }
 
-@*AJAX CALL - search both new and used inventory*@
-
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
 <div>
     <ul id="errorList" class="text-danger"></ul>
 </div>
-<<div class="container">
+<div class="container">
     <div class="col-lg-12 fields">
         <div class="container">
             <div class="row">
@@ -22,7 +21,7 @@
                         <div class="form-group">
                             <input type="text"
                                    class="form-control"
-                                   id="add-description"
+                                   id="searchTerm"
                                    placeholder="Enter Make, Model, or Year" required>
 
                         </div>
@@ -34,15 +33,15 @@
                                 Price:
                             </label>
                             <div class="col-md-5">
-                                <input type="text"
+                                <input type="number"
                                        class="form-control"
-                                       id="edit-description"
+                                       id="minPrice"
                                        placeholder="" required>
                             </div>
                             <div class="col-md-5">
-                                <input type="text"
+                                <input type="number"
                                        class="form-control"
-                                       id="edit-description"
+                                       id="maxPrice"
                                        placeholder="" required>
                             </div>
                         </div>
@@ -78,7 +77,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <button type="submit" value="All" class="button1" id="searchButton">Search</button>
+                    <button type="submit" value="All" class="button1" id="searchButtonSale">Search</button>
                 </div>
             </div>
         </div>

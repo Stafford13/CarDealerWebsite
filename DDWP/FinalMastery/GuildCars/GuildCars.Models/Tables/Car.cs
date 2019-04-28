@@ -22,5 +22,6 @@
         public virtual Make Make { get; set; }
         public string VIN { get; set; }
         public string Description { get; set; }
+        public int SalePrice { get; set; }
     }
 }
