@@ -7,10 +7,9 @@ using System.Web;
 
 namespace GuildCars.Models
 {
-    public class CarInventoryViewModel
+    public class CarDetailsViewModel
     {
         public Car Car { get; set; }
+        public HttpPostedFileBase ImageUpload { get; set; }
     }
 }
-
-//Shouldn't this be a list?

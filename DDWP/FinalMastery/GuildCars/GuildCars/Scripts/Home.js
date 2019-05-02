@@ -196,6 +196,13 @@ if (term == "") {
 }
 });
 
+$('$delete').on('click', function () {
+    if (confirm("Are you sure you want to delete this?")) {
+        //delete something 
+    } else {
+        //don't delete that thing
+    }
+});
 //ajax
 //mockrepo
 //connect views to mockrepo

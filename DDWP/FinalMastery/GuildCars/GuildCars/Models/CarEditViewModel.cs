@@ -55,15 +55,15 @@ namespace GuildCars.Models
                 errors.Add(new ValidationResult("Price can not be more than 100% of the MSRP"));
             }
 
-            //if (string.IsNullOrEmpty(Car.MakeName))
-            //{
-            //    errors.Add(new ValidationResult("The make of the car is required"));
-            //}
+            if (string.IsNullOrEmpty(Car.Make.MakeName))
+            {
+                errors.Add(new ValidationResult("The make of the car is required"));
+            }
 
-            //if (string.IsNullOrEmpty(Car.ModelName))
-            //{
-            //    errors.Add(new ValidationResult("The model of the car is required"));
-            //}
+            if (string.IsNullOrEmpty(Car.Model.ModelName))
+            {
+                errors.Add(new ValidationResult("The model of the car is required"));
+            }
 
             if (ImageUpload != null && ImageUpload.ContentLength > 0)
             {

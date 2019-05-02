@@ -1,9 +1,9 @@
-﻿
+﻿@model GuildCars.Models.CarInventoryViewModel
 @{
     ViewBag.Title = "Inventory";
 }
 
-@*ADD AJAX CALL - Dynamically add count to tables*@
+@*Dynamically add count to tables*@
 
 <h2>Inventory</h2>
 
@@ -18,7 +18,11 @@
                 <th width="5%">Count</th>
                 <th width="40%">Stock Value</th>
             </tr>
-            <tbody id="newCountRows"></tbody>
+            <tbody id="newCountRows">
+                @*<td>@Model.Car.Year</td>
+                <td>@Model.Car.Model.ModelName</td>*@
+
+            </tbody>
         </table>
     </div>
 </div>
