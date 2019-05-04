@@ -208,6 +208,7 @@
     <Compile Include="Models\CarEditViewModel.cs" />
     <Compile Include="Models\CarInventoryViewModel.cs" />
     <Compile Include="Models\CarDetailsViewModel.cs" />
+    <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\MakeViewModel.cs" />
     <Compile Include="Models\ModelViewModel.cs" />
     <Compile Include="Models\FeaturedCarsViewModel.cs" />

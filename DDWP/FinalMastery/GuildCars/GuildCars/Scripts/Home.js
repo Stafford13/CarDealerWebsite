@@ -198,6 +198,9 @@ if (term == "") {
 
 $('$delete').on('click', function () {
     if (confirm("Are you sure you want to delete this?")) {
+        $.ajax({
+            type: 'DELETE',
+
         //delete something 
     } else {
         //don't delete that thing

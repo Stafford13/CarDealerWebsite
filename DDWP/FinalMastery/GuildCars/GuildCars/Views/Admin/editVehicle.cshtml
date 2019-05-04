@@ -206,13 +206,18 @@
                     Featured:
                 </label>
                 <div class="col-md-10">
-                    @Html.CheckBoxFor(m => m.Car.isFeatured, new { @class = "form-control"})
+                    @Html.CheckBoxFor(m => m.Car.isFeatured, new { @class = "form-control" })
                 </div>
             </div>
         </div>
         <br />
 
         <button class="button1">Save</button>
+
+        <div class="col-md-2">
+            <button class="button2 delete">Delete</button>
+            @*make this button do something, preferably delete the special*@
+        </div>
         <br />
     }
 </div>
