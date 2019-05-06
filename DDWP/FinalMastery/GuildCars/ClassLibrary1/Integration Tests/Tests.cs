@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
+using GuildCars.Data.MockRepo;
 
 namespace Integration_Tests
 {
 
     //Check out Execute format for tests
     [TestFixture]
-    public class ADO_Tests
+    public class Tests
     {
         [SetUp]
         public void Init()
@@ -33,7 +34,7 @@ namespace Integration_Tests
         }
 
         [Test]
-        public void CanLoadSpecials()
+        public void CantLoadSpecials()
         {
             var repo = new SpecialRepositoryADO();
 
@@ -41,6 +42,19 @@ namespace Integration_Tests
 
             Assert.AreEqual(1, specials[0].SpecialId);
             Assert.AreEqual("OneTime", specials[0].SpecialName);
+            Assert.AreEqual("One time deal", specials[0].SpecialText);
+            //CHECK OUT VIDEO 7
+        }
+
+        [Test]
+        public void CanLoadSpecials()
+        {
+            var repo = new SpecialMockRepo();
+
+            var specials = repo.GetAllSpecials();
+
+            Assert.AreEqual(1, specials.SpecialId);
+            Assert.AreEqual("A Good Special", specials[0].SpecialName);
             Assert.AreEqual("One time deal", specials[0].SpecialText);
             //CHECK OUT VIDEO 7
         }
@@ -65,8 +79,8 @@ namespace Integration_Tests
             Assert.AreEqual("Used", car.Type);
             Assert.AreEqual("40000", car.MSRP);
             Assert.AreEqual("45000", car.Price);
-            //Assert.AreEqual("Honda", car.MakeName);
-            //Assert.AreEqual("Accord", car.ModelName);
+            Assert.AreEqual("Honda", car.Make.MakeName);
+            Assert.AreEqual("Accord", car.Model.ModelName);
             Assert.AreEqual("Car1", car.ImageFileName);
         }
 
@@ -94,8 +108,8 @@ namespace Integration_Tests
             carToAdd.Type = "Used";
             carToAdd.MSRP = 40000;
             carToAdd.Price = 45000;
-            //carToAdd.MakeName = "Honda";
-            //carToAdd.ModelName = "Accord";
+            carToAdd.Make.MakeName = "Honda";
+            carToAdd.Model.ModelName = "Accord";
             carToAdd.ImageFileName = "Car1.PNG";
 
             repo.Insert(carToAdd);
@@ -118,8 +132,8 @@ namespace Integration_Tests
             carToAdd.Type = "Used";
             carToAdd.MSRP = 40000;
             carToAdd.Price = 45000;
-            //carToAdd.MakeName = "Honda";
-            //carToAdd.ModelName = "Accord";
+            carToAdd.Make.MakeName = "Honda";
+            carToAdd.Model.ModelName = "Accord";
             carToAdd.ImageFileName = "Car1.PNG";
 
             repo.Insert(carToAdd);
@@ -158,8 +172,8 @@ namespace Integration_Tests
             carToAdd.Type = "Used";
             carToAdd.MSRP = 40000;
             carToAdd.Price = 45000;
-            //carToAdd.MakeName = "Honda";
-            //carToAdd.ModelName = "Accord";
+            carToAdd.Make.MakeName = "Honda";
+            carToAdd.Model.ModelName = "Accord";
             carToAdd.ImageFileName = "Car1.PNG";
 
             repo.Insert(carToAdd);

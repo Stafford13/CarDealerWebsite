@@ -86,6 +86,15 @@ namespace GuildCars.Controllers
             return View(vm);
         }
 
+        [Route("Admin/deleteVehicle")]
+        [HttpPost]
+        public ActionResult DeleteVehicle(int id)
+        {
+            CarMockRepository carRepo = new CarMockRepository();
+            carRepo.Delete(id);
+            return RedirectToAction("Vehicles");
+        }
+
         [Route("Admin/users")]
         public ActionResult Users()
         {
@@ -109,7 +118,14 @@ namespace GuildCars.Controllers
             SpecialMockRepo specialRepo = new SpecialMockRepo();
             specialRepo.Create(vm.Special);
             return RedirectToAction("editSpecial");
+        }
 
+        [HttpPost]
+        public ActionResult DeleteSpecial(int id)
+        {
+            SpecialMockRepo specialRepo = new SpecialMockRepo();
+            specialRepo.Delete(id);
+            return RedirectToAction("editSpecial");
         }
 
         [Route("Admin/makes")]

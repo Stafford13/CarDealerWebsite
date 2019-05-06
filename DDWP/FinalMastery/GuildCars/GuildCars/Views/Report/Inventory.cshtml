@@ -3,8 +3,6 @@
     ViewBag.Title = "Inventory";
 }
 
-@*Dynamically add count to tables*@
-
 <h2>Inventory</h2>
 
 <div class="container">
@@ -19,11 +17,17 @@
                 <th width="40%">Stock Value</th>
             </tr>
             <tbody id="newCountRows">
-                @*<td>@Model.Car.Year</td>
-                <td>@Model.Car.Model.ModelName</td>*@
-
-            </tbody>
-        </table>
+                @foreach (var car in Model.NewInventory)
+                {<tr>
+                <td>@car.Year</td>
+                <td>@car.Make</td>
+                <td>@car.Model</td>
+                <td>@car.Count</td>
+                <td>@car.StockValue</td>
+                 </tr>
+                }
+                </tbody>
+            </table>
     </div>
 </div>
     <br />
@@ -38,7 +42,18 @@
                 <th width="5%">Count</th>
                 <th width="40%">Stock Value</th>
             </tr>
-            <tbody id="usedCountRows"></tbody>
-        </table>
+            <tbody id="usedCountRows">
+                @foreach (var car in Model.UsedInventory)
+                {
+                    <tr>
+                <td>@car.Year</td>
+                <td>@car.Make</td>
+                <td>@car.Model</td>
+                <td>@car.Count</td>
+                <td>@car.StockValue</td>
+                        </tr>
+            }
+                </tbody>
+            </table>
     </div>
 </div>

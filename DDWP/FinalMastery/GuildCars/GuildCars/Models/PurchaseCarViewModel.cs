@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -29,20 +30,15 @@ namespace GuildCars.Models
                 errors.Add(new ValidationResult("Email is required"));
             }
 
-            //if (Sale.Email doesnt have certain things, fix me!!!!!)
-            //{
-            //    errors.Add(new ValidationResult("A correct email address is required"));
-            //}
-
             if (string.IsNullOrEmpty(Sale.Phone))
             {
                 errors.Add(new ValidationResult("Phone number is required"));
             }
 
-            //if (Sale.Phone)
-            //{
-            //    errors.Add(new ValidationResult("A correct phone number is required"));
-            //}
+            if (!Regex.Match(Sale.Phone, @"^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$").Success)
+            {
+                errors.Add(new ValidationResult("A correct phone number is required"));
+            }
 
             if (string.IsNullOrEmpty(Sale.Address1))
             {
@@ -54,12 +50,26 @@ namespace GuildCars.Models
                 errors.Add(new ValidationResult("Sale price must be at least 95% of the vehicle's' price"));
             }
 
-            ////how do I say 5 numbers?
-            //if (Sale.ZipCode != "00000")
-            //{
-            //    errors.Add(new ValidationResult("Zip Code is required"));
-            //}
+            if (!Regex.Match(Sale.ZipCode.ToString(), @"^\d{5}$").Success)
+            {
+                errors.Add(new ValidationResult("Zip Code must be a 5 digit number"));
+            }
 
             return errors;
         }
+
+        private bool IsValidEmail (string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
+}

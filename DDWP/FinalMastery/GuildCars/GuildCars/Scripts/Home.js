@@ -196,16 +196,63 @@ if (term == "") {
 }
 });
 
-$('$delete').on('click', function () {
-    if (confirm("Are you sure you want to delete this?")) {
-        $.ajax({
-            type: 'DELETE',
 
-        //delete something 
-    } else {
-        //don't delete that thing
+$('#searchButtonReport').on('click', function () {
+    $('#errorList').empty();
+    $('#searchResults').empty();
+
+    var searchType = $('#searchButtonReport').val();
+    //alert(searchType);
+    var isError = false;
+    var user = $('#filterUser').val();
+    var fromDate = $('#fromDate').val();
+    var toDate = $('#toDate').val();
+
+    //alert(term + minPrice + maxPrice + minYear + maxYear)
+    if (user == "") {
+        user = 'hamster';
+    } if (fromDate == "") {
+        fromDate = 01/01/2010;
+    } if (toDate == "") {
+        toDate == datetime.Today;
+    //} if (minPrice < 0 || maxPrice < 0) {
+    //    $('#errorList').append("<li>Prices must be positive.</li>");
+    //    isError = true;
+    } if (fromDate >= toDate) {
+        $('#errorList').append("<li>Dates must not equal each other.</li>");
+        isError = true;
+    } if (fromDate > toDate) {
+        $('#errorList').append("<li>From Date must be earlier than To Date.</li>");
+        isError = true;
+    } if (isError == false) {
+        $('#searchResults').empty();
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:63501/api/salesReport/search/' + searchType + '/' + user + '/' + fromDate + '/' + toDate,
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    var user = item.user;
+                    var sale = item.TotalSale;
+                    var vehicle = item.TotalVehicle;
+
+                    $('#salesCountRows').append(
+                        '<tr><td>' + user +'</td><td>' + sale + '</td><td>' + vehicle + '</td></tr>')
+                })
+                if (data.length == 0) {
+                    alert("No Results Found With Selected Parameters.");
+                }
+                else {
+                    //alert("Data Length: " + data.length)
+                }
+            },
+            error: function (xHR) {
+                alert(JSON.stringify(xHR.responseJSON));
+            }
+        });
     }
 });
+
+
 //ajax
 //mockrepo
 //connect views to mockrepo

@@ -46,8 +46,10 @@
              </p>
          </div>
          <div class="col-md-2">
-              <button class="button2 delete">Delete</button>
-             @*make this button do something, preferably delete the special*@
+             @using (Html.BeginForm("DeleteSpecial", "Admin", new { id = item.SpecialId }, FormMethod.Post))
+             {
+              <button class="btn btn-danger button2" onclick="return confirm('Are you sure you want to delete @item.SpecialName?');">Delete</button>
+           }
          </div>
          <br />
      </div>

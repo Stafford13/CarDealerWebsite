@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace GuildCars.Models
@@ -29,19 +30,16 @@ namespace GuildCars.Models
             {
                 errors.Add(new ValidationResult("Email Address is required"));
             }
-            //if (Customer.Email != fix this!!)
-            //{
-            //    errors.Add(new ValidationResult("A correct Email address is required"));
-            //}
 
             if (string.IsNullOrEmpty(Customer.Phone))
             {
                 errors.Add(new ValidationResult("Phone is required"));
             }
-            //if (Customer.Phone != fix this!!)
-            //{
-            //    errors.Add(new ValidationResult("a correct phone number is required"));
-            //}
+
+            if (!Regex.Match(Customer.Phone, @"^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$").Success)
+            {
+                errors.Add(new ValidationResult("A correct phone number is required"));
+            }
 
             if (string.IsNullOrEmpty(Customer.Message))
             {
@@ -50,4 +48,18 @@ namespace GuildCars.Models
 
             return errors;
         }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
 }

@@ -10,7 +10,6 @@ using System.Web.Mvc;
 using GuildCars.Data.ADO;
 using GuildCars.Models.Tables;
 using GuildCars.Data.MockRepo;
-using GuildCars.Data.ViewModels;
 using GuildCars.Data.Models;
 
 namespace GuildCars.Controllers
