@@ -128,10 +128,11 @@ namespace GuildCars.Data.MockRepo
                 ModelId = 1,
                 isFeatured = false,
                 isSold = false,
-                VIN = "1005"
+                VIN = "1005",
+                SoldDate = "01/01/2019"
             },
         };
-            }
+        }
 
         public Car Create(Car car)
         {
@@ -168,25 +169,6 @@ namespace GuildCars.Data.MockRepo
             return _cars.Where(c => c.isSold == false);
         }
 
-        //public IEnumerable<Car> GetNewCars(string searchText = null, decimal minPrice = 0, decimal maxPrice = 900000000, int minYear = 0, int maxYear = 2100)
-        //{
-        //    //instantiate make and model repos
-
-        //    //3 embedded if statements
-        //    //return _cars.Where()
-        //    throw new NotImplementedException();
-        //}
-
-        //public IEnumerable<Car> GetUsedCars(string searchText = null, decimal minPrice = 0, decimal maxPrice = 900000000, int minYear = 0, int maxYear = 2100)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public IEnumerable<Car> GetNotSoldCars(string searchText = null, decimal minPrice = 0, decimal maxPrice = 900000000, int minYear = 0, int maxYear = 2100)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public IEnumerable<Car> Search(string searchType, string searchText, decimal minPrice = 0, decimal maxPrice = 900000000, int minYear = 2000, int maxYear = 2100)
         {
             ModelMockRepo modelRepo = new ModelMockRepo();
@@ -211,7 +193,7 @@ namespace GuildCars.Data.MockRepo
             int year = 0;
             int.TryParse(searchText, out year);
 
-            foreach(var car in vehicles)
+            foreach (var car in vehicles)
             {
                 car.Make = makeRepo.GetById(car.MakeId);
                 car.Model = modelRepo.GetById(car.ModelId);
@@ -233,6 +215,27 @@ namespace GuildCars.Data.MockRepo
             }
 
             return found;
+        }
+
+        public IEnumerable<Car> Search(string searchType, string user, int minYear = 2000, int maxYear = 2100)
+        {
+            ModelMockRepo modelRepo = new ModelMockRepo();
+            MakeMockRepo makeRepo = new MakeMockRepo();
+            IEnumerable<Car> vehicles = new List<Car>();
+
+            switch (searchType)
+            {
+                case "All":
+                    vehicles = GetAllCars().Where(c => c.isSold == true);
+                    break;
+                default:
+                    break;
+            }
+
+            List<Car> found = new List<Car>();
+
+            return found;
+
         }
 
         public Car Update(Car car)

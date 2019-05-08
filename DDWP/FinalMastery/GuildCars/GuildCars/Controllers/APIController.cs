@@ -32,6 +32,21 @@ namespace GuildCars.Controllers
             return Ok(found);
         }
 
+        [Route("api/sales/search/{searchType}/{User}/{minYear}/{maxYear}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult Search(string searchType, string User, int minYear, int maxYear)
+        {
+            CarMockRepository repo = new CarMockRepository();
+            IEnumerable<Car> found = repo.Search(searchType, User, minYear, maxYear);
+
+            if (found == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(found);
+        }
+
         [Route("modellist/{make}")]
         [AcceptVerbs("GET")]
         public IHttpActionResult ModelList(int make)

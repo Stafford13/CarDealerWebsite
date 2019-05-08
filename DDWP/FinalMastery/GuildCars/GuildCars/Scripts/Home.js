@@ -212,15 +212,15 @@ $('#searchButtonReport').on('click', function () {
     if (user == "") {
         user = 'hamster';
     } if (fromDate == "") {
-        fromDate = 01/01/2010;
+        fromDate = 2000;
     } if (toDate == "") {
-        toDate == datetime.Today;
+        toDate == 2021;
     //} if (minPrice < 0 || maxPrice < 0) {
     //    $('#errorList').append("<li>Prices must be positive.</li>");
     //    isError = true;
-    } if (fromDate >= toDate) {
-        $('#errorList').append("<li>Dates must not equal each other.</li>");
-        isError = true;
+    //} if (fromDate >= toDate) {
+    //    $('#errorList').append("<li>Dates must not equal each other.</li>");
+    //    isError = true;
     } if (fromDate > toDate) {
         $('#errorList').append("<li>From Date must be earlier than To Date.</li>");
         isError = true;
@@ -228,7 +228,7 @@ $('#searchButtonReport').on('click', function () {
         $('#searchResults').empty();
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:63501/api/salesReport/search/' + searchType + '/' + user + '/' + fromDate + '/' + toDate,
+            url: 'http://localhost:63501/api/salesReport/search/' + searchType + '/' + User + '/' + fromDate + '/' + toDate,
             success: function (data) {
                 $.each(data, function (index, item) {
                     var user = item.user;

@@ -61,7 +61,13 @@ namespace GuildCars.Controllers
         [Route("reports/sales")]
         public ActionResult salesReport()
         {
-            return View();
+            SaleReportViewModel SaleViewModel = new SaleReportViewModel();
+            CarMockRepository carMock = new CarMockRepository();
+
+            IEnumerable<Car> allCars = carMock.GetAllCars();
+            IEnumerable<Car> soldVehicles = allCars.Where(v => v.isSold == true);
+
+            return View(SaleViewModel);
         }
     }
 }
